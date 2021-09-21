@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    box-sizing: border-box;
+
+    font-family: 'Roboto', sans-serif;
+
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    background-color: #1D1D1D;
+    height: 48px;
+    width: 100%;
+}
+
+.logo-container {
+    display: flex;
+    height: inherit;
+    justify-content: center;
+}
+
+.logo {
+    align-self: center;
+    color: #FFF;
+    display: inline-flex;
+    font-size: 1.5em;
+}
+
+/*main {
+    height: 800px;
+    margin: auto;
+    width: 900px;
+}
+
+aside {
+    background-color: aqua;
+    float: left;
+    height: inherit;
+    width: 25%;
+}
+
+section {
+    background-color: brown;
+    float: left;
+    height: inherit;
+    margin-left: 5%;
+    width: 70%;
+    word-break: break-word;
+}*/
+
+.student-main {
+    display: flex;
+    height: 800px;
+    justify-content: center;
+    margin-top: 18px;
+}
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    width: 900px;
+}
+
+.student-aside {
+    width: 25%;
+    word-break: break-word;
+}
+
+section {
+    word-break: break-word;
+    width: 70%;
+}
+
+.user-name {
+
+}
+
+.role-label {
+    color: #A1A1A1;
+}
+
+.aside-menu {
+    margin: 18px 0;
+}
+
+.btn {
+    background-color: #FFF;
+    border: 1px solid #A1A1A1;
+    border-radius: 8px;
+    display: block;
+    min-width: 100px;
+    padding: 9px 0;
+}
+
+.btn:hover {
+    background-color: #dcdcdc;
+}
+
+.btn-default {
+    background-color: #208CDA;
+    border: none;
+    color: #FFF;
+}
+
+.btn-default:hover {
+    background-color: #085685;
+    border: none;
+    color: #FFF;
+}
+
+.fk-list {
+    list-style-type: none;
+}
+
+.fk-list li {
+    margin-top: 8px;
+}
+
+.fk-list li:first-child {
+    margin: 0;
+}
+
+.fk-list a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.fk-list a:hover {
+    text-decoration: underline;
+}
+
+.fk-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.fk-item {
+    background-color: #FFF;
+    border: 1px solid #A1A1A1;
+    border-radius: 16px;
+    box-shadow: 0 0 8px 1px rgba(29, 29, 29, 0.16);
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding: 16px;
+    width: 90%;
+}
+
+.fk-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.fk-short-desc-container {
+    display: flex;
+}
+
+.fk-short-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-height: 1.2em;
+    max-height: 6.0em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+}
+
+.fk-btn {
+    align-self: end;
+}
+
+.login-main {
+    background-color: #1D1D1D;
+    height: 100vh;
+    width: 100%;
+}
+
+.login-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    z-index: -1;
+}
+
+.login-window {
+    align-self: center;
+    background-color: #FFF;
+    border-radius: 16px;
+    padding: 16px;
+    height: 300px;
+    width: 250px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.bg-heart {
+    position: relative;
+}
+
+.heart {
+    background-color: #BD2C35;
+    height: 250px;
+    position: absolute;
+    transform: rotate(45deg);
+    width: 250px;
+}
+
+.h-1 {
+    left: 825px;
+    bottom: 175px;
+}
+
+.h-2 {
+    left: 1175px;
+    bottom: 175px;
+}
+
+.h-3 {
+    background-color: #C3333C;
+    left: 1000px;
+    bottom: 0;
+}
