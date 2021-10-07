@@ -1,10 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    <%@include file="../css/style.css" %>
+</style>
 <head>
     <meta charset="UTF-8">
     <title>Login to FCK</title>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <main class="login-main">
