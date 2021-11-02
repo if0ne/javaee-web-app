@@ -20,7 +20,7 @@
                 <p class="role-label">Студент</p>
                 <div class="student-aside-panel">
                     <form class="all-courses-form">
-                        <button class="btn btn-default">Все курсы</button>
+                        <button class="btn btn-default">Мои курсы</button>
                     </form>
                     <form class="logout-form">
                         <button class="btn">
@@ -28,15 +28,6 @@
                             <i class="fas fa-sign-out-alt"></i>
                         </button>
                     </form>
-                </div>
-                <div class="student-fk-list">
-                    <a href="#">Название ФК №1</a>
-                    <a href="#">Название ФК №2</a>
-                    <a href="#">Название ФК №3</a>
-                    <a href="#">Название ФК №4</a>
-                    <a href="#">Название ФК №5</a>
-                    <a href="#">Название ФК №6</a>
-                    <a href="#">Ооооооооооооооооооооооочень длинное название ФК №3</a>
                 </div>
             </aside>
             <section class="fk-container">
@@ -57,7 +48,7 @@
                             </div>
                         </div>
                         <form class="fk-goto">
-                            <button class="btn btn-default">Подробнее</button>
+                            <button class="btn btn-subscribe">Записаться</button>
                         </form>
                     </div>
                 </section>
@@ -73,7 +64,7 @@
                             </div>
                         </div>
                         <form class="fk-goto">
-                            <button class="btn btn-default">Подробнее</button>
+                            <button class="btn btn-subscribe">Записаться</button>
                         </form>
                     </div>
                 </section>
@@ -92,7 +83,7 @@
                             </div>
                         </div>
                         <form class="fk-goto">
-                            <button class="btn btn-default">Подробнее</button>
+                            <button class="btn btn-disabled" disabled>Вы записаны</button>
                         </form>
                     </div>
                 </section>

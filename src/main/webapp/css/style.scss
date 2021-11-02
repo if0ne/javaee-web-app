@@ -1,14 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+$font-stack: 100% 'Roboto', sans-serif;
+
+$main-black: #1D1D1D;
+$second-black: #3D3D3D;
+$light-gray: #A1A1A1;
+$lighter: #A6A6A6;
+$more-light: #FBFBFB;
+
+$fk-blue: #208CDA;
+$fk-dark-blue: #085685;
+
+$fk-green: #73B71B;
+$fk-dark-green: #477200;
+
+$fk-red: #F51D34;
+$fk-dark-red: #AB1222;
+
+$fk-yellow: #F3C64B;
+
+//SHARED STYLES
+
 * {
   box-sizing: border-box;
-  font: 100% "Roboto", sans-serif;
+  font: $font-stack;
   margin: 0;
   padding: 0;
 }
 
 .btn {
   background-color: #FFF;
-  border: 1px solid #A1A1A1;
+  border: 1px solid $light-gray;
   border-radius: 8px;
   min-width: 100px;
   padding: 9px 9px;
@@ -19,23 +41,23 @@
 }
 
 .btn-default {
-  background-color: #208CDA;
+  background-color: $fk-blue;
   border: none;
   color: #FFF;
 }
 
 .btn-default:hover {
-  background-color: #085685;
+  background-color: $fk-dark-blue;
 }
 
 .btn-subscribe {
-  background-color: #73B71B;
+  background-color: $fk-green;
   border: none;
   color: #FFF;
 }
 
 .btn-subscribe:hover {
-  background-color: #477200;
+  background-color: $fk-dark-green;
 }
 
 .btn-disabled {
@@ -49,15 +71,16 @@
 }
 
 .btn-danger {
-  background-color: #F51D34;
+  background-color: $fk-red;
   border: none;
   color: #FFF;
 }
 
 .btn-danger:hover {
-  background-color: #AB1222;
+  background-color: $fk-dark-red;
 }
 
+//Небольшой костыль
 .btn-edit {
   width: 100px;
 }
@@ -68,7 +91,7 @@
 }
 
 nav {
-  background-color: #1D1D1D;
+  background-color: $main-black;
   height: 48px;
   width: 100%;
 }
@@ -91,12 +114,13 @@ nav {
 }
 
 .role-label {
-  color: #A1A1A1;
+  color: $light-gray;
 }
 
 .fk-title {
   font-size: 1.32em;
   font-weight: bold;
+
   text-decoration: none;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -117,7 +141,7 @@ nav {
 
 .fk-item {
   background-color: #FFF;
-  border: 1px solid #A1A1A1;
+  border: 1px solid $light-gray;
   border-radius: 16px;
   box-shadow: 0 0 8px 1px rgba(29, 29, 29, 0.16);
   min-height: 200px;
@@ -141,7 +165,7 @@ nav {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   line-height: 1.2em;
-  max-height: 6em;
+  max-height: 6.0em;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: justify;
@@ -153,16 +177,21 @@ nav {
   align-self: flex-end;
 }
 
-.student-fk-list a {
-  color: #000;
-  text-decoration: none;
-  font-weight: 600;
-}
-.student-fk-list a:hover {
-  text-decoration: underline;
+//STUDENT MAIN PAGE
+
+.student-fk-list {
+  a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 400px){
   .student-main {
     margin-top: 18px;
   }
@@ -177,19 +206,23 @@ nav {
 
   .student-aside-panel {
     display: flex;
-  }
-  .student-aside-panel .all-courses-form {
-    flex: 2;
-  }
-  .student-aside-panel .all-courses-form button {
-    width: 100%;
-  }
-  .student-aside-panel .logout-form {
-    margin-left: 8px;
-    flex: 1;
-  }
-  .student-aside-panel .logout-form button {
-    width: 100%;
+
+    .all-courses-form {
+      flex: 2;
+
+      button {
+        width: 100%;
+      }
+    }
+
+    .logout-form {
+      margin-left: 8px;
+      flex: 1;
+
+      button {
+        width: 100%;
+      }
+    }
   }
 
   .fk-container {
@@ -201,33 +234,38 @@ nav {
     display: block;
     min-width: 100%;
     max-width: 100%;
+
     width: 100%;
-  }
-  .fk-goto button {
-    width: inherit;
+    button {
+      width: inherit;
+    }
   }
 }
+
 @media only screen and (min-width: 401px) and (max-width: 960px) {
   .all-courses-form {
     flex: 2;
     min-width: 101px;
-  }
-  .all-courses-form button {
-    width: 100%;
+
+    button {
+      width: 100%;
+    }
   }
 
   .student-aside-panel {
     display: flex;
     width: 60%;
+
     margin: 8px 0;
   }
 
   .logout-form {
     margin-left: 8px;
     flex: 1;
-  }
-  .logout-form button {
-    width: 100%;
+
+    button {
+      width: 100%;
+    }
   }
 
   .student-main {
@@ -240,9 +278,10 @@ nav {
     display: flex;
     flex-direction: column;
     width: 90%;
-  }
-  .student-main-container .fk-container {
-    margin-top: 18px;
+
+    .fk-container {
+      margin-top: 18px;
+    }
   }
 
   .student-fk-list {
@@ -250,19 +289,22 @@ nav {
     flex-wrap: wrap;
     margin-top: 18px;
     justify-content: center;
-  }
-  .student-fk-list a {
-    background: #FBFBFB;
-    border-radius: 8px;
-    padding: 8px 6px;
-    margin: 8px 6px;
-    flex-basis: 150px;
-    text-decoration: none;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    a {
+      background: $more-light;
+      border-radius: 8px;
+
+      padding: 8px 6px;
+      margin: 8px 6px;
+
+      flex-basis: 150px;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
   }
 }
+
 @media only screen and (min-width: 961px) {
   .fk-item {
     width: 90%;
@@ -278,33 +320,42 @@ nav {
     display: flex;
     justify-content: space-between;
     width: 960px;
-  }
-  .student-main-container .student-aside {
-    min-width: 200px;
-    max-width: 200px;
-    word-break: break-word;
-  }
-  .student-main-container .fk-container {
-    min-width: 700px;
-    max-width: 700px;
-  }
-  .student-main-container .student-aside-panel {
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    margin: 6px 0;
-  }
-  .student-main-container .student-aside-panel button {
-    margin: 2px;
-  }
-  .student-main-container .student-fk-list {
-    display: flex;
-    flex-direction: column;
-  }
-  .student-main-container .student-fk-list a {
-    margin-bottom: 8px;
+
+    .student-aside {
+      min-width: 200px;
+      max-width: 200px;
+      word-break: break-word;
+    }
+
+    .fk-container {
+      min-width: 700px;
+      max-width: 700px;
+    }
+
+    .student-aside-panel {
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      margin: 6px 0;
+
+      button {
+        margin: 2px;
+      }
+    }
+
+    .student-fk-list {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        margin-bottom: 8px;
+      }
+    }
   }
 }
+
+//LOGIN PAGE
+
 .login-main {
   background: no-repeat center #1D1D1D url("../img/login_background.svg");
   background-size: cover;
@@ -349,7 +400,7 @@ nav {
 
 .error-message {
   align-self: center;
-  color: #F51D34;
+  color: $fk-red;
   margin-top: 8px;
 }
 
@@ -360,8 +411,8 @@ nav {
 
   .login-window {
     align-self: center;
-    background-color: #FBFBFB;
-    border: 1px solid #A1A1A1;
+    background-color: $more-light;
+    border: 1px solid $light-gray;
     border-right: none;
     border-left: none;
     display: flex;
@@ -371,6 +422,7 @@ nav {
     width: 100%;
   }
 }
+
 @media only screen and (min-width: 401px) and (max-width: 960px) {
   .login-main {
     background: #1D1D1D;
@@ -388,6 +440,7 @@ nav {
     width: 400px;
   }
 }
+
 @media only screen and (min-width: 961px) {
   .login-window {
     align-self: center;
@@ -401,9 +454,13 @@ nav {
     width: 400px;
   }
 }
+
+//EDIT
+
 a {
   color: #FFF;
   font-weight: bold;
+
   text-decoration: none;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -445,11 +502,11 @@ select {
 }
 
 .skipped {
-  background: #F51D34;
+  background: $fk-red;
 }
 
 .official {
-  background: #F3C64B;
+  background: $fk-yellow;
 }
 
 .hint {
@@ -460,7 +517,7 @@ select {
 }
 
 .hint-text {
-  color: #3D3D3D;
+  color: $second-black;
   margin-left: 6px;
 }
 
@@ -475,92 +532,110 @@ select {
   overflow-y: auto;
   border-spacing: 0;
   white-space: nowrap;
-}
-.student-grades .table-cont {
-  border: 1px solid #A6A6A6;
-  padding: 8px 8px;
-  text-align: center;
-}
-.student-grades .table-head {
-  padding: 8px 8px;
-  background: #FBFBFB;
-  color: #666;
-  font-weight: normal;
-  position: sticky;
-  top: 0;
-  text-align: left;
-  z-index: 2;
-}
-.student-grades .left-info {
-  background: #FFF;
-  box-shadow: 8px 0 8px 0 rgba(29, 29, 29, 0.08);
-  position: sticky;
-  left: 0;
-  z-index: 1;
-}
-.student-grades .left-info-head {
-  box-shadow: 8px 0 8px 0 rgba(29, 29, 29, 0.08);
-  position: sticky;
-  left: 0;
-  z-index: 3;
-}
 
-@media only screen and (max-width: 960px) {
-  .aside-edit .tabletop-offset {
-    margin-left: 8px;
+  .table-cont {
+    border: 1px solid $lighter;
+    padding: 8px 8px;
+    text-align: center;
+  }
+
+  .table-head {
+    padding: 8px 8px;
+    background: #FBFBFB;
+    color: #666;
+    font-weight: normal;
+    position: sticky;
+    top: 0;
+    text-align: left;
+    z-index: 2;
+  }
+
+  .left-info {
+    background: #FFF;
+    box-shadow: 8px 0 8px 0 rgba(29, 29, 29, 0.08);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+
+  .left-info-head {
+    box-shadow: 8px 0 8px 0 rgba(29, 29, 29, 0.08);
+    position: sticky;
+    left: 0;
+    z-index: 3;
   }
 }
+
+@media only screen and (max-width: 960px){
+  .aside-edit {
+    .tabletop-offset {
+      margin-left: 8px;
+    }
+  }
+}
+
 @media only screen and (max-width: 960px) {
   .edit-main {
     display: flex;
     flex-direction: column;
-  }
-  .edit-main .aside-edit {
-    display: flex;
-    flex-direction: column;
-    background: #1D1D1D;
-    padding: 18px 18px;
-  }
-  .edit-main .aside-menu {
-    display: flex;
-    justify-content: space-between;
-    margin: 8px 0;
-  }
-  .edit-main .aside-menu .form-helper {
-    flex: 4;
-    visibility: hidden;
-  }
-  .edit-main .fk-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 18px;
-    justify-content: center;
-  }
-  .edit-main .fk-list a {
-    background: #FBFBFB;
-    border-radius: 8px;
-    color: #000;
-    padding: 8px 6px;
-    margin: 8px 6px;
-    flex-basis: 150px;
-    text-decoration: none;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .edit-main .fk-list a:hover {
-    text-decoration: underline;
-  }
-  .edit-main .fk-list .selected-fk {
-    background: #A1A1A1;
-  }
-  .edit-main .edit-info {
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
+
+    .aside-edit {
+      display: flex;
+      flex-direction: column;
+      background: $main-black;
+      padding: 18px 18px;
+    }
+
+    .aside-menu {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+
+      .form-helper {
+        flex: 4;
+        visibility: hidden;
+      }
+    }
+
+    .fk-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      justify-content: center;
+
+      a {
+        background: $more-light;
+        border-radius: 8px;
+        color: #000;
+
+        padding: 8px 6px;
+        margin: 8px 6px;
+
+        flex-basis: 150px;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .selected-fk {
+        background: $light-gray;
+      }
+    }
+
+    .edit-info {
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+    }
   }
 }
+
 @media only screen and (min-width: 961px) {
   .edit-main {
     display: flex;
@@ -568,79 +643,99 @@ select {
     min-height: 100vh;
     height: 100%;
     width: 100%;
-  }
-  .edit-main .aside-edit {
-    background-color: #1D1D1D;
-    display: flex;
-    flex-direction: column;
-    flex-basis: 250px;
-    width: 250px;
-    max-width: 250px;
-    padding: 18px 0 0 0;
-  }
-  .edit-main .side-profile {
-    margin: 0 18px;
-    word-break: break-all;
-  }
-  .edit-main .aside-menu {
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    margin: 4px 0;
-  }
-  .edit-main .aside-menu form {
-    margin: 4px 0;
-  }
-  .edit-main .aside-menu .form-helper {
-    display: none;
-  }
-  .edit-main .fk-list {
-    display: flex;
-    flex-direction: column;
-  }
-  .edit-main .fk-list a {
-    padding: 4px 18px;
-  }
-  .edit-main .fk-list .selected-fk {
-    background: #3D3D3D;
-    width: 100%;
+
+    .aside-edit {
+      background-color: #1D1D1D;
+      display: flex;
+      flex-direction: column;
+      flex-basis: 250px;
+      width: 250px;
+      max-width: 250px;
+      padding: 18px 0 0 0;
+    }
+
+    .side-profile {
+      margin: 0 18px;
+      word-break: break-all;
+    }
+
+    .aside-menu {
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      margin: 4px 0;
+
+      form {
+        margin: 4px 0;
+      }
+
+      .form-helper {
+        display: none;
+      }
+    }
+
+    .fk-list {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        padding: 4px 18px;
+      }
+
+      .selected-fk {
+        background: $second-black;
+        width: 100%;
+      }
+    }
   }
 
   .edit-info {
     display: flex;
     width: 100%;
-  }
-  .edit-info .content-offset {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    margin: 18px 0 0 18px;
-    max-width: 720px;
-  }
-  .edit-info .edit-yulya {
-    display: flex;
-    flex: 1.3;
-    flex-direction: column;
+
+    .content-offset {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      margin: 18px 0 0 18px;
+      max-width: 720px;
+    }
+
+    .edit-yulya {
+      display: flex;
+      flex: 1.3;
+      flex-direction: column;
+    }
   }
 }
+
+//ALL TEACHER COURSES
 .container-teacher {
   align-items: flex-start;
   margin-top: 18px;
 }
 
 @media only screen and (min-width: 401px) and (max-width: 960px) {
-  .aside-edit .single-form {
-    width: 100%;
-  }
-  .aside-edit .single-form .logout-form {
-    margin: 0;
-    max-width: 100px;
+  .aside-edit {
+    .single-form {
+      width: 100%;
+
+      .logout-form {
+        margin: 0;
+        max-width: 100px;
+      }
+    }
   }
 
-  .container-teacher .fk-item {
-    max-width: 100%;
+  .container-teacher {
+    .fk-item {
+      max-width: 100%;
+    }
   }
 }
+
+//CREATE PAGE
+
 #create-form {
   display: flex;
   flex-direction: column;
@@ -648,18 +743,20 @@ select {
 
 #desc {
   resize: none;
-  border: 1px solid #A1A1A1;
+  border: 1px solid $light-gray;
   border-radius: 8px;
   padding: 6px;
 }
 
-.new-field select {
-  min-width: 130px;
-  max-width: 130px;
+.new-field {
+  select {
+    min-width: 130px;
+    max-width: 130px;
+  }
 }
 
 .date {
-  border: 1px solid #A1A1A1;
+  border: 1px solid $light-gray;
   border-radius: 8px;
   padding: 6px;
 }
@@ -668,38 +765,48 @@ select {
   .new-field {
     display: flex;
     margin: 8px 0;
-  }
-  .new-field label {
-    align-self: center;
-    display: block;
-    max-width: 160px;
-    width: 160px;
-    min-width: 160px;
-    text-align: right;
-    margin-right: 8px;
-  }
-  .new-field #name {
-    min-width: 200px;
-  }
-  .new-field #desc {
-    min-width: 200px;
-    min-height: 125px;
-  }
-  .new-field .no-align {
-    align-self: start;
+
+    label {
+      align-self: center;
+      display: block;
+      max-width: 160px;
+      width: 160px;
+      min-width: 160px;
+      text-align: right;
+
+      margin-right: 8px;
+    }
+
+    #name {
+      min-width: 200px;
+    }
+
+    #desc {
+      min-width: 200px;
+      min-height: 125px;
+    }
+
+    .no-align {
+      align-self: start;
+    }
   }
 }
+
 @media only screen and (max-width: 960px) {
   .new-field {
     display: flex;
     flex-direction: column;
     margin: 8px 0;
-  }
-  .new-field .date {
-    min-width: 130px;
-    max-width: 130px;
+
+    .date {
+      min-width: 130px;
+      max-width: 130px;
+    }
   }
 }
+
+//DETAILED INFO ABOUT FK
+
 .fk-info {
   display: flex;
   flex-direction: column;
@@ -715,27 +822,32 @@ select {
   margin: 18px 0;
 }
 
-@media screen and (max-width: 400px) {
-  .student-main-container .info-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  .student-main-container .fk-info {
-    width: 90%;
+@media screen and (max-width: 400px){
+  .student-main-container {
+    .info-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .fk-info {
+      width: 90%;
+    }
   }
 }
-@media screen and (min-width: 401px) and (max-width: 960px) {
+
+//MODERATOR PAGE
+
+@media screen and (min-width: 401px) and (max-width: 960px){
   .mod-table {
     overflow-y: auto;
     overflow-x: auto;
   }
 }
-@media screen and (min-width: 961px) {
+
+@media screen and (min-width: 961px){
   .mod-table {
     overflow-y: auto;
     overflow-x: hidden;
   }
 }
-
-/*# sourceMappingURL=style.css.map */
