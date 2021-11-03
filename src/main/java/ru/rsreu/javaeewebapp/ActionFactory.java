@@ -2,6 +2,7 @@ package ru.rsreu.javaeewebapp;
 
 import ru.rsreu.javaeewebapp.commands.ActionCommand;
 import ru.rsreu.javaeewebapp.commands.EmptyCommand;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 

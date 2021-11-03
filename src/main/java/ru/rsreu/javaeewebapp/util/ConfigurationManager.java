@@ -1,4 +1,4 @@
-package ru.rsreu.javaeewebapp;
+package ru.rsreu.javaeewebapp.util;
 
 import java.util.ResourceBundle;
 

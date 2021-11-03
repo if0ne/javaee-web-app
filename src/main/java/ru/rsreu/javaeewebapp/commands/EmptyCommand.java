@@ -1,6 +1,6 @@
 package ru.rsreu.javaeewebapp.commands;
 
-import ru.rsreu.javaeewebapp.ConfigurationManager;
+import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
