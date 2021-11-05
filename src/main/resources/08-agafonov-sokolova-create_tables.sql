@@ -17,7 +17,7 @@ create table users (
     password varchar(50) not null,
     first_name varchar(50) not null,
     last_name varchar(50) not null,
-    middlename varchar(50),
+    middle_name varchar(50),
     role number not null,
     blocked number(1, 0) default 0,
     constraint pk_user primary key (id_user),
@@ -33,7 +33,7 @@ create table courses (
     description varchar(1500),
     teacher number not null,
     constraint pk_course primary key (id_course),
-    constraint fk_teacher foreign key (teacher) references users (id_user)
+    constraint fk_teacher foreign key (teacher) references users (id_user) on delete cascade
 )
 /
 -- Dates table.
@@ -41,10 +41,10 @@ create table courses (
 -- which the lesson will be held. A list of dates is formed on which the lesson will be held based on these data.
 create table dates (
     id_date number not null,
-    course number,
     course_date date,
+    id_course number,
     constraint pk_date primary key (id_date),
-    constraint fk_date_course foreign key (course) references courses (id_course)
+    constraint fk_date_course foreign key (id_course) references courses (id_course) on delete cascade
 )
 /
 -- Students rating table.
@@ -64,10 +64,10 @@ create table classes (
     rating number not null,
     course_date number not null,
     grade number,
-    attendance number not null,
+    attendance number(1, 0) default 0,
     constraint pk_class primary key (id_class),
-    constraint fk_date foreign key (course_date) references dates (id_date),
-    constraint fk_rating_classes foreign key (rating) references ratings (id_rating)
+    constraint fk_date foreign key (course_date) references dates (id_date) on delete cascade,
+    constraint fk_rating_classes foreign key (rating) references ratings (id_rating) on delete cascade
 )
 /
 -- Students and courses table is intermediate table for a many-to-many relationship between the students table and the course one.
@@ -78,9 +78,9 @@ create table user_courses (
     id_course number not null,
     id_rating number not null,
     constraint pk_students_cources primary key (id),
-    constraint fk_students foreign key (id_student) references users (id_user),
-    constraint fk_courses foreign key (id_course) references courses (id_course),
-    constraint fk_rating_user_cources foreign key (id_rating) references ratings (id_rating),
+    constraint fk_students foreign key (id_student) references users (id_user) on delete cascade,
+    constraint fk_courses foreign key (id_course) references courses (id_course) on delete cascade,
+    constraint fk_rating_user_cources foreign key (id_rating) references ratings (id_rating) on delete cascade,
     constraint unique_rating unique (id_rating)
 )
 /

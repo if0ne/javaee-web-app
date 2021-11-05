@@ -6,6 +6,6 @@ insert into roles (id_role, name) values (2, 'Преподаватель')
 /
 insert into roles (id_role, name) values (3, 'Студент')
 /
-insert into users (id_user, login, password, first_name, last_name, middlename, role)
-values (0, 'admin', '7345admin2736', 'Соколова', 'Юлия', 'Анатольевна', 0)
+insert into users (id_user, login, password, first_name, last_name, role)
+values (0, 'admin', 'admin', 'Админка', 'Админ', 0)
 /
