@@ -1,75 +1,80 @@
---АДМИНИСТРАТОР
---Запросы на изменение БД
-    --Добавить пользователя
+--enter to system by login and password
+select id_user, roles.name
+from users inner join roles on users.role = roles.id_role
+where login = ? and password = ?
+/
+--Administrator
+--database change requests 
+    --add user
     insert into users (id_user, login, password, last_name, first_name, middle_name, role)
     values (?, ?, ?, ?, ?, ?, ?)
     /
-    --Удалить пользователя
+    --delete user
     delete from users
     where id_user = ?
     /
-        --запрос на получение id роли по имени (пусть пока тут будет, если что удалю)
+        --get role id by name
         select id_role
         from roles
         where name = ?
         /
---Запросы на получение информации из БД
-    --Список всех пользователей системы
+--get database information requests
+    --all system users list
     select last_name, first_name, middle_name, roles.name
     from users inner join roles on users.role = roles.id_role 
     where roles.name <> 'Администратор'
     group by roles.name, last_name, first_name, middle_name
     /
     
---МОДЕРАТОР
---Запросы на изменение БД
-    --Заблокировать пользователя
+--Moderator
+--database change requests
+    --block user
     update users
     set blocked = 1
     where id_user = ?
     /
-    --Разблокировать пользователя
+    --unblock user
     update users
     set blocked = 0
     where id_user = ?
     /
---Запросы на получение информации из БД
+--get database information requests
     --список всех студентов с текущим статусом
     select last_name, first_name, middle_name, blocked
     from users inner join roles on users.role = roles.id_role 
     where roles.name = 'Студент'
     /
 
---ПРЕПОДАВАТЕЛЬ
---Запросы на изменение БД
-    --добавление курса
+--Teacher
+--database change requests
+    --add course
     insert into courses (id_course, name, description, teacher) values (?, ?, ?, ?)
     /
-    --добавление дат нового курса (после вычисления дат из промежутка)
-    --для одного курса добавляется несколько записей с разными датами
+    --add dates for a new course (after calculating dates from a range)
+    --several records with different dates are added for one course
     insert into dates (id_date, course_date, id_course) values (?, ?, ?)
     /
-    --отчисление студента с курса (также как и у студента)
-    --добавление итоговой оценки студенту
+    --expul of a student from the course (as well as a student)
+    --add final grade for the student
     update ratings
     set final_grade = ?
     where ratings.id_rating = (select id_rating
                                 from user_courses
                                 where id_student = ? and id_course = ?)
     /
-    --добавление информации о студенте (успеваемости и посещаемости в определённую дату)
+    --add information about the student (attendance and progress on a certain date)
     update classes
     set attendance = ?, grade = ?
     where classes.rating = (select id_rating from user_courses where id_student = ? and id_course = ?)
     and classes.course_date = (select id_date from dates where course_date = ? and id_course = ?)
     /
---Запросы на получение информации из БД
-    --информация о конкретном курсе и успеваемости студентов (также как и у студента)
-    --получить список дат(для таблицы успеваемости)
+--get database information requests
+    --get information about the course and the student progress (as well as a student)
+    --get dates list (for progress table)
     select course_date from dates where id_course = ?
     /
-    --список курсов преподавателя
-        --ДОБАВИТЬ СЛЕДУЮЩУЮ ДАТУ ЗАНЯТИЯ
+    --get the teacher courses list
+        --ADD NEXT DATE OF THE CLASS
     select name, last_name, first_name, middle_name, count(id_student) as count
     from (user_courses inner join courses on user_courses.id_course = courses.id_course) inner join users on courses.teacher = users.id_user
     where teacher = ?
@@ -77,55 +82,51 @@
     order by name
     /
 
---СТУДЕНТ
---Запросы на изменение БД
-    --записаться на курс (новые id и id_rating вычисляются отдельно)
+--Student
+--database change requests
+    --register for a course
     insert into users_courses (id, id_student, id_course, id_rating)
     values (?, ?, ?, ?)
     /
-    --отчисление с курса
-    delete from user_courses
-    where id_student = ? and id_course = ?
-    /
-    --при каскадном удалении(чтобы удалить и всю информацию об оценках, и о студенте на курсе) (лучше этот вариант)
+    --drop out from the course
     delete from ratings
     where id_rating = (select id_rating
                         from user_courses
                         where id_student = ? and id_course = ?)
     /
---Запросы на получение информации из БД
-    --Получить свои курсы
+--get database information requests
+    --get your courses list
     select name, description, last_name, first_name, middle_name
     from courses inner join users on courses.teacher = users.id_user
     where id_course in (select id_course
                         from user_courses
                         where id_student = ?)
     /
-    --получить все курсы
+    --get all courses list
     
-            --ДОБАВИТЬ КОЛИЧЕСТВО СТУДЕНТОВ У КАЖДОГО КУРСА И СОРТИРОВКУ ПО КОЛИЧЕСТВУ
+            --ADD NUMBER OF STUDENTS TO EACH COURSE AND SORT BY NUMBER
    
-        --курсы, на которые записан
+        --get a courses list for which you are registered
         select name, description, last_name, first_name, middle_name
         from courses inner join users on courses.teacher = users.id_user
         where id_course in (select id_course
                             from user_courses
                             where id_student = ?) 
         /
-        --курсы, на которые не записан
+        --get a courses list for which you are not registered
         select name, description, last_name, first_name, middle_name
         from courses inner join users on courses.teacher = users.id_user
         where id_course not in (select id_course
                             from user_courses
                             where id_student = ?)
         /
-    --получить информацию о курсе
-        --информация о конкрентом курсе
+    --get information about the course
+        --get information about the course
         select name, description, last_name, first_name, middlename
         from courses inner join users on courses.teacher = users.id_user
         where courses.id_course = ?
         /
-        --успеваемость студентов на курсе
+        --get students progress list on the course
         select last_name, first_name, middle_name, final_grade, dates.course_date, grade, attendance
         from (((user_courses inner join users on user_courses.id_student = users.id_user)
                 inner join ratings on user_courses.id_rating = ratings.id_rating)
@@ -133,18 +134,18 @@
                 inner join dates on dates.id_date = classes.course_date
         where user_courses.id_course = ?
         /
---доп. запросы для получения последнего id
---id пользователя
+--additional requests to get the last id
+--user id
 select id_user
 from (select id_user from users order by id_user desc)
 where rownum = 1
 /
---id курса
+--course id
 select id_course
 from (select id_course from courses order by id_course desc)
 where rownum = 1
 /
---id даты
+--date id
 select id_date
 from (select id_date from dates order by id_date desc)
 where rownum = 1
@@ -154,12 +155,12 @@ select id
 from (select id from user_courses order by id desc)
 where rownum = 1
 /
---id рейтинга
+--rating id
 select id_rating
 from (select id_rating from ratings order by id_rating desc)
 where rownum = 1
 /
---id класса
+--class id
 select id_class
 from (select id_class from classes order by id_class desc)
 where rownum = 1
