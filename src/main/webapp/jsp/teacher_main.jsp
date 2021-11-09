@@ -38,7 +38,6 @@
                     <div class="fk-item-container">
                         <div class="fk-info">
                             <h2 class="fk-title">Название ФК №1</h2>
-                            <p class="role-label">Преподаватель</p>
                             <div class="fk-short-desc-container">
                                 <p>Количество студентов: 19</p>
                                 <p>Следующее занятие: 19.09.21</p>
@@ -53,7 +52,6 @@
                     <div class="fk-item-container">
                         <div class="fk-info">
                             <h2 class="fk-title">Название ФК №2</h2>
-                            <p class="role-label">Преподаватель</p>
                             <div class="fk-short-desc-container">
                                 <p>Количество студентов: 19</p>
                                 <p>Следующее занятие: 19.09.21</p>
@@ -68,7 +66,6 @@
                     <div class="fk-item-container">
                         <div class="fk-info">
                             <h2 class="fk-title">Ооооооооооооооооооооооочень длинное название ФК №3</h2>
-                            <p class="role-label">Преподаватель</p>
                             <div class="fk-short-desc-container">
                                 <p>Количество студентов: 19</p>
                                 <p>Следующее занятие: 19.09.21</p>

@@ -75,10 +75,10 @@ where login = ? and password = ?
     /
     --get the teacher courses list
         --ADD NEXT DATE OF THE CLASS
-    select name, last_name, first_name, middle_name, count(id_student) as count
-    from (user_courses inner join courses on user_courses.id_course = courses.id_course) inner join users on courses.teacher = users.id_user
+    select name, count(id_student) as count
+    from user_courses inner join courses on user_courses.id_course = courses.id_course
     where teacher = ?
-    group by name, last_name, first_name, middle_name
+    group by name
     order by name
     /
 
