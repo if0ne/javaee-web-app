@@ -19,7 +19,7 @@ public final class Client {
         connect = DbConnector.getConnection();
     }
 
-    public List<Map<String, Object>> selectData(String sql, String...params) {
+    public List<Map<String, Object>> selectData(String sql, int...params) {
         List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
 
         PreparedStatement statement = null;
@@ -27,7 +27,7 @@ public final class Client {
         try {
             statement = connect.prepareStatement(sql);
             for (int index = 0; index < params.length; ++index) {
-                statement.setString(index + 1, params[index]);
+                statement.setString(index + 1, Integer.toString(params[index]));
             }
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

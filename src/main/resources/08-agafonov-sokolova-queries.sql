@@ -39,7 +39,7 @@ where login = ? and password = ?
     where id_user = ?
     /
 --get database information requests
-    --список всех студентов с текущим статусом
+    --all students list with their current statuses
     select last_name, first_name, middle_name, blocked
     from users inner join roles on users.role = roles.id_role 
     where roles.name = '—тудент'
@@ -75,7 +75,7 @@ where login = ? and password = ?
     /
     --get the teacher courses list
         --ADD NEXT DATE OF THE CLASS
-    select name, count(id_student) as count
+    select name, count(id_student) as count --, next_date 
     from user_courses inner join courses on user_courses.id_course = courses.id_course
     where teacher = ?
     group by name
@@ -122,7 +122,7 @@ where login = ? and password = ?
         /
     --get information about the course
         --get information about the course
-        select name, description, last_name, first_name, middlename
+        select name, description, last_name, first_name, middle_name
         from courses inner join users on courses.teacher = users.id_user
         where courses.id_course = ?
         /
