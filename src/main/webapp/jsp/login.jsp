@@ -12,19 +12,20 @@
             <section class="login-window">
                 <h1 class="logo" style="align-self: center; color: #000">ELECTIVES</h1>
                 <h2 class="form-title" style="align-self: center;">Вход</h2>
-                <form method="post" action="" class="login-form">
+                <form method="post" action="/controller" class="login-form">
+                    <input type="hidden" name="command" value="login">
                     <div class="field">
                         <label for="login">Логин:</label>
-                        <input id="login" class="input-field">
+                        <input id="login" class="input-field" name="login">
                     </div>
                     <div class="field">
                         <label for="password">Пароль:</label>
-                        <input id="password" type="password" class="input-field">
+                        <input id="password" type="password" class="input-field" name="password">
                     </div>
                     <button class="btn btn-default" style="align-self: center;">Войти</button>
                 </form>
                 <p class="error-message">
-                    Неверный логин или пароль
+                    ${wrongAction}
                 </p>
             </section>
         </div>
