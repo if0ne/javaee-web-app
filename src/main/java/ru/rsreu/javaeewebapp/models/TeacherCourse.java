@@ -1,12 +1,21 @@
 package ru.rsreu.javaeewebapp.models;
 
+import ru.rsreu.javaeewebapp.util.ColumnLink;
+
 import java.sql.Date;
 
 public class TeacherCourse {
+
+    @ColumnLink("name")
     private String name;
+    @ColumnLink("count")
     private int studentsNumber;
+    @ColumnLink("next_date")
     private Date nextClassDate;
 
+    public TeacherCourse() {
+
+    }
     public TeacherCourse(String name, int studentsNumber, Date nextClassDate) {
         this.name = name;
         this.studentsNumber = studentsNumber;
