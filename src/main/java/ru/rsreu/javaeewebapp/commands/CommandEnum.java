@@ -7,6 +7,11 @@ public enum CommandEnum {
         {
             this.command = new LoginCommand();
         }
+    },
+    SHOW_LOGIN {
+        {
+            this.command = new MainRedirectCommand();
+        }
     };
     ActionCommand command;
     public ActionCommand getCurrentCommand() {

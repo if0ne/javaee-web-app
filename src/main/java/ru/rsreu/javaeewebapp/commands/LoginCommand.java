@@ -1,5 +1,6 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        String page = ConfigurationManager.getProperty("path.page.login");
+        String page = "/controller?command=show_login";
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -16,9 +17,11 @@ public class LoginCommand implements ActionCommand {
         }
 
         if (!((login.equals("admin")) && (password.equals("admin")))) {
-            request.setAttribute("wrongAction", "Не правильный логин или пароль");
+            request.setAttribute("wrongLoginPassword", "Не правильный логин или пароль");
         } else {
-            request.setAttribute("wrongAction", null);
+            request.getSession(true).setAttribute("user_id", 1);
+            request.getSession(true).setAttribute("role", Role.ADMINISTRATOR.toString());
+            request.setAttribute("wrongLoginPassword", null);
         }
 
         return page;
