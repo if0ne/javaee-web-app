@@ -1,9 +1,7 @@
 package ru.rsreu.javaeewebapp;
 
 import ru.rsreu.javaeewebapp.commands.ActionCommand;
-import ru.rsreu.javaeewebapp.models.enums.Role;
-import ru.rsreu.javaeewebapp.util.ConfigurationManager;
-import ru.rsreu.javaeewebapp.util.MessageManager;
+import ru.rsreu.javaeewebapp.commands.EmptyCommand;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,8 +30,14 @@ public class FrontController extends HttpServlet {
 
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
-
-        page = command.execute(request);
+        try {
+            command.readRequestAttributes(request);
+            page = command.execute();
+            command.setAttributes(request);
+        } catch (Exception exception) {
+            command = new EmptyCommand();
+            page = command.execute();
+        }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
