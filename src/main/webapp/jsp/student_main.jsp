@@ -16,13 +16,15 @@
     <main class="student-main">
         <div class="student-main-container">
             <aside class="student-aside">
-                <h1 class="user-name">Агафонов Павел</h1>
-                <p class="role-label">Студент</p>
+                <h1 class="user-name">${user_last_name} ${user_first_name}</h1>
+                <p class="role-label">${user_role}</p>
                 <div class="student-aside-panel">
-                    <form class="all-courses-form">
+                    <form class="all-courses-form" action="/controller" method="get">
+                        <input type="hidden" name="command" value="show_all_courses">
                         <button class="btn btn-default">Все курсы</button>
                     </form>
-                    <form class="logout-form">
+                    <form class="logout-form" action="/controller" method="post">
+                        <input type="hidden" name="command" value="logout">
                         <button class="btn">
                             Выйти
                             <i class="fas fa-sign-out-alt"></i>
@@ -30,72 +32,32 @@
                     </form>
                 </div>
                 <div class="student-fk-list">
-                    <a href="#">Название ФК №1</a>
-                    <a href="#">Название ФК №2</a>
-                    <a href="#">Название ФК №3</a>
-                    <a href="#">Название ФК №4</a>
-                    <a href="#">Название ФК №5</a>
-                    <a href="#">Название ФК №6</a>
-                    <a href="#">Ооооооооооооооооооооооочень длинное название ФК №3</a>
+                    <c:forEach var="link" items="${student_courses}">
+                        <a href="/controller?command=show_detailed_course&course_id=${link.id}">${link.title}</a>
+                    </c:forEach>
                 </div>
             </aside>
             <section class="fk-container">
-                <section class="fk-item">
-                    <div class="fk-item-container">
-                        <div class="fk-info">
-                            <h2 class="fk-title">Название ФК №1</h2>
-                            <p class="role-label">Преподаватель</p>
-                            <div class="fk-short-desc-container">
-                                <p class="fk-short-desc">
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                </p>
+                <c:forEach var="course" items="${student_courses}">
+                    <section class="fk-item">
+                        <div class="fk-item-container">
+                            <div class="fk-info">
+                                <h2 class="fk-title">${course.title}</h2>
+                                <p class="role-label">${course.teacherName}</p>
+                                <div class="fk-short-desc-container">
+                                    <p class="fk-short-desc">
+                                        ${course.decription}
+                                    </p>
+                                </div>
                             </div>
+                            <form class="fk-goto" action="/controller" method="get">
+                                <input type="hidden" name="command" value="show_detailed_course">
+                                <input type="hidden" name="course_id" value="${course.id}">
+                                <button class="btn btn-default">Подробнее</button>
+                            </form>
                         </div>
-                        <form class="fk-goto">
-                            <button class="btn btn-default">Подробнее</button>
-                        </form>
-                    </div>
-                </section>
-                <section class="fk-item">
-                    <div class="fk-item-container">
-                        <div class="fk-info">
-                            <h2 class="fk-title">Название ФК №2</h2>
-                            <p class="role-label">Преподаватель</p>
-                            <div class="fk-short-desc-container">
-                                <p class="fk-short-desc">
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                </p>
-                            </div>
-                        </div>
-                        <form class="fk-goto">
-                            <button class="btn btn-default">Подробнее</button>
-                        </form>
-                    </div>
-                </section>
-                <section class="fk-item">
-                    <div class="fk-item-container">
-                        <div class="fk-info">
-                            <h2 class="fk-title">Ооооооооооооооооооооооочень длинное название ФК №3</h2>
-                            <p class="role-label">Преподаватель</p>
-                            <div class="fk-short-desc-container">
-                                <p class="fk-short-desc">
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                    Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                                </p>
-                            </div>
-                        </div>
-                        <form class="fk-goto">
-                            <button class="btn btn-default">Подробнее</button>
-                        </form>
-                    </div>
-                </section>
+                    </section>
+                </c:forEach>
             </section>
         </div>
     </main>

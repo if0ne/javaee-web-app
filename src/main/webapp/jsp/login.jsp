@@ -25,7 +25,7 @@
                     <button class="btn btn-default" style="align-self: center;">Войти</button>
                 </form>
                 <p class="error-message">
-                    ${wrongLoginPassword}
+                    ${wrong_login_password}
                 </p>
             </section>
         </div>

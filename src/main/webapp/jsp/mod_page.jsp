@@ -12,11 +12,12 @@
         <aside class="aside-edit">
             <h1 class="logo" style="align-self: center;">ELECTIVES</h1>
             <div class="side-profile">
-                <h1 class="user-name" style="color: #FFF; display: block;">Агафонов Павел</h1>
-                <p class="role-label">Модератор</p>
+                <h1 class="user-name" style="color: #FFF; display: block;">${user_last_name} ${user_first_name}</h1>
+                <p class="role-label">${user_role}</p>
             </div>
             <div class="aside-menu">
-                <form class="logout-form tabletop-offset" style="margin: 0;">
+                <form class="logout-form tabletop-offset" action="/controller" method="get" style="margin: 0;">
+                    <input type="hidden" name="command" value="logout">
                     <button class="btn">
                         Выйти
                         <i class="fas fa-sign-out-alt"></i>
@@ -40,33 +41,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Не заблокирован</td>
-                                <td class="table-cont">
-                                    <form>
-                                        <button class="btn btn-danger">Заблокировать</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Заблокирован</td>
-                                <td class="table-cont">
-                                    <form>
-                                        <button class="btn btn-default">Разблокировать</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Не заблокирован</td>
-                                <td class="table-cont">
-                                    <form>
-                                        <button class="btn btn-danger">Заблокировать</button>
-                                    </form>
-                                </td>
-                            </tr>
+                            <c:forEach var="student" items="${students}">
+                                <tr>
+                                    <td class="table-cont left-info">${student.lastName} ${student.firstName}</td>
+                                    <td class="table-cont">${student.status}</td>
+                                    <td class="table-cont">
+                                        <form action="/controller" method="post">
+                                            <input type="hidden" name="command" value="change_user_status">
+                                            <button class="btn btn-danger">
+                                                ${student.status.equals(\"Заблокирован\") ? "Разблокировать" : "Заблокировать" }
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </section>

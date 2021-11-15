@@ -17,11 +17,11 @@ public class LoginCommand implements ActionCommand {
         }
 
         if (!((login.equals("admin")) && (password.equals("admin")))) {
-            request.setAttribute("wrongLoginPassword", "Не правильный логин или пароль");
+            request.setAttribute("wrong_login_password", "Не правильный логин или пароль");
         } else {
             request.getSession(true).setAttribute("user_id", 1);
-            request.getSession(true).setAttribute("role", Role.ADMINISTRATOR.toString());
-            request.setAttribute("wrongLoginPassword", null);
+            request.getSession(true).setAttribute("role", Role.STUDENT.toString());
+            request.setAttribute("wrong_login_password", null);
         }
 
         return page;
