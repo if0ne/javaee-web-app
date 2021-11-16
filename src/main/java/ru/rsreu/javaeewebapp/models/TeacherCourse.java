@@ -6,24 +6,24 @@ import java.sql.Date;
 
 public class TeacherCourse {
 
-    @ColumnLink("name")
-    private String name;
-    @ColumnLink("count")
+    private int id;
+    private String title;
     private int studentsNumber;
-    @ColumnLink("next_date")
     private Date nextClassDate;
 
-    public TeacherCourse() {
-
-    }
-    public TeacherCourse(String name, int studentsNumber, Date nextClassDate) {
-        this.name = name;
+    public TeacherCourse(int id, String title, int studentsNumber, Date nextClassDate) {
+        this.id = id;
+        this.title = title;
         this.studentsNumber = studentsNumber;
         this.nextClassDate = nextClassDate;
     }
 
-    public String getName() {
-        return  this.name;
+    public int getId() {
+        return this.id;
+    }
+
+    public String getTitle() {
+        return  this.title;
     }
 
     public int getStudentsNumber() {
@@ -32,5 +32,21 @@ public class TeacherCourse {
 
     public Date getNextClassDate() {
         return this.nextClassDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setStudentsNumber(int studentsNumber) {
+        this.studentsNumber = studentsNumber;
+    }
+
+    public void setNextClassDate(Date nextClassDate) {
+        this.nextClassDate = nextClassDate;
     }
 }

@@ -3,8 +3,9 @@ package ru.rsreu.javaeewebapp.dao.oracle;
 import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.javaeewebapp.Client;
 import ru.rsreu.javaeewebapp.interfaces.UsersDAO;
-import ru.rsreu.javaeewebapp.models.StudentsStatus;
-import ru.rsreu.javaeewebapp.models.UsersRoles;
+import ru.rsreu.javaeewebapp.models.StudentStatus;
+import ru.rsreu.javaeewebapp.models.User;
+import ru.rsreu.javaeewebapp.models.UserRole;
 import ru.rsreu.javaeewebapp.util.MapClassConverter;
 
 import java.util.ArrayList;
@@ -23,24 +24,29 @@ public class OracleUsersDAO implements UsersDAO {
     }
 
     @Override
-    public List<StudentsStatus> getStudentsStatuses() {
-        List<StudentsStatus> result = new ArrayList<StudentsStatus>();
+    public List<StudentStatus> getStudentsStatuses() {
+        List<StudentStatus> result = new ArrayList<StudentStatus>();
         List<Map<String, Object>> rows = client.selectData(SQL_GET_STUDENTS_STATUSES);
 
         for(Map<String, Object> row : rows) {
-            result.add(MapClassConverter.getObjectFromMap(row, StudentsStatus.class));
+            result.add(MapClassConverter.getObjectFromMap(row, StudentStatus.class));
         }
         return result;
     }
 
     @Override
-    public List<UsersRoles> getAllUsersRoles() {
-        List<UsersRoles> result = new ArrayList<UsersRoles>();
+    public List<UserRole> getAllUsersRoles() {
+        List<UserRole> result = new ArrayList<UserRole>();
         List<Map<String, Object>> rows = client.selectData(SQL_GET_USERS_ROLES);
 
         for(Map<String, Object> row : rows) {
-            result.add(MapClassConverter.getObjectFromMap(row, UsersRoles.class));
+            result.add(MapClassConverter.getObjectFromMap(row, UserRole.class));
         }
         return result;
+    }
+
+    @Override
+    public User getLoggedUser(String login, String password) {
+        return null;
     }
 }

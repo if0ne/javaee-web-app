@@ -4,46 +4,47 @@ import ru.rsreu.javaeewebapp.util.ColumnLink;
 
 public class Course {
 
-    @ColumnLink("name")
-    private String name;
-    @ColumnLink("description")
+    private int id;
+    private String title;
     private String description;
-    @ColumnLink("last_name")
-    private String teacherLastName;
-    @ColumnLink("first_name")
-    private String teacherFirstName;
-    @ColumnLink("middle_name")
-    private String teacherMiddleName;
+    private UserName teacherName;
 
-    public Course() {
-
-    }
-    public Course(String name, String description, String teacherLastName,
-                  String teacherFirstName, String teacherMiddleName) {
-        this.name = name;
+    public Course(int id, String title, String description, UserName teacherName) {
+        this.id = id;
+        this.title = title;
         this.description = description;
-        this.teacherLastName = teacherLastName;
-        this.teacherFirstName = teacherFirstName;
-        this.teacherMiddleName = teacherMiddleName;
+        this.teacherName = teacherName;
     }
 
-    public String getName() {
-        return this.name;
+    public int getId() {
+        return this.id;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 
     public String getDescription() {
         return this.description;
     }
 
-    public String getTeacherLastName() {
-        return this.teacherLastName;
+    public String getTeacherName() {
+        return this.teacherName.getFullName();
     }
 
-    public String getTeacherFirstName() {
-        return this.teacherFirstName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTeacherMiddleName() {
-        return this.teacherMiddleName;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTeacherName(UserName teacherName) {
+        this.teacherName = teacherName;
     }
 }
