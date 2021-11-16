@@ -1,5 +1,5 @@
 --enter to system by login and password
-select id_user, roles.name
+select id_user, roles.name, last_name, first_name, middle_name, blocked
 from users inner join roles on users.role = roles.id_role
 where login = ? and password = ?
 /
@@ -20,10 +20,10 @@ where login = ? and password = ?
         /
 --get database information requests
     --all system users list
-    select last_name, first_name, middle_name, roles.name
+    select id_user, last_name, first_name, middle_name, roles.name
     from users inner join roles on users.role = roles.id_role 
     where roles.name <> 'Администратор'
-    group by roles.name, last_name, first_name, middle_name
+    group by roles.name, last_name, first_name, middle_name, id_user
     /
     
 --Moderator

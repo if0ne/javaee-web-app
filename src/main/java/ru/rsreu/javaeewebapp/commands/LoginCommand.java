@@ -2,6 +2,7 @@ package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.LoginInput;
 import ru.rsreu.javaeewebapp.commands.outputs.LoginOutput;
+
 import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 import ru.rsreu.javaeewebapp.util.ParameterChecker;
@@ -21,7 +22,7 @@ public class LoginCommand implements ActionCommand {
         input.setPassword(request.getParameter("password"));
 
         boolean isSuccess = !ParameterChecker.isAnyFieldNull(input.getLogin(), input.getPassword());
-
+  
         if (!isSuccess) {
             throw new Exception("Wrong parameters in LoginCommand");
         }

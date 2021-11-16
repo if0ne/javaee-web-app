@@ -16,13 +16,15 @@
     <main class="student-main">
         <div class="student-main-container">
             <aside class="student-aside">
-                <h1 class="user-name">Агафонов Павел</h1>
-                <p class="role-label">Студент</p>
+                <h1 class="user-name">${user_last_name} ${user_first_name}</h1>
+                <p class="role-label">${user_role}</p>
                 <div class="student-aside-panel">
-                    <form class="all-courses-form">
+                    <form class="all-courses-form" action="/controller" method="get">
+                        <input type="hidden" name="command" value="show_my_courses">
                         <button class="btn btn-default">Мои курсы</button>
                     </form>
-                    <form class="logout-form">
+                    <form class="logout-form" action="/controller" method="get">
+                        <input type="hidden" name="command" value="logout">
                         <button class="btn">
                             Выйти
                             <i class="fas fa-sign-out-alt"></i>
@@ -33,15 +35,10 @@
             <div class="info-container">
                 <section class="fk-info">
                     <section class="part-info">
-                        <h1 class="fk-title">Название ФК №1</h1>
-                        <p class="role-label">Преподаватель</p>
+                        <h1 class="fk-title">${course.title}</h1>
+                        <p class="role-label">${course.teacherLastName} ${course.teacherFirstName} ${course.teacherMiddleName}</p>
                         <p class="fk-desc">
-                            Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                            Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                            Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                            Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                            Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
-                            Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание. Это описание.
+                            ${course.description}
                         </p>
                     </section>
                     <hr>
@@ -52,45 +49,26 @@
                             <tr>
                                 <th class="table-head left-info-head">ФИО</th>
                                 <th class="table-head">Итоговая оценка</th>
-                                <th class="table-head">25.02.21</th>
-                                <th class="table-head">25.02.21</th>
-                                <th class="table-head">25.02.21</th>
-                                <th class="table-head">25.02.21</th>
-                                <th class="table-head">25.02.21</th>
-                                <th class="table-head">25.02.21</th>
+                                <c:forEach var="date" items="${dates}">
+                                    <th class="table-head">date.date</th>
+                                </c:forEach>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Зачтено</td>
-                                <td class="table-cont skipped"></td>
-                                <td class="table-cont">3</td>
-                                <td class="table-cont official"></td>
-                                <td class="table-cont">5</td>
-                                <td class="table-cont">5</td>
-                                <td class="table-cont">5</td>
-                            </tr>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Зачтено</td>
-                                <td class="table-cont skipped"></td>
-                                <td class="table-cont">3</td>
-                                <td class="table-cont official"></td>
-                                <td class="table-cont">5</td>
-                                <td class="table-cont">5</td>
-                                <td class="table-cont">5</td>
-                            </tr>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Зачтено</td>
-                                <td class="table-cont skipped"></td>
-                                <td class="table-cont">3</td>
-                                <td class="table-cont official"></td>
-                                <td class="table-cont">5</td>
-                                <td class="table-cont">5</td>
-                                <td class="table-cont">5</td>
-                            </tr>
+                            <c:forEach var="student" items="${students}">
+                                <tr>
+                                    <td class="table-cont left-info">${student.lastName} ${student.firstName}</td>
+                                    <td class="table-cont">${student.finalGrade}</td>
+                                    <c:forEach var="attendance" items="${student.progresses}">
+                                        <td class="table-cont
+                                            ${attendance.status == 0 ? "" :
+                                            attendance.status == 1 ? "official" : "skipped"
+                                        }">
+                                                ${attendance.grade}
+                                        </td>
+                                    </c:forEach>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                         <div class="hints">
@@ -107,7 +85,8 @@
                     <hr>
                     <section class="part-info">
                         <h2 class="fk-section-title">Отчисление</h2>
-                        <form id="delete-student" class="form-area">
+                        <form id="delete-student" class="form-area" action="/controller" method="post">
+                            <input type="hidden" name="command" value="killme">
                             <button class="btn btn-danger btn-leave">Отчислиться</button>
                         </form>
                     </section>

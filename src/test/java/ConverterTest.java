@@ -1,10 +1,4 @@
 import org.junit.Test;
-import ru.rsreu.javaeewebapp.models.StudentsStatus;
-import ru.rsreu.javaeewebapp.util.MapClassConverter;
-
-import java.util.HashMap;
-import java.util.Map;
-import static org.junit.Assert.*;
 
 public class ConverterTest {
 

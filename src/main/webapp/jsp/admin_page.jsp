@@ -12,11 +12,12 @@
         <aside class="aside-edit">
             <h1 class="logo" style="align-self: center;">ELECTIVES</h1>
             <div class="side-profile">
-                <h1 class="user-name" style="color: #FFF; display: block;">Агафонов Павел</h1>
-                <p class="role-label">Администратор</p>
+                <h1 class="user-name" style="color: #FFF; display: block;">${user_last_name} ${user_first_name}</h1>
+                <p class="role-label">${user_role}</p>
             </div>
             <div class="aside-menu">
-                <form class="logout-form tabletop-offset" style="margin: 0;">
+                <form class="logout-form tabletop-offset" action="/controller" method="get" style="margin: 0;">
+                    <input type="hidden" name="command" value="logout">
                     <button class="btn">
                         Выйти
                         <i class="fas fa-sign-out-alt"></i>
@@ -32,29 +33,30 @@
                 <h1 class="fk-title">Пользователи</h1>
                 <section class="edit-block">
                     <h2 class="fk-section-title">Добавление пользователя</h2>
-                    <form id="user-add" class="form-area">
+                    <form id="user-add" class="form-area" action="/controller" method="post">
+                        <input type="hidden" name="command" value="create_user">
                         <div class="field-area">
                             <div class="edit-field">
                                 <label for="user-second-name">Фамилия</label>
-                                <input id="user-second-name" class="input-field"/>
+                                <input id="user-second-name" class="input-field" name="last_name"/>
                             </div>
 
                             <div class="edit-field">
                                 <label for="user-first-name">Имя</label>
-                                <input id="user-first-name" class="input-field"/>
+                                <input id="user-first-name" class="input-field" name="first_name"/>
                             </div>
 
                             <div class="edit-field">
                                 <label for="user-middle-name">Отчество</label>
-                                <input id="user-middle-name" class="input-field"/>
+                                <input id="user-middle-name" class="input-field" name="middle_name"/>
                             </div>
 
                             <div class="edit-field">
                                 <label for="user-role">Роль</label>
-                                <select id="user-role" form="user-add" required>
-                                    <option>Модератор</option>
-                                    <option>Преподаватель</option>
-                                    <option>Студент</option>
+                                <select id="user-role" form="user-add" name="new_user_role" required>
+                                    <option value="2">Модератор</option>
+                                    <option value="1">Преподаватель</option>
+                                    <option value="0">Студент</option>
                                 </select>
                             </div>
                         </div>
@@ -73,33 +75,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Студент</td>
-                                <td class="table-cont">
-                                    <form>
-                                        <button class="btn btn-danger">Удалить</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Преподаватель</td>
-                                <td class="table-cont">
-                                    <form>
-                                        <button class="btn btn-danger">Удалить</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="table-cont left-info">Агафонов Павел</td>
-                                <td class="table-cont">Модератор</td>
-                                <td class="table-cont">
-                                    <form>
-                                        <button class="btn btn-danger">Удалить</button>
-                                    </form>
-                                </td>
-                            </tr>
+                            <c:forEach var="user" items="${users}">
+                                <tr>
+                                    <td class="table-cont left-info">${user.lastName} ${user.firstName}</td>
+                                    <td class="table-cont">${user.role}</td>
+                                    <td class="table-cont">
+                                        <form action="/controller" method="post">
+                                            <input type="hidden" name="command" value="delete_user">
+                                            <input type="hidden" name="delete_user_id" value="${user.id}">
+                                            <button class="btn btn-danger">Удалить</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </section>

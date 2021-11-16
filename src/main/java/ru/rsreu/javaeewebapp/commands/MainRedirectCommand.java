@@ -2,6 +2,7 @@ package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.MainRedirectInput;
 import ru.rsreu.javaeewebapp.models.enums.Role;
+import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,8 +30,6 @@ public class MainRedirectCommand implements ActionCommand {
 
         if (input.isHasRole()) {
             userRole = Role.valueOf(input.getRole());
-        } else {
-
         }
 
         return userRole.getMainPage();
