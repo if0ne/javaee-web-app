@@ -5,10 +5,6 @@ public class LoginInput {
     private String login;
     private String password;
 
-    public LoginInput() {
-
-    }
-
     public String getLogin() {
         return login;
     }

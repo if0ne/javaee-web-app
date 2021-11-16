@@ -7,47 +7,99 @@ public enum CommandEnum {
         }
     },
     LOGOUT {
-
+        {
+            this.command = new LogoutCommand();
+        }
     },
     CREATE_USER {
-
+        {
+            this.command = new CreateUserCommand();
+        }
     },
     DELETE_USER {
+        {
+            this.command = new DeleteUserCommand();
+        }
 
     },
-    SHOW_MY_COURSES {
-
+    SHOW_STUDENT_PAGE {
+        {
+            this.command = new ShowStudentPageCommand();
+        }
     },
-    SUBSCRIBE {
-
-    },
-    SHOW_DETAILED_COURSE {
-
-    },
-    CREATE_COURSE {
-
-    },
-    LEAVE_FROM_COURSE {
-
-    },
-    UPDATE_USER_INFO {
-
-    },
-    UPDATE_USER_GRADE {
-
-    },
-    CHANGE_USER_STATUS {
-
+    SHOW_STUDENT_DETAILED_COURSE {
+        {
+            this.command = new ShowStudentDetailedCourseCommand();
+        }
     },
     SHOW_ALL_COURSES {
-
+        {
+            this.command = new ShowAllCoursesCommand();
+        }
+    },
+    SUBSCRIBE {
+        {
+            this.command = new SubscribeCommand();
+        }
+    },
+    LEAVE_FROM_COURSE {
+        {
+            this.command = new LeaveFromCourseCommand();
+        }
+    },
+    SHOW_TEACHER_PAGE {
+        {
+            this.command = new ShowTeacherPageCommand();
+        }
+    },
+    CREATE_COURSE {
+        {
+            this.command = new CreateCourseCommand();
+        }
+    },
+    UPDATE_USER_INFO {
+        {
+            this.command = new UpdateUserInfoCommand();
+        }
+    },
+    UPDATE_USER_GRADE {
+        {
+            this.command = new UpdateUserGradeCommand();
+        }
+    },
+    CHANGE_USER_STATUS {
+        {
+            this.command = new ChangeUserStatusCommand();
+        }
     },
     EDIT_COURSE {
-
+        {
+            this.command = new EditCourseCommand();
+        }
     },
     SHOW_LOGIN {
         {
             this.command = new MainRedirectCommand();
+        }
+    },
+    KICK_FROM_COURSE {
+        {
+            this.command = new KickFromCourseCommand();
+        }
+    },
+    SHOW_ADMIN_PAGE {
+        {
+            this.command = new ShowAdminPageCommand();
+        }
+    },
+    SHOW_MOD_PAGE {
+        {
+            this.command = new ShowModPageCommand();
+        }
+    },
+    SHOW_GUEST_PAGE {
+        {
+            this.command = new ShowGuestPageCommand();
         }
     };
     ActionCommand command;
