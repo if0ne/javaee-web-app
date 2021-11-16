@@ -1,19 +1,22 @@
 package ru.rsreu.javaeewebapp.commands;
 
-import ru.rsreu.javaeewebapp.util.ConfigurationManager;
+import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class EmptyCommand implements ActionCommand{
+public class ChangeUserStatusCommand implements ActionCommand {
+
+    private UserInfoInput input;
 
     @Override
     public void readRequestAttributes(HttpServletRequest request) throws Exception {
-
+        input = new UserInfoInput();
+        input.setUserIdFromRequest(request.getParameter("user_id"));
     }
 
     @Override
     public String execute() {
-        String page = "/jsp/login.jsp";
+        String page = "/controller?command=show_mod_page";
         return page;
     }
 
@@ -21,4 +24,5 @@ public class EmptyCommand implements ActionCommand{
     public void setAttributes(HttpServletRequest request) {
 
     }
+
 }

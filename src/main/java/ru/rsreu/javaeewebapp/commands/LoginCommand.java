@@ -37,6 +37,7 @@ public class LoginCommand implements ActionCommand {
 
         output = new LoginOutput();
 
+        //TODO: ПРОВЕРКУ ВХОДА И ПОЛУЧЕНИЯ САМОГО ПОЛЬЗОВАТЕЛЯ
         if (!((login.equals("admin")) && (password.equals("admin")))) {
             output.setSuccessLogin(false);
             output.setWrongLoginPasswordMessage("Неправильный логин или пароль");

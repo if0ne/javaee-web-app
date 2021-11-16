@@ -1,10 +1,10 @@
 package ru.rsreu.javaeewebapp.commands;
 
-import ru.rsreu.javaeewebapp.util.ConfigurationManager;
+import ru.rsreu.javaeewebapp.commands.outputs.ShowAdminPageOutput;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class EmptyCommand implements ActionCommand{
+public class ShowGuestPageCommand implements ActionCommand {
 
     @Override
     public void readRequestAttributes(HttpServletRequest request) throws Exception {
@@ -19,6 +19,6 @@ public class EmptyCommand implements ActionCommand{
 
     @Override
     public void setAttributes(HttpServletRequest request) {
-
     }
+
 }

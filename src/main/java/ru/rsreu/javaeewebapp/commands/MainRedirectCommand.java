@@ -20,7 +20,7 @@ public class MainRedirectCommand implements ActionCommand {
         Object userId = session.getAttribute("user_id");
 
         input.setRole(role == null ? "" : role.toString());
-        input.setUserId(userId == null ? -1 : (Integer) userId);
+        input.setUserId(userId == null ? -1 : Integer.parseInt(userId.toString()));
         input.setHasRole(role != null);
     }
 

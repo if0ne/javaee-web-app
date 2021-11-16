@@ -6,10 +6,6 @@ public class MainRedirectInput {
     private int userId;
     private String role;
 
-    public MainRedirectInput() {
-
-    }
-
     public boolean isHasRole() {
         return isHasRole;
     }
