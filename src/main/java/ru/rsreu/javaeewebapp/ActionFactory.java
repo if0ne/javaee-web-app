@@ -13,6 +13,7 @@ public class ActionFactory {
         ActionCommand current = new EmptyCommand();
         String action = request.getParameter("command");
         System.out.println("Command: " + action);
+
         if (action == null || action.isEmpty()) {
             return current;
         }
@@ -21,7 +22,7 @@ public class ActionFactory {
             CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException ex) {
-            request.setAttribute("wrongAction", action + MessageManager.getProperty("message.wrongaction"));
+
         }
         return current;
     }

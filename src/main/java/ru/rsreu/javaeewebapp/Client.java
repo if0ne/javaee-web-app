@@ -22,10 +22,7 @@ public final class Client {
     public List<Map<String, Object>> selectData(String sql, int...params) {
         List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
 
-        PreparedStatement statement = null;
-
-        try {
-            statement = connect.prepareStatement(sql);
+        try (PreparedStatement statement = connect.prepareStatement(sql)) {
             for (int index = 0; index < params.length; ++index) {
                 statement.setString(index + 1, Integer.toString(params[index]));
             }
@@ -38,17 +35,22 @@ public final class Client {
                 rows.add(row);
             }
 
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
 
-        } finally {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-
-            }
         }
 
         return rows;
+    }
+
+    public void updateData(String sql, int...params) {
+        try (PreparedStatement statement = connect.prepareStatement(sql)) {
+            for (int index = 0; index < params.length; ++index) {
+                statement.setString(index + 1, Integer.toString(params[index]));
+            }
+            int rowCount = statement.executeUpdate();
+        } catch (SQLException ignored) {
+
+        }
     }
 
     public void close() {
