@@ -22,6 +22,7 @@ public class ActionFactory {
         } catch (IllegalArgumentException ex) {
 
         }
+
         return current;
     }
 }
