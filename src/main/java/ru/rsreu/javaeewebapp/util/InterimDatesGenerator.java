@@ -1,6 +1,8 @@
 package ru.rsreu.javaeewebapp.util;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,7 +17,7 @@ public class InterimDatesGenerator {
 
     }
 
-    public static List<java.sql.Date> getInterimDatesBetween(java.sql.Date begin, java.sql.Date end, int day) {
+    /*public static List<java.sql.Date> getInterimDatesBetween(java.sql.Date begin, java.sql.Date end, int day) {
         List<java.sql.Date> dates = new ArrayList<java.sql.Date>();
 
         Calendar start = new GregorianCalendar();
@@ -44,6 +46,33 @@ public class InterimDatesGenerator {
         }
 
         return dates;
+    }*/
+
+
+    public static List<java.sql.Date> getInterimDatesBetween(java.sql.Date begin, java.sql.Date end, int day) {
+        List<java.sql.Date> dates = new ArrayList<java.sql.Date>();
+
+        LocalDate start = getLocalDateFrom(begin);
+        LocalDate finish = getLocalDateFrom(end);
+
+        int beginDay = start.getDayOfWeek().ordinal() + 1;
+
+        int dayDiff = day - beginDay;
+        start = start.plusDays(dayDiff);
+        if (dayDiff >= 0) {
+            dates.add(Date.valueOf(start));
+        }
+
+        start= start.plusDays(COUNT_OF_DAYS_IN_WEEK);
+        while (start.isBefore(finish) || start.equals(finish)) {
+            dates.add(Date.valueOf(start));
+            start = start.plusDays(COUNT_OF_DAYS_IN_WEEK);
+        }
+
+        return dates;
     }
 
+    private static LocalDate getLocalDateFrom(Date date) {
+        return LocalDate.of(START_YEAR + date.getYear(), date.getMonth() + 1, date.getDate());
+    }
 }
