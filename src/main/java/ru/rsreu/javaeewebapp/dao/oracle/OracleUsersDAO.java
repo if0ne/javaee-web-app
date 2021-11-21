@@ -10,7 +10,6 @@ import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,11 +41,11 @@ public class OracleUsersDAO implements UsersDAO {
     }
 
     private StudentStatus getStudentStatusFromMap(Map<String, Object> row) {
-        return new StudentStatus((Integer) row.get("id_user"),
-                new UserName((String) row.get("last_name"),
-                        (String) row.get("first_name"),
-                        (String) row.get("middle_name")),
-                (boolean) row.get("blocked"));
+        return new StudentStatus(((BigDecimal) row.get("id_user")).intValueExact(),
+                                    new UserName((String) row.get("last_name"),
+                                            (String) row.get("first_name"),
+                                            (String) row.get("middle_name")),
+                                    (boolean) row.get("blocked"));
     }
 
     @Override
@@ -61,11 +60,11 @@ public class OracleUsersDAO implements UsersDAO {
     }
 
     private UserRole getUserRoleFromMap(Map<String, Object> row) {
-        return new UserRole((Integer) row.get("id_user"),
+        return new UserRole(((BigDecimal) row.get("id_user")).intValueExact(),
                 new UserName((String) row.get("last_name"),
-                        (String) row.get("first_name"),
-                        (String) row.get("middle_name")),
-                (Role) row.get("name"));
+                            (String) row.get("first_name"),
+                            (String) row.get("middle_name")),
+                Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()));
     }
 
     @Override
@@ -82,7 +81,7 @@ public class OracleUsersDAO implements UsersDAO {
 
     private User getUserFromMap(Map<String, Object> row) {
         return new User(((BigDecimal) row.get("id_user")).intValueExact(),
-                Role.valueOf(row.get("role").toString()) ,
+                Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()) ,
                 new UserName((String) row.get("last_name"),
                             (String) row.get("first_name"),
                             (String) row.get("middle_name")),

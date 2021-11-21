@@ -150,7 +150,7 @@ where login = ? and password = ?
         select first_value(course_date)
         over (order by id_date asc) as next_date
         from dates
-        where id_course = 0 and course_date >= current_date
+        where id_course = ? and course_date >= current_date
         /
 --additional requests to get the last id
 --user id

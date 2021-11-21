@@ -2,7 +2,6 @@ package ru.rsreu.javaeewebapp.models;
 
 import ru.rsreu.javaeewebapp.models.enums.FinalGrade;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
@@ -28,8 +27,8 @@ public class Student {
         return this.studentName.getLastAndFirstName();
     }
 
-    public int getFinalGrade() {
-        return this.finalGrade.getFinalGrade();
+    public String getFinalGrade() {
+        return this.finalGrade.getFinalGradeId();
     }
 
     public List<Progress> getProgresses() {

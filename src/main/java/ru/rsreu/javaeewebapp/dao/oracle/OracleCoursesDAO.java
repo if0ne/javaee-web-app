@@ -8,6 +8,7 @@ import ru.rsreu.javaeewebapp.models.enums.FinalGrade;
 import ru.rsreu.javaeewebapp.models.enums.Grade;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +46,10 @@ public class OracleCoursesDAO implements CoursesDAO {
 
     private TeacherCourse getTeacherCoursesFromMap(Map<String, Object> row) {
         return new TeacherCourse(
-                (Integer) row.get("id_course"),
+                ((BigDecimal) row.get("id_course")).intValueExact(),
                 (String) row.get("name"),
-                (Integer) row.get("count"),
-                getNextDate((Integer) row.get("id_course"))
+                ((BigDecimal) row.get("count")).intValueExact(),
+                getNextDate(((BigDecimal) row.get("id_course")).intValueExact())
         );
     }
 
@@ -97,7 +98,7 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Course getCourseFromMap(Map<String, Object> row) {
-        return new Course((Integer) row.get("id_course"),
+        return new Course(((BigDecimal) row.get("course")).intValueExact(),
                             (String) row.get("name"),
                             (String) row.get("description"),
                             new UserName((String) row.get("last_name"),
@@ -121,7 +122,7 @@ public class OracleCoursesDAO implements CoursesDAO {
                                                        int courseId) {
         List<Dates> dates = getCourseDates(courseId);
         List<Student> students = getCourseStudents(courseId);
-        return new SpecificCourse((Integer) row.get("id_course"),
+        return new SpecificCourse(((BigDecimal) row.get("id_course")).intValueExact(),
                                     (String) row.get("name"),
                                     new UserName((String) row.get("last_name"),
                                                 (String) row.get("first_name"),
@@ -133,7 +134,8 @@ public class OracleCoursesDAO implements CoursesDAO {
 
     private List<Dates> getCourseDates(int courseId) {
         List<Dates> result = new ArrayList<Dates>();
-        List<Map<String, Object>> rows = this.client.selectData(SQL_GET_DATES);
+        List<Map<String, Object>> rows = this.client.selectData(SQL_GET_DATES,
+                                                        Integer.toString(courseId));
 
         for (Map<String, Object> row : rows) {
             result.add(getDatesFromMap(row));
@@ -142,7 +144,7 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Dates getDatesFromMap(Map<String, Object> row) {
-        return new Dates((Integer) row.get("id_date"),
+        return new Dates(((BigDecimal) row.get("id_date")).intValueExact(),
                     (Date) row.get("course_date"));
     }
 
@@ -157,12 +159,12 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Student getStudentsFromMap(Map<String, Object> row) {
-        return new Student((Integer) row.get("id_user"),
+        return new Student(((BigDecimal) row.get("id_user")).intValueExact(),
                 new UserName((String) row.get("last_name"),
                         (String) row.get("first_name"),
                         (String) row.get("middle_name")),
-                (FinalGrade) row.get("final_grade"),
-                getProgressList((Integer) row.get("id_user")));
+                FinalGrade.getGradeFromInt((String) row.get("final_grade")),
+                getProgressList(((BigDecimal) row.get("id_user")).intValueExact()));
     }
 
     private List<Progress> getProgressList(int id_user) {
@@ -176,8 +178,8 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Progress getProgressFromMap(Map<String, Object> row) {
-        return new Progress((Attendance) row.get("attendance"),
-                            (Grade) row.get("grade"));
+        return new Progress(Attendance.getAttendanceFromInt(((BigDecimal) row.get("attendance")).intValueExact()),
+                            Grade.getGradeFromInt(((BigDecimal) row.get("grade")).intValueExact()));
     }
 
 }

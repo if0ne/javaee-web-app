@@ -65,7 +65,7 @@ create table classes (
     rating number not null,
     course_date number not null,
     grade number,
-    attendance number(1, 0) default 0,
+    attendance number default 0,
     constraint pk_class primary key (id_class),
     constraint fk_date foreign key (course_date) references dates (id_date) on delete cascade,
     constraint fk_rating_classes foreign key (rating) references ratings (id_rating) on delete cascade

@@ -1,18 +1,27 @@
 package ru.rsreu.javaeewebapp.models.enums;
 
-import ru.rsreu.javaeewebapp.util.MessageManager;
-
 public enum FinalGrade {
-    CREDITED(0),
-    FAILED(1);
+    CREDITED("Зачтено"),
+    FAILED("Незачтено");
 
-    private int finalGrade;
+    private String finalGrade;
 
-    FinalGrade(int finalGrade) {
+    FinalGrade(String finalGrade) {
         this.finalGrade = finalGrade;
     }
 
-    public int getFinalGrade() {
+    public static FinalGrade getGradeFromInt(String finalGrade) {
+        switch (finalGrade) {
+            case "Зачтено":
+                return CREDITED;
+            case "Незачтено":
+                return FAILED;
+            default:
+                return null;
+        }
+    }
+
+    public String getFinalGradeId() {
         return this.finalGrade;
     }
 }

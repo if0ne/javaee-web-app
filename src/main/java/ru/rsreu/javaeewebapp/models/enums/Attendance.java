@@ -9,6 +9,16 @@ public enum Attendance {
         this.attendance = attendance;
     }
 
+    public static Attendance getAttendanceFromInt(int attendanceId) {
+        switch (attendanceId) {
+            case 1:
+                return REASON;
+            case 2:
+                return SKIPPED;
+            default:
+                return PRESENCE;
+        }
+    }
     public int getAttendance() {
         return this.attendance;
     }

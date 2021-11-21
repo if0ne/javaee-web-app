@@ -5,6 +5,7 @@ import ru.rsreu.javaeewebapp.interfaces.ModifiedCourseDAO;
 import ru.rsreu.javaeewebapp.util.DateStringConverter;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,11 +56,11 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
     }
 
     private String getNewId(String sql) {
-        return Integer.toString(Integer.parseInt(getCurrentId(sql)) + 1);
+        return Integer.toString(getCurrentId(sql) + 1);
     }
 
-    private String getCurrentId(String sql) {
-        List<String> id = new ArrayList<String>();
+    private Integer getCurrentId(String sql) {
+        List<Integer> id = new ArrayList<Integer>();
         List<Map<String, Object>> rows = this.client.selectData(sql);
 
         for (Map<String, Object> row : rows) {
@@ -68,8 +69,8 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
         return id.get(FIRST_LIST_ELEMENT);
     }
 
-    private String getIdFromMap(Map<String, Object> row) {
-        return (String) row.get("id");
+    private Integer getIdFromMap(Map<String, Object> row) {
+        return ((BigDecimal) row.get("id")).intValueExact();
     }
 
 }

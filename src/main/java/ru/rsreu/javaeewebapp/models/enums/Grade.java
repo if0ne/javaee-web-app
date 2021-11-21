@@ -9,6 +9,21 @@ public enum Grade {
         this.grade = grade;
     }
 
+    public static Grade getGradeFromInt(int gradeId) {
+        switch (gradeId) {
+            case 2:
+                return TWO;
+            case 3:
+                return THREE;
+            case 4:
+                return FOUR;
+            case 5:
+                return FIVE;
+            default:
+                return null;
+        }
+    }
+
     public int getGrade() {
         return this.grade;
     }
