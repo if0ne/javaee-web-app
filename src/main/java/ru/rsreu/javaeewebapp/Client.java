@@ -19,12 +19,12 @@ public final class Client {
         connect = DbConnector.getConnection();
     }
 
-    public List<Map<String, Object>> selectData(String sql, int...params) {
+    public List<Map<String, Object>> selectData(String sql, String...params) {
         List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
 
         try (PreparedStatement statement = connect.prepareStatement(sql)) {
             for (int index = 0; index < params.length; ++index) {
-                statement.setString(index + 1, Integer.toString(params[index]));
+                statement.setString(index + 1, params[index]);
             }
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -42,10 +42,10 @@ public final class Client {
         return rows;
     }
 
-    public void updateData(String sql, int...params) {
+    public void updateData(String sql, String...params) {
         try (PreparedStatement statement = connect.prepareStatement(sql)) {
             for (int index = 0; index < params.length; ++index) {
-                statement.setString(index + 1, Integer.toString(params[index]));
+                statement.setString(index + 1, params[index]);
             }
             int rowCount = statement.executeUpdate();
         } catch (SQLException ignored) {

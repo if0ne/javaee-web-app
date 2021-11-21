@@ -1,18 +1,13 @@
 package ru.rsreu.javaeewebapp.dao.oracle;
 
-import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.javaeewebapp.Client;
 import ru.rsreu.javaeewebapp.interfaces.ProgressDAO;
-import ru.rsreu.javaeewebapp.models.Progress;
-import ru.rsreu.javaeewebapp.util.MapClassConverter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 public class OracleProgressDAO implements ProgressDAO {
 
-    private static final String SQL_GET_STUDENT_PROGRESS = Resourcer.getString("sql.query.progress");
+    private static final String SQL_UPDATE_PROGRESS = MessageManager.getProperty("sql.update.progress");
+    private static final String SQL_UPDATE_FINAL_GRADE = MessageManager.getProperty("sql.update.final.grade");
 
     private Client client;
 
@@ -21,13 +16,18 @@ public class OracleProgressDAO implements ProgressDAO {
     }
 
     @Override
-    public List<Progress> getStudentsProgress(int course) {
-        List<Progress> result = new ArrayList<Progress>();
-        List<Map<String, Object>> rows = client.selectData(SQL_GET_STUDENT_PROGRESS, course);
+    public void updateStudentProgress(int studentId, int courseId, int dateId, int attendance, int grade) {
+        this.client.updateData(SQL_UPDATE_PROGRESS, Integer.toString(attendance),
+                                                    Integer.toString(grade),
+                                                    Integer.toString(studentId),
+                                                    Integer.toString(courseId),
+                                                    Integer.toString(dateId));
+    }
 
-        for (Map<String, Object> row : rows) {
-            result.add(MapClassConverter.getObjectFromMap(row, Progress.class));
-        }
-        return result;
+    @Override
+    public void updateFinalGrade(int studentId, int courseId, int finalGrade) {
+        this.client.updateData(SQL_UPDATE_FINAL_GRADE, Integer.toString(finalGrade),
+                                                        Integer.toString(studentId),
+                                                        Integer.toString(courseId));
     }
 }

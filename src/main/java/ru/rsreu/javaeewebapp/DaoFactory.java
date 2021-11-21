@@ -1,8 +1,6 @@
 package ru.rsreu.javaeewebapp;
 
-import ru.rsreu.javaeewebapp.interfaces.CoursesDAO;
-import ru.rsreu.javaeewebapp.interfaces.ProgressDAO;
-import ru.rsreu.javaeewebapp.interfaces.UsersDAO;
+import ru.rsreu.javaeewebapp.interfaces.*;
 
 public abstract class DaoFactory {
 
@@ -14,6 +12,8 @@ public abstract class DaoFactory {
     public abstract CoursesDAO getCoursesDAO();
     public abstract ProgressDAO getProgressDAO();
     public abstract UsersDAO getUsersDAO();
+    public abstract ModifiedCourseDAO getModifiedCourseDAO();
+    public abstract ModifiedUserDAO getModifiedUserDAO();
 
 }
 

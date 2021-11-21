@@ -2,9 +2,7 @@ package ru.rsreu.javaeewebapp.dao.oracle;
 
 import ru.rsreu.javaeewebapp.Client;
 import ru.rsreu.javaeewebapp.DaoFactory;
-import ru.rsreu.javaeewebapp.interfaces.CoursesDAO;
-import ru.rsreu.javaeewebapp.interfaces.ProgressDAO;
-import ru.rsreu.javaeewebapp.interfaces.UsersDAO;
+import ru.rsreu.javaeewebapp.interfaces.*;
 
 import java.sql.SQLException;
 
@@ -46,6 +44,16 @@ public class OracleDbDaoFactory extends DaoFactory {
     @Override
     public UsersDAO getUsersDAO() {
         return new OracleUsersDAO(client);
+    }
+
+    @Override
+    public ModifiedCourseDAO getModifiedCourseDAO() {
+        return new OracleModifiedCourseDAO(client);
+    }
+
+    @Override
+    public ModifiedUserDAO getModifiedUserDAO() {
+        return new OracleModifiedUserDAO(client);
     }
 
 }

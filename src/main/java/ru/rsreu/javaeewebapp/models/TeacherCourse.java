@@ -1,7 +1,5 @@
 package ru.rsreu.javaeewebapp.models;
 
-import ru.rsreu.javaeewebapp.util.ColumnLink;
-
 import java.sql.Date;
 
 public class TeacherCourse {

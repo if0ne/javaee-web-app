@@ -5,14 +5,16 @@ import java.util.List;
 public class SpecificCourse {
 
     private int id;
+    private String title;
     private UserName teacher;
     private String description;
     private List<Dates> dates;
     private List<Student> students;
 
-    public SpecificCourse(int id, UserName teacher, String description,
+    public SpecificCourse(int id, String title, UserName teacher, String description,
                           List<Dates> dates, List<Student> students) {
         this.id = id;
+        this.title = title;
         this.teacher = teacher;
         this.description = description;
         this.dates = dates;

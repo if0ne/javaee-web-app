@@ -3,16 +3,16 @@ package ru.rsreu.javaeewebapp.models.enums;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
 public enum FinalGrade {
-    CREDITED(MessageManager.getProperty("role.credited")),
-    FAILED(MessageManager.getProperty("role.failed"));
+    CREDITED(0),
+    FAILED(1);
 
-    private String finalGrade;
+    private int finalGrade;
 
-    FinalGrade(String finalGrade) {
+    FinalGrade(int finalGrade) {
         this.finalGrade = finalGrade;
     }
 
-    public String getFinalGrade() {
+    public int getFinalGrade() {
         return this.finalGrade;
     }
 }

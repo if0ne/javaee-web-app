@@ -1,7 +1,8 @@
 package ru.rsreu.javaeewebapp.models;
 
 import ru.rsreu.javaeewebapp.models.enums.FinalGrade;
-import ru.rsreu.javaeewebapp.util.MessageManager;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
@@ -9,14 +10,14 @@ public class Student {
     private int id;
     private UserName studentName;
     private FinalGrade finalGrade;
-    List<Progress> progresses;
+    private List<Progress> progresses;
 
     public Student(int id, UserName studentName,
                    FinalGrade finalGrade, List<Progress> progresses) {
         this.id = id;
         this.studentName = studentName;
         this.finalGrade = finalGrade;
-
+        this.progresses = progresses;
     }
 
     public int getId() {
@@ -27,7 +28,7 @@ public class Student {
         return this.studentName.getLastAndFirstName();
     }
 
-    public String getFinalGrade() {
+    public int getFinalGrade() {
         return this.finalGrade.getFinalGrade();
     }
 
