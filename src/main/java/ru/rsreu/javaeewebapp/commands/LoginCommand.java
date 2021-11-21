@@ -1,8 +1,11 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.DaoFactory;
+import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.LoginInput;
 import ru.rsreu.javaeewebapp.commands.outputs.LoginOutput;
 
+import ru.rsreu.javaeewebapp.models.User;
 import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 import ru.rsreu.javaeewebapp.util.ParameterChecker;
@@ -37,14 +40,16 @@ public class LoginCommand implements ActionCommand {
 
         output = new LoginOutput();
 
-        //TODO: ПРОВЕРКУ ВХОДА И ПОЛУЧЕНИЯ САМОГО ПОЛЬЗОВАТЕЛЯ
-        if (!((login.equals("admin")) && (password.equals("admin")))) {
+        User user = DaoFactory.getInstance(DbType.ORACLE).getUsersDAO().getLoggedUser(login, password);
+        if (user == null) {
             output.setSuccessLogin(false);
             output.setWrongLoginPasswordMessage("Неправильный логин или пароль");
         } else {
+            Role role = Role.getRoleFromInt(user.getRole());
             output.setSuccessLogin(true);
-            output.setUserId(1);
-            output.setRole(Role.STUDENT.toString());
+            output.setUserId(user.getId());
+            output.setRole(role.toString());
+            output.setRoleName(role.getLocale());
             output.setWrongLoginPasswordMessage(null);
         }
 
@@ -58,6 +63,7 @@ public class LoginCommand implements ActionCommand {
         if (output.isSuccessLogin()) {
             session.setAttribute("user_id", output.getUserId());
             session.setAttribute("role", output.getRole());
+            session.setAttribute("role_name", output.getRoleName());
         }
     }
 }

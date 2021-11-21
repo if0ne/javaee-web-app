@@ -35,6 +35,7 @@ public class FrontController extends HttpServlet {
             page = command.execute();
             command.setAttributes(request);
         } catch (Exception exception) {
+            System.err.println(exception.getMessage());
             command = new EmptyCommand();
             page = command.execute();
         }

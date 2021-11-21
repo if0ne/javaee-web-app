@@ -9,6 +9,8 @@ import ru.rsreu.javaeewebapp.models.UserRole;
 import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -79,8 +81,8 @@ public class OracleUsersDAO implements UsersDAO {
     }
 
     private User getUserFromMap(Map<String, Object> row) {
-        return new User((Integer) row.get("id_user"),
-                (Role) row.get("role"),
+        return new User(((BigDecimal) row.get("id_user")).intValueExact(),
+                Role.valueOf(row.get("role").toString()) ,
                 new UserName((String) row.get("last_name"),
                             (String) row.get("first_name"),
                             (String) row.get("middle_name")),

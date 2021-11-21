@@ -5,6 +5,8 @@ public class LoginOutput {
     private boolean isSuccessLogin;
     private int userId;
     private String role;
+    private String roleName;
+
     private String wrongLoginPasswordMessage;
 
     public LoginOutput() {
@@ -33,6 +35,14 @@ public class LoginOutput {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getWrongLoginPasswordMessage() {
