@@ -1,7 +1,5 @@
 package ru.rsreu.javaeewebapp.models;
 
-import ru.rsreu.javaeewebapp.util.ColumnLink;
-
 public class Course {
 
     private int id;

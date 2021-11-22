@@ -1,6 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,6 +24,11 @@ public class ChangeUserStatusCommand implements ActionCommand {
     @Override
     public void setAttributes(HttpServletRequest request) {
 
+    }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.REDIRECT;
     }
 
 }

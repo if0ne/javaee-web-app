@@ -1,6 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.CreateCourseInput;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,4 +35,8 @@ public class CreateCourseCommand implements ActionCommand {
 
     }
 
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.REDIRECT;
+    }
 }

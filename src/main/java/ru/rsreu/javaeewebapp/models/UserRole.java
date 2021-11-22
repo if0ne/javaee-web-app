@@ -2,7 +2,9 @@ package ru.rsreu.javaeewebapp.models;
 
 import ru.rsreu.javaeewebapp.models.enums.Role;
 
-public class UserRole {
+import java.io.Serializable;
+
+public class UserRole implements Serializable {
 
     private int id;
     private UserName fullName;
@@ -25,8 +27,8 @@ public class UserRole {
     }
     public String getFullName() { return this.fullName.getFullName(); }
 
-    public int getRole() {
-        return this.role.getRoleId();
+    public String getRole() {
+        return this.role.getLocale();
     }
 
     public void setId(int id) {

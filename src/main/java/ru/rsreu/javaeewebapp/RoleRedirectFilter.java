@@ -25,6 +25,7 @@ public class RoleRedirectFilter implements Filter {
         List<CommandEnum> guestCommands = new ArrayList<>();
         guestCommands.add(CommandEnum.LOGIN);
         guestCommands.add(CommandEnum.SHOW_LOGIN);
+        guestCommands.add(CommandEnum.SHOW_GUEST_PAGE);
         roleWithCommand.put(Role.GUEST, guestCommands);
 
         List<CommandEnum> studentCommands = new ArrayList<>();

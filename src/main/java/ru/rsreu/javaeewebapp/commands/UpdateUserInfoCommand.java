@@ -1,6 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.UpdateUserInfoInput;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,11 @@ public class UpdateUserInfoCommand implements ActionCommand {
     @Override
     public void setAttributes(HttpServletRequest request) {
 
+    }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.REDIRECT;
     }
 
 }

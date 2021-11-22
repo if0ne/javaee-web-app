@@ -2,6 +2,7 @@ package ru.rsreu.javaeewebapp;
 
 import ru.rsreu.javaeewebapp.commands.ActionCommand;
 import ru.rsreu.javaeewebapp.commands.EmptyCommand;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,8 +43,17 @@ public class FrontController extends HttpServlet {
             page = command.execute();
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-        dispatcher.forward(request, response);
+        RedirectType redirectType = command.getRedirectType();
+
+        switch (redirectType) {
+            case REDIRECT:
+                response.sendRedirect(page);
+                break;
+            case FORWARD:
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+                dispatcher.forward(request, response);
+                break;
+        }
     }
 
 }

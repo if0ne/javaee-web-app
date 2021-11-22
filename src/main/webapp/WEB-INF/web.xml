@@ -20,6 +20,16 @@
     </servlet-mapping>
 
     <filter>
+        <filter-name>Encoding</filter-name>
+        <filter-class>ru.rsreu.javaeewebapp.EncodingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>RoleRedirect</filter-name>
         <filter-class>ru.rsreu.javaeewebapp.RoleRedirectFilter</filter-class>
     </filter>

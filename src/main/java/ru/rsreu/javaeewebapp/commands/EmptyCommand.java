@@ -1,5 +1,6 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ public class EmptyCommand implements ActionCommand{
 
     @Override
     public String execute() {
-        String page = "/jsp/login.jsp";
+        String page = "/controller?command=show_login";
         return page;
     }
 
@@ -21,4 +22,10 @@ public class EmptyCommand implements ActionCommand{
     public void setAttributes(HttpServletRequest request) {
 
     }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.REDIRECT;
+    }
+
 }

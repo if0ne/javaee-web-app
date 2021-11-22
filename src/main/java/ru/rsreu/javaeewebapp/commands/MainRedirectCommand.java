@@ -1,6 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.MainRedirectInput;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 
@@ -43,4 +44,10 @@ public class MainRedirectCommand implements ActionCommand {
             session.setAttribute("role", Role.GUEST.toString());
         }
     }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.REDIRECT;
+    }
+
 }

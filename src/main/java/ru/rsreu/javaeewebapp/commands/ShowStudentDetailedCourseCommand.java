@@ -3,6 +3,7 @@ package ru.rsreu.javaeewebapp.commands;
 import ru.rsreu.javaeewebapp.commands.inputs.UserCourseInfoInput;
 import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
 import ru.rsreu.javaeewebapp.commands.outputs.ShowStudentDetailedCourseOutput;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,6 +32,11 @@ public class ShowStudentDetailedCourseCommand implements ActionCommand {
     @Override
     public void setAttributes(HttpServletRequest request) {
         request.setAttribute("data", output);
+    }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.FORWARD;
     }
 
 }

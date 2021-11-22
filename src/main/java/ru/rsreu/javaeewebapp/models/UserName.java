@@ -2,7 +2,9 @@ package ru.rsreu.javaeewebapp.models;
 
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
-public class UserName {
+import java.io.Serializable;
+
+public class UserName implements Serializable {
 
     private String lastName;
     private String firstName;

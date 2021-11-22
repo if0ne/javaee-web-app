@@ -1,9 +1,12 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+
 import javax.servlet.http.HttpServletRequest;
 
 public interface ActionCommand {
-    public abstract void readRequestAttributes(HttpServletRequest request) throws Exception;
-    public abstract String execute();
-    public abstract void setAttributes(HttpServletRequest request);
+    void readRequestAttributes(HttpServletRequest request) throws Exception;
+    String execute();
+    void setAttributes(HttpServletRequest request);
+    RedirectType getRedirectType();
 }

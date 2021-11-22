@@ -3,6 +3,7 @@ package ru.rsreu.javaeewebapp.commands;
 import ru.rsreu.javaeewebapp.DaoFactory;
 import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.CreateUserInput;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.models.enums.Role;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +43,11 @@ public class CreateUserCommand implements ActionCommand {
     @Override
     public void setAttributes(HttpServletRequest request) {
 
+    }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.REDIRECT;
     }
 
 }

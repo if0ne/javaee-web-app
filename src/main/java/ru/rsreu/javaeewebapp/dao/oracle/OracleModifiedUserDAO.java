@@ -27,8 +27,7 @@ public class OracleModifiedUserDAO implements ModifiedUserDAO {
     public void createUser(String lastName, String firstName, String middleName,
                            String login, String password, int role) {
         String userId = getNewId(SQL_NEW_ID_USER);
-        this.client.updateData(SQL_CREATE_USER, userId, login, password,
-                lastName, firstName, middleName,
+        this.client.updateData(SQL_CREATE_USER, userId, login, password, lastName, firstName, middleName,
                 Integer.toString(role));
     }
     private String getNewId(String sql) {

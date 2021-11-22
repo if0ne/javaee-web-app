@@ -4,6 +4,7 @@ import ru.rsreu.javaeewebapp.DaoFactory;
 import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.outputs.ShowAdminPageOutput;
 import ru.rsreu.javaeewebapp.models.UserRole;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -32,4 +33,10 @@ public class ShowAdminPageCommand implements ActionCommand {
     public void setAttributes(HttpServletRequest request) {
         request.setAttribute("data", output);
     }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.FORWARD;
+    }
+
 }

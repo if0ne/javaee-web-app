@@ -92,8 +92,8 @@
                                 <tbody>
                                 <c:forEach var="user" items="${data.allUsers}">
                                     <tr>
-                                        <td class="table-cont left-info">${user.name}</td>
-                                        <td class="table-cont">Здесь логин</td>
+                                        <td class="table-cont left-info">${user.fullName}</td>
+                                        <td class="table-cont">login</td>
                                         <td class="table-cont">${user.role}</td>
                                         <td class="table-cont">
                                             <form action="/controller" method="post">

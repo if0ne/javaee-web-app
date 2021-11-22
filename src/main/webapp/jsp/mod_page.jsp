@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +13,8 @@
         <aside class="aside-edit">
             <h1 class="logo" style="align-self: center;">ELECTIVES</h1>
             <div class="side-profile">
-                <h1 class="user-name" style="color: #FFF; display: block;">${user_last_name} ${user_first_name}</h1>
-                <p class="role-label">${user_role}</p>
+                <h1 class="user-name" style="color: #FFF; display: block;">${sessionScope.userLastName} ${sessionScope.userFirstName}</h1>
+                <p class="role-label">${sessionScope.roleName}</p>
             </div>
             <div class="aside-menu">
                 <form class="logout-form tabletop-offset" action="/controller" method="get" style="margin: 0;">

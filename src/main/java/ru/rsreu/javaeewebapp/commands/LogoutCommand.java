@@ -1,5 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class LogoutCommand implements ActionCommand{
@@ -19,4 +21,10 @@ public class LogoutCommand implements ActionCommand{
     public void setAttributes(HttpServletRequest request) {
         request.getSession(true).invalidate();
     }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.FORWARD;
+    }
+
 }

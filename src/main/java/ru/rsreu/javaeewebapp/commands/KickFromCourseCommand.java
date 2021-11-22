@@ -1,6 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.UserCourseInfoInput;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,4 +27,10 @@ public class KickFromCourseCommand implements ActionCommand {
     public void setAttributes(HttpServletRequest request) {
 
     }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.REDIRECT;
+    }
+
 }

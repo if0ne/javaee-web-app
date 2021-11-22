@@ -6,6 +6,7 @@ import ru.rsreu.javaeewebapp.commands.inputs.LoginInput;
 import ru.rsreu.javaeewebapp.commands.outputs.LoginOutput;
 
 import ru.rsreu.javaeewebapp.models.User;
+import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 import ru.rsreu.javaeewebapp.util.ParameterChecker;
@@ -70,4 +71,10 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute("userFirstName", output.getFirstName());
         }
     }
+
+    @Override
+    public RedirectType getRedirectType() {
+        return RedirectType.REDIRECT;
+    }
+
 }

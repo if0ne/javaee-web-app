@@ -306,8 +306,9 @@ nav {
   }
 }
 .login-main {
-  background: no-repeat center #1D1D1D url("../img/login_background.svg");
-  background-size: cover;
+  /*background: no-repeat center #1D1D1D url("../img/login_background.svg");
+  background-size: cover;*/
+  background: #1D1D1D;
   min-height: 100vh;
   height: 100%;
   width: 100%;
@@ -467,7 +468,6 @@ select {
 .student-grades {
   margin: 18px 0;
   border-collapse: collapse;
-  width: 100%;
   max-width: 900px;
   max-height: 500px;
   display: block;
@@ -496,12 +496,20 @@ select {
   box-shadow: 8px 0 8px 0 rgba(29, 29, 29, 0.08);
   position: sticky;
   left: 0;
+  max-width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   z-index: 1;
 }
 .student-grades .left-info-head {
   box-shadow: 8px 0 8px 0 rgba(29, 29, 29, 0.08);
   position: sticky;
   left: 0;
+  max-width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   z-index: 3;
 }
 
