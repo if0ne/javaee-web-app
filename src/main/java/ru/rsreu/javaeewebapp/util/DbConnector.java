@@ -5,6 +5,7 @@ import oracle.jdbc.OracleDriver;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public final class DbConnector {
     private DbConnector() {
@@ -18,7 +19,11 @@ public final class DbConnector {
         Connection connection = null;
         try {
             DriverManager.registerDriver(new OracleDriver());
-            connection = DriverManager.getConnection(url, user, pass);
+            Properties properties = new Properties();
+            properties.put("user", user);
+            properties.put("password", pass);
+            properties.put("charSet", "chcp1251");
+            connection = DriverManager.getConnection(url, properties);
         } catch (SQLException exception) {
             System.err.println(exception.getMessage());
         }

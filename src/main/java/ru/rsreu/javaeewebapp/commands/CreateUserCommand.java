@@ -1,5 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.DaoFactory;
+import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.CreateUserInput;
 import ru.rsreu.javaeewebapp.models.enums.Role;
 
@@ -26,7 +28,14 @@ public class CreateUserCommand implements ActionCommand {
     @Override
     public String execute() {
         String page = "/controller?command=show_admin_page";
-        //TODO: ВЫЗОВ ДАОШКИ ДЛЯ СОЗДАНИЯ ПОЛЬЗОВАТЕЛЯ
+        DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().createUser(
+                input.getLastName(),
+                input.getFirstName(),
+                input.getMiddleName(),
+                input.getLogin(),
+                input.getPassword(),
+                input.getRole().getRoleId()
+        );
         return page;
     }
 

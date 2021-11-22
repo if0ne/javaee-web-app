@@ -28,6 +28,9 @@ public class User {
         return this.name.getFullName();
     }
 
+    public String getFirstName() { return this.name.getFirstName(); }
+    public String getLastName() { return this.name.getLastName(); }
+
     public boolean getStatus() {
         return this.status;
     }

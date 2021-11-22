@@ -7,6 +7,9 @@ public class LoginOutput {
     private String role;
     private String roleName;
 
+    private String firstName;
+    private String lastName;
+
     private String wrongLoginPasswordMessage;
 
     public LoginOutput() {
@@ -43,6 +46,22 @@ public class LoginOutput {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getWrongLoginPasswordMessage() {

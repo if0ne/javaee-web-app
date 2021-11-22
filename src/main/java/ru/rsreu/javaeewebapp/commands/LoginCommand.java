@@ -50,6 +50,8 @@ public class LoginCommand implements ActionCommand {
             output.setUserId(user.getId());
             output.setRole(role.toString());
             output.setRoleName(role.getLocale());
+            output.setLastName(user.getLastName());
+            output.setFirstName(user.getFirstName());
             output.setWrongLoginPasswordMessage(null);
         }
 
@@ -59,11 +61,13 @@ public class LoginCommand implements ActionCommand {
     @Override
     public void setAttributes(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
-        request.setAttribute("wrong_login_password", output.getWrongLoginPasswordMessage());
+        request.setAttribute("wrongLoginPassword", output.getWrongLoginPasswordMessage());
         if (output.isSuccessLogin()) {
-            session.setAttribute("user_id", output.getUserId());
+            session.setAttribute("userId", output.getUserId());
             session.setAttribute("role", output.getRole());
-            session.setAttribute("role_name", output.getRoleName());
+            session.setAttribute("roleName", output.getRoleName());
+            session.setAttribute("userLastName", output.getLastName());
+            session.setAttribute("userFirstName", output.getFirstName());
         }
     }
 }

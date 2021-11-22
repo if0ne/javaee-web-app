@@ -10,6 +10,8 @@ import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +65,7 @@ public class OracleUsersDAO implements UsersDAO {
         return new UserRole(((BigDecimal) row.get("id_user")).intValueExact(),
                 new UserName((String) row.get("last_name"),
                             (String) row.get("first_name"),
-                            (String) row.get("middle_name")),
+                        row.get("middle_name") != null ? (String) row.get("middle_name") : ""),
                 Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()));
     }
 
@@ -76,7 +78,11 @@ public class OracleUsersDAO implements UsersDAO {
         for (Map<String, Object> row : rows) {
             result.add(getUserFromMap(row));
         }
-        return result.get(FIRST_LIST_ELEMENT);
+        if (result.size() == 0) {
+            return null;
+        } else {
+            return result.get(FIRST_LIST_ELEMENT);
+        }
     }
 
     private User getUserFromMap(Map<String, Object> row) {
@@ -85,7 +91,7 @@ public class OracleUsersDAO implements UsersDAO {
                 new UserName((String) row.get("last_name"),
                             (String) row.get("first_name"),
                             (String) row.get("middle_name")),
-                (boolean) row.get("blocked"));
+                ((BigDecimal) row.get("blocked")).intValueExact() == 0);
     }
 
 }

@@ -1,5 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.DaoFactory;
+import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ public class DeleteUserCommand implements ActionCommand {
     @Override
     public String execute() {
         String page = "/controller?command=show_admin_page";
-        //TODO: ВЫЗОВ ДАОШКИ ДЛЯ УДАЛЕНИЯ ПОЛЬЗОВАТЕЛЯ
+        DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().deleteUser(input.getUserId());
         return page;
     }
 

@@ -27,7 +27,8 @@ public class OracleModifiedUserDAO implements ModifiedUserDAO {
                            String login, String password, int role) {
         String userId = getNewId(SQL_NEW_ID_USER);
         this.client.updateData(SQL_CREATE_USER, userId, login, password,
-                lastName, firstName, middleName, Integer.toString(role));
+                lastName, firstName, middleName,
+                Integer.toString(role));
     }
     private String getNewId(String sql) {
         return Integer.toString(Integer.parseInt(getCurrentId(sql)) + 1);
@@ -44,7 +45,7 @@ public class OracleModifiedUserDAO implements ModifiedUserDAO {
     }
 
     private String getIdFromMap(Map<String, Object> row) {
-        return (String) row.get("id");
+        return row.get("id").toString();
     }
 
     @Override

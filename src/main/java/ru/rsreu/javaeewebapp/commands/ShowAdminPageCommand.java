@@ -1,8 +1,12 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.DaoFactory;
+import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.outputs.ShowAdminPageOutput;
+import ru.rsreu.javaeewebapp.models.UserRole;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class ShowAdminPageCommand implements ActionCommand {
 
@@ -17,6 +21,10 @@ public class ShowAdminPageCommand implements ActionCommand {
     public String execute() {
         String page = "/jsp/admin_page.jsp";
         output = new ShowAdminPageOutput();
+
+        List<UserRole> users = DaoFactory.getInstance(DbType.ORACLE).getUsersDAO().getAllUsersRoles();
+        output.setAllUsers(users);
+
         return page;
     }
 
