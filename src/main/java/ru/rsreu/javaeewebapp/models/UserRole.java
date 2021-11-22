@@ -7,12 +7,14 @@ import java.io.Serializable;
 public class UserRole implements Serializable {
 
     private int id;
+    private String login;
     private UserName fullName;
     private UserName name;
     private Role role;
 
-    public UserRole(int id, UserName name, Role role) {
+    public UserRole(int id, String login, UserName name, Role role) {
         this.id = id;
+        this.login = login;
         this.name = name;
         this.fullName = name;
         this.role = role;
@@ -20,6 +22,10 @@ public class UserRole implements Serializable {
 
     public int getId() {
         return this.id;
+    }
+
+    public String getLogin() {
+        return this.login;
     }
 
     public String getName() {
@@ -33,6 +39,10 @@ public class UserRole implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void setFullName(UserName fullName) {

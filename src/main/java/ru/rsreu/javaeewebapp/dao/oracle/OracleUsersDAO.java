@@ -42,10 +42,10 @@ public class OracleUsersDAO implements UsersDAO {
 
     private StudentStatus getStudentStatusFromMap(Map<String, Object> row) {
         return new StudentStatus(((BigDecimal) row.get("id_user")).intValueExact(),
-                                    (String) row.get("login"),
-                                    new UserName((String) row.get("last_name"),
-                                            (String) row.get("first_name"),
-                                            (String) row.get("middle_name")),
+                                    row.get("login").toString(),
+                                    new UserName(row.get("last_name").toString(),
+                                                row.get("first_name").toString(),
+                                                row.get("middle_name").toString()),
                                     (boolean) row.get("blocked"));
     }
 
@@ -62,10 +62,11 @@ public class OracleUsersDAO implements UsersDAO {
 
     private UserRole getUserRoleFromMap(Map<String, Object> row) {
         return new UserRole(((BigDecimal) row.get("id_user")).intValueExact(),
+                row.get("login").toString(),
                 new UserName(
                         row.get("last_name").toString(),
                         row.get("first_name").toString(),
-                        row.get("middle_name") != null ? row.get("middle_name").toString() : ""),
+                        row.get("middle_name").toString()),
                 Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()));
     }
 
@@ -87,11 +88,11 @@ public class OracleUsersDAO implements UsersDAO {
 
     private User getUserFromMap(Map<String, Object> row) {
         return new User(((BigDecimal) row.get("id_user")).intValueExact(),
-                (String) row.get("login"),
+                row.get("login").toString(),
                 Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()) ,
-                new UserName((String) row.get("last_name"),
-                            (String) row.get("first_name"),
-                            (String) row.get("middle_name")),
+                new UserName(row.get("last_name").toString(),
+                            row.get("first_name").toString(),
+                            row.get("middle_name").toString()),
                 ((BigDecimal) row.get("blocked")).intValueExact() == 0);
     }
 }

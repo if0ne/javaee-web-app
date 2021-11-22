@@ -47,7 +47,7 @@ public class OracleCoursesDAO implements CoursesDAO {
     private TeacherCourse getTeacherCoursesFromMap(Map<String, Object> row) {
         return new TeacherCourse(
                 ((BigDecimal) row.get("id_course")).intValueExact(),
-                (String) row.get("name"),
+                row.get("name").toString(),
                 ((BigDecimal) row.get("count")).intValueExact(),
                 getNextDate(((BigDecimal) row.get("id_course")).intValueExact())
         );
@@ -99,11 +99,11 @@ public class OracleCoursesDAO implements CoursesDAO {
 
     private Course getCourseFromMap(Map<String, Object> row) {
         return new Course(((BigDecimal) row.get("course")).intValueExact(),
-                            (String) row.get("name"),
-                            (String) row.get("description"),
-                            new UserName((String) row.get("last_name"),
-                                        (String) row.get("first_name"),
-                                        (String) row.get("middle_name")));
+                            row.get("name").toString(),
+                            row.get("description").toString(),
+                            new UserName(row.get("last_name").toString(),
+                                        row.get("first_name").toString(),
+                                        row.get("middle_name").toString()));
     }
 
     @Override
@@ -123,11 +123,11 @@ public class OracleCoursesDAO implements CoursesDAO {
         List<Dates> dates = getCourseDates(courseId);
         List<Student> students = getCourseStudents(courseId);
         return new SpecificCourse(((BigDecimal) row.get("id_course")).intValueExact(),
-                                    (String) row.get("name"),
-                                    new UserName((String) row.get("last_name"),
-                                                (String) row.get("first_name"),
-                                                (String) row.get("middle_name")),
-                                    (String) row.get("description"),
+                                    row.get("name").toString(),
+                                    new UserName(row.get("last_name").toString(),
+                                                row.get("first_name").toString(),
+                                                row.get("middle_name").toString()),
+                                    row.get("description").toString(),
                                     dates, students);
 
     }
@@ -160,10 +160,10 @@ public class OracleCoursesDAO implements CoursesDAO {
 
     private Student getStudentsFromMap(Map<String, Object> row) {
         return new Student(((BigDecimal) row.get("id_user")).intValueExact(),
-                new UserName((String) row.get("last_name"),
-                        (String) row.get("first_name"),
-                        (String) row.get("middle_name")),
-                FinalGrade.getGradeFromInt((String) row.get("final_grade")),
+                new UserName(row.get("last_name").toString(),
+                            row.get("first_name").toString(),
+                            row.get("middle_name").toString()),
+                FinalGrade.getGradeFromInt(row.get("final_grade").toString()),
                 getProgressList(((BigDecimal) row.get("id_user")).intValueExact()));
     }
 
