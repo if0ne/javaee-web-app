@@ -20,10 +20,9 @@ where login = ? and password = ?
         /
 --get database information requests
     --all system users list
-    select id_user, last_name, first_name, middle_name, roles.name as name
+    select id_user, login, last_name, first_name, middle_name, roles.name as name
     from users inner join roles on users.role = roles.id_role 
     where roles.name <> 'Администратор'
-    group by roles.name, last_name, first_name, middle_name, id_user
     /
     
 --Moderator
@@ -40,7 +39,7 @@ where login = ? and password = ?
     /
 --get database information requests
     --all students list with their current statuses
-    select id_user, last_name, first_name, middle_name, blocked
+    select id_user, login, last_name, first_name, middle_name, blocked
     from users inner join roles on users.role = roles.id_role 
     where roles.name = 'Студент'
     /

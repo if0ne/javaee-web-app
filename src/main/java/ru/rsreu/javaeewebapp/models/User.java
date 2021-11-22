@@ -5,12 +5,14 @@ import ru.rsreu.javaeewebapp.models.enums.Role;
 public class User {
 
     private int id;
+    private String login;
     private Role role;
     private UserName name;
     private boolean status;
 
-    public User(int id, Role role, UserName name, boolean status) {
+    public User(int id, String login, Role role, UserName name, boolean status) {
         this.id = id;
+        this.login = login;
         this.role = role;
         this.name = name;
         this.status = status;
@@ -18,6 +20,10 @@ public class User {
 
     public int getId() {
         return this.id;
+    }
+
+    public String getLogin() {
+        return this.login;
     }
 
     public int getRole() {
@@ -37,6 +43,10 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void setRole(Role role) {

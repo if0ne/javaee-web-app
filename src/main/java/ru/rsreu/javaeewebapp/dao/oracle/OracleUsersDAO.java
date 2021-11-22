@@ -44,6 +44,7 @@ public class OracleUsersDAO implements UsersDAO {
 
     private StudentStatus getStudentStatusFromMap(Map<String, Object> row) {
         return new StudentStatus(((BigDecimal) row.get("id_user")).intValueExact(),
+                                    (String) row.get("login"),
                                     new UserName((String) row.get("last_name"),
                                             (String) row.get("first_name"),
                                             (String) row.get("middle_name")),
@@ -87,6 +88,7 @@ public class OracleUsersDAO implements UsersDAO {
 
     private User getUserFromMap(Map<String, Object> row) {
         return new User(((BigDecimal) row.get("id_user")).intValueExact(),
+                (String) row.get("login"),
                 Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()) ,
                 new UserName((String) row.get("last_name"),
                             (String) row.get("first_name"),

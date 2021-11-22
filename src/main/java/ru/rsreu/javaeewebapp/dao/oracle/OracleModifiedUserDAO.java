@@ -4,6 +4,7 @@ import ru.rsreu.javaeewebapp.Client;
 import ru.rsreu.javaeewebapp.interfaces.ModifiedUserDAO;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,21 +32,25 @@ public class OracleModifiedUserDAO implements ModifiedUserDAO {
                 Integer.toString(role));
     }
     private String getNewId(String sql) {
-        return Integer.toString(Integer.parseInt(getCurrentId(sql)) + 1);
+        return Integer.toString(getCurrentId(sql) + 1);
     }
 
-    private String getCurrentId(String sql) {
-        List<String> id = new ArrayList<String>();
+    private Integer getCurrentId(String sql) {
+        List<Integer> id = new ArrayList<Integer>();
         List<Map<String, Object>> rows = this.client.selectData(sql);
 
         for (Map<String, Object> row : rows) {
             id.add(getIdFromMap(row));
         }
-        return id.get(FIRST_LIST_ELEMENT);
+        if (id.size() == 0) {
+            return FIRST_LIST_ELEMENT;
+        } else {
+            return id.get(FIRST_LIST_ELEMENT);
+        }
     }
 
-    private String getIdFromMap(Map<String, Object> row) {
-        return row.get("id").toString();
+    private Integer getIdFromMap(Map<String, Object> row) {
+        return ((BigDecimal) row.get("id")).intValueExact();
     }
 
     @Override

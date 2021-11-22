@@ -66,7 +66,11 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
         for (Map<String, Object> row : rows) {
             id.add(getIdFromMap(row));
         }
-        return id.get(FIRST_LIST_ELEMENT);
+        if (id.size() == 0) {
+            return FIRST_LIST_ELEMENT;
+        } else {
+            return id.get(FIRST_LIST_ELEMENT);
+        }
     }
 
     private Integer getIdFromMap(Map<String, Object> row) {

@@ -11,7 +11,7 @@ public class UserName {
     public UserName(String lastName, String firstName, String middleName) {
         this.lastName = lastName;
         this.firstName = firstName;
-        this.middleName = middleName;
+        this.middleName = (middleName != null) ? middleName : "";
     }
 
     public String getLastName() {
