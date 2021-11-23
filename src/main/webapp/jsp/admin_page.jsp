@@ -71,6 +71,16 @@
                                 <label for="user-middle-name">Пароль</label>
                                 <input type="password" id="user-password" class="input-field" name="user_password"/>
                             </div>
+
+                            <div class="edit-field helper">
+                                <label for="user-middle-name">Костыль</label>
+                                <input type="password" class="input-field"/>
+                            </div>
+
+                            <div class="edit-field helper">
+                                <label for="user-middle-name">Костыль</label>
+                                <input type="password" class="input-field"/>
+                            </div>
                         </div>
                         <button class="btn btn-default btn-edit">Добавить</button>
                     </form>
@@ -93,7 +103,7 @@
                                 <c:forEach var="user" items="${data.allUsers}">
                                     <tr>
                                         <td class="table-cont left-info">${user.fullName}</td>
-                                        <td class="table-cont">login</td>
+                                        <td class="table-cont">${user.login}</td>
                                         <td class="table-cont">${user.role}</td>
                                         <td class="table-cont">
                                             <form action="/controller" method="post">

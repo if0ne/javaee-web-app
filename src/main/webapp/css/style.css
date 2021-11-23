@@ -746,4 +746,14 @@ select {
   }
 }
 
+.helper {
+    visibility: hidden;
+}
+
+@media screen and (max-width: 400px) {
+    .helper {
+        display: none;
+    }
+}
+
 /*# sourceMappingURL=style.css.map */

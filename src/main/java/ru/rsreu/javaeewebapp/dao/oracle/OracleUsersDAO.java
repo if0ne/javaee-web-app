@@ -46,7 +46,7 @@ public class OracleUsersDAO implements UsersDAO {
                                     new UserName(row.get("last_name").toString(),
                                                 row.get("first_name").toString(),
                                                 row.get("middle_name").toString()),
-                                    (boolean) row.get("blocked"));
+                ((BigDecimal) row.get("blocked")).intValueExact() != 0);
     }
 
     @Override

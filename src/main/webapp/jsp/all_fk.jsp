@@ -16,8 +16,8 @@
     <main class="student-main">
         <div class="student-main-container">
             <aside class="student-aside">
-                <h1 class="user-name">${user_last_name} ${user_first_name}</h1>
-                <p class="role-label">${user_role}</p>
+                <h1 class="user-name">${sessionScope.userLastName} ${sessionScope.userFirstName}</h1>
+                <p class="role-label">${sessionScope.roleName}</p>
                 <div class="student-aside-panel">
                     <form class="all-courses-form" action="/controller" method="get">
                         <input type="hidden" name="command" value="show_my_courses">
@@ -33,7 +33,7 @@
                 </div>
             </aside>
             <section class="fk-container">
-                <c:forEach var="course" items="${courses}">
+                <c:forEach var="course" items="${data.courses}">
                     <section class="fk-item">
                         <div class="fk-item-container">
                             <div class="fk-info">

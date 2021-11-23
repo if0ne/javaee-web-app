@@ -1,5 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.DaoFactory;
+import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
 import ru.rsreu.javaeewebapp.commands.outputs.ShowAllCoursesOutput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
@@ -24,6 +26,8 @@ public class ShowAllCoursesCommand implements ActionCommand {
     public String execute() {
         String page = MessageManager.getProperty("jsp.all.fk");
         output = new ShowAllCoursesOutput();
+        DaoFactory.getInstance(DbType.ORACLE).getCoursesDAO().getAllStudentCourses(input.getUserId());
+        DaoFactory.getInstance(DbType.ORACLE).getCoursesDAO().getStudentCourses(input.getUserId());
         //TODO: ДАО
         return page;
     }

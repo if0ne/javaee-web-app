@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="data" scope="request" type="ru.rsreu.javaeewebapp.commands.outputs.ShowModPageOutput"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,16 +42,20 @@
                                 <th class="table-head"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <c:forEach var="student" items="${students}">
+                        <tbody
+                            <c:forEach var="student" items="${data.students}">
                                 <tr>
-                                    <td class="table-cont left-info">${student.lastName} ${student.firstName}</td>
-                                    <td class="table-cont">${student.status}</td>
+                                    <td class="table-cont left-info">${student.name}</td>
+                                    <td class="table-cont">
+                                            ${student.status ? "Заблокирован" : "Незаблокирован"}
+                                    </td>
                                     <td class="table-cont">
                                         <form action="/controller" method="post">
                                             <input type="hidden" name="command" value="change_user_status">
+                                            <input type="hidden" name="user_id" value="${student.id}">
+                                            <input type="hidden" name="user_status" value="${student.status ? 1 : 0}">
                                             <button class="btn btn-danger">
-                                                ${student.status.equals(\"Заблокирован\") ? "Разблокировать" : "Заблокировать" }
+                                                ${student.status ? "Разблокировать" : "Заблокировать" }
                                             </button>
                                         </form>
                                     </td>
