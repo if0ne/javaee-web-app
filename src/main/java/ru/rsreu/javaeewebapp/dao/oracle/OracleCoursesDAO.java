@@ -25,6 +25,8 @@ public class OracleCoursesDAO implements CoursesDAO {
     private static final String SQL_GET_STUDENTS = MessageManager.getProperty("sql.all.students.of.course");
     private static final String SQL_GET_PROGRESS = MessageManager.getProperty("sql.progress");
     private static final int FIRST_LIST_ELEMENT = 0;
+    private static final boolean REGISTERED = true;
+    private static final boolean UNREGISTERED = false;
 
     private Client client;
 
@@ -75,7 +77,7 @@ public class OracleCoursesDAO implements CoursesDAO {
                                                             Integer.toString(studentId));
 
         for (Map<String, Object> row : rows) {
-            result.add(getCourseFromMap(row));
+            result.add(getCourseFromMap(row, REGISTERED));
         }
         return result;
     }
@@ -87,23 +89,24 @@ public class OracleCoursesDAO implements CoursesDAO {
                 Integer.toString(studentId));
 
         for (Map<String, Object> row : rows) {
-            result.add(getCourseFromMap(row));
+            result.add(getCourseFromMap(row, REGISTERED));
         }
         rows = this.client.selectData(SQL_GET_UNUSED_STUDENT_COURSES,
                                     Integer.toString(studentId));
         for (Map<String, Object> row : rows) {
-            result.add(getCourseFromMap(row));
+            result.add(getCourseFromMap(row, UNREGISTERED));
         }
         return result;
     }
 
-    private Course getCourseFromMap(Map<String, Object> row) {
+    private Course getCourseFromMap(Map<String, Object> row, boolean registrationStatus) {
         return new Course(((BigDecimal) row.get("course")).intValueExact(),
                             row.get("name").toString(),
                             row.get("description").toString(),
                             new UserName(row.get("last_name").toString(),
                                         row.get("first_name").toString(),
-                                        row.get("middle_name").toString()));
+                                        row.get("middle_name").toString()),
+                            registrationStatus);
     }
 
     @Override
