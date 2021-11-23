@@ -20,8 +20,6 @@ public class OracleUsersDAO implements UsersDAO {
     private static final String SQL_GET_USERS_ROLES = MessageManager.getProperty("sql.user.role");
     private static final String SQL_GET_LOGGED_USER = MessageManager.getProperty("sql.user.logged");
     private static int FIRST_LIST_ELEMENT = 0;
-    private static final String ADMINISTRATOR = "Администратор";
-    private static final String STUDENT = "Студент";
 
     private Client client;
 
@@ -32,7 +30,7 @@ public class OracleUsersDAO implements UsersDAO {
     @Override
     public List<StudentStatus> getStudentsStatuses() {
         List<StudentStatus> result = new ArrayList<StudentStatus>();
-        List<Map<String, Object>> rows = client.selectData(SQL_GET_STUDENTS_STATUSES, STUDENT);
+        List<Map<String, Object>> rows = client.selectData(SQL_GET_STUDENTS_STATUSES);
 
         for(Map<String, Object> row : rows) {
             result.add(getStudentStatusFromMap(row));
@@ -52,7 +50,7 @@ public class OracleUsersDAO implements UsersDAO {
     @Override
     public List<UserRole> getAllUsersRoles() {
         List<UserRole> result = new ArrayList<UserRole>();
-        List<Map<String, Object>> rows = client.selectData(SQL_GET_USERS_ROLES, ADMINISTRATOR);
+        List<Map<String, Object>> rows = client.selectData(SQL_GET_USERS_ROLES);
 
         for(Map<String, Object> row : rows) {
             result.add(getUserRoleFromMap(row));

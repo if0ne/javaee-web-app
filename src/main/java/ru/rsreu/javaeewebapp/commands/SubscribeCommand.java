@@ -2,6 +2,7 @@ package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.UserCourseInfoInput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ public class SubscribeCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/controller/command?show_all_courses";
+        String page = MessageManager.getProperty("show.all.courses");
         //TODO: ДАО
         return page;
     }

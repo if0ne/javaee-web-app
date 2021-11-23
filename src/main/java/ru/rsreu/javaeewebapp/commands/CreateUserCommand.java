@@ -5,6 +5,7 @@ import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.CreateUserInput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.models.enums.Role;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,7 +29,7 @@ public class CreateUserCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/controller?command=show_admin_page";
+        String page = MessageManager.getProperty("show.admin.page");
         DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().createUser(
                 input.getLastName(),
                 input.getFirstName(),

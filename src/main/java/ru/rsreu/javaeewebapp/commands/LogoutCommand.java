@@ -1,6 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +14,7 @@ public class LogoutCommand implements ActionCommand{
 
     @Override
     public String execute() {
-        String page = "/index.jsp";
+        String page = MessageManager.getProperty("jsp.index");
         return page;
     }
 

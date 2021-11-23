@@ -5,6 +5,7 @@ import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.outputs.ShowAdminPageOutput;
 import ru.rsreu.javaeewebapp.models.UserRole;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ShowAdminPageCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/jsp/admin_page.jsp";
+        String page = MessageManager.getProperty("jsp.admin");
         output = new ShowAdminPageOutput();
 
         List<UserRole> users = DaoFactory.getInstance(DbType.ORACLE).getUsersDAO().getAllUsersRoles();

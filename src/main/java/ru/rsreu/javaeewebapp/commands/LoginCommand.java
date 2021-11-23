@@ -9,6 +9,7 @@ import ru.rsreu.javaeewebapp.models.User;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.ConfigurationManager;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 import ru.rsreu.javaeewebapp.util.ParameterChecker;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class LoginCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/controller?command=show_login";
+        String page = MessageManager.getProperty("show.login");
 
         String login = this.input.getLogin();
         String password = this.input.getPassword();

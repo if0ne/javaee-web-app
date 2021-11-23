@@ -2,6 +2,7 @@ package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.outputs.ShowAdminPageOutput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +15,7 @@ public class ShowGuestPageCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/jsp/login.jsp";
+        String page = MessageManager.getProperty("jsp.login");
         return page;
     }
 

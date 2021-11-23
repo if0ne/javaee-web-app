@@ -2,6 +2,7 @@ package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.commands.inputs.UserCourseInfoInput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ public class KickFromCourseCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/controller?command=edit_course&course_id=" + input.getCourseId();
+        String page = MessageManager.getProperty("edit.course.id") + input.getCourseId();
         //TODO: ДАО
         return page;
     }

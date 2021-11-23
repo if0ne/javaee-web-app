@@ -3,6 +3,7 @@ package ru.rsreu.javaeewebapp.commands;
 import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
 import ru.rsreu.javaeewebapp.commands.outputs.ShowStudentPageOutput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,7 +22,7 @@ public class ShowStudentPageCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/jsp/student_main.jsp";
+        String page = MessageManager.getProperty("jsp.student");
         output = new ShowStudentPageOutput();
 
         return page;

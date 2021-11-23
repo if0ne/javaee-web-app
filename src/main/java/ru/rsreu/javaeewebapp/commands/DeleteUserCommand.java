@@ -4,6 +4,7 @@ import ru.rsreu.javaeewebapp.DaoFactory;
 import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +20,7 @@ public class DeleteUserCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/controller?command=show_admin_page";
+        String page = MessageManager.getProperty("show.admin.page");
         DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().deleteUser(input.getUserId());
         return page;
     }

@@ -3,6 +3,7 @@ package ru.rsreu.javaeewebapp.commands;
 import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
 import ru.rsreu.javaeewebapp.commands.outputs.ShowAllCoursesOutput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,7 +22,7 @@ public class ShowAllCoursesCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/jsp/all_fk.jsp";
+        String page = MessageManager.getProperty("jsp.all.fk");
         output = new ShowAllCoursesOutput();
         //TODO: ДАО
         return page;

@@ -4,6 +4,7 @@ import ru.rsreu.javaeewebapp.commands.inputs.UserCourseInfoInput;
 import ru.rsreu.javaeewebapp.commands.inputs.UserInfoInput;
 import ru.rsreu.javaeewebapp.commands.outputs.ShowStudentDetailedCourseOutput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,7 @@ public class ShowStudentDetailedCourseCommand implements ActionCommand {
 
     @Override
     public String execute() {
-        String page = "/jsp/detailed_fk.jsp";
+        String page = MessageManager.getProperty("jsp.detailed.fk");
         output = new ShowStudentDetailedCourseOutput();
         //TODO: ДАО ДЛЯ ПОЛУЧЕНИЯ ИНФОРМАЦИИ ПРО КУРС
         return null;

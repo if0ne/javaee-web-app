@@ -1,7 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
-import ru.rsreu.javaeewebapp.util.ConfigurationManager;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +14,7 @@ public class EmptyCommand implements ActionCommand{
 
     @Override
     public String execute() {
-        String page = "/controller?command=show_login";
+        String page = MessageManager.getProperty("show.login");
         return page;
     }
 
