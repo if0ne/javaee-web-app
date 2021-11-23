@@ -90,7 +90,7 @@ public class OracleUsersDAO implements UsersDAO {
                 Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()) ,
                 new UserName(row.get("last_name").toString(),
                             row.get("first_name").toString(),
-                            row.get("middle_name").toString()),
+                            row.get("middle_name") != null ? row.get("middle_name").toString() : ""),
                 ((BigDecimal) row.get("blocked")).intValueExact() == 0);
     }
 }

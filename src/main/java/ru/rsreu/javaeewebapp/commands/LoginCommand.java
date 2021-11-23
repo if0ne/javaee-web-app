@@ -75,7 +75,7 @@ public class LoginCommand implements ActionCommand {
 
     @Override
     public RedirectType getRedirectType() {
-        return RedirectType.REDIRECT;
+        return RedirectType.FORWARD;
     }
 
 }

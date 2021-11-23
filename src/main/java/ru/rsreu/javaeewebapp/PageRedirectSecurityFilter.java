@@ -12,7 +12,7 @@ public class PageRedirectSecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        //((HttpServletResponse) response).sendRedirect("/controller?command=show_login");
+        ((HttpServletResponse) response).sendRedirect("/controller?command=show_login");
         chain.doFilter(request, response);
     }
 
