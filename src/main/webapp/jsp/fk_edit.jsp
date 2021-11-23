@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<jsp:useBean id="data" scope="request" type="ru.rsreu.javaeewebapp.commands.outputs.EditCourseOutput"/>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,12 +14,12 @@
         <aside class="aside-edit">
             <h1 class="logo" style="align-self: center;">ELECTIVES</h1>
             <div class="side-profile">
-                <h1 class="user-name" style="color: #FFF; display: block;">${user_last_name} ${user_first_name}</h1>
-                <p class="role-label">${user_role}</p>
+                <h1 class="user-name" style="color: #FFF; display: block;">${sessionScope.userLastName} ${sessionScope.userFirstName}</h1>
+                <p class="role-label">${sessionScope.roleName}</p>
             </div>
             <div class="aside-menu">
                 <form class="all-courses-form" action="/controller" method="get">
-                    <input type="hidden" name="command" value="show_my_courses">
+                    <input type="hidden" name="command" value="show_teacher_page">
                     <button class="btn btn-default">Мои курсы</button>
                 </form>
                 <form class="logout-form tabletop-offset" action="/controller" method="get">
@@ -31,10 +33,10 @@
                 </form>
             </div>
             <div class="fk-list">
-                <c:forEach var="link" items="${teacher_courses}">
+                <c:forEach var="link" items="${data.allCourses}">
                     <a
                             href="/controller?command=show_detailed_course&course_id=${link.id}"
-                            class="${course.id == link.id ? "selected-fk" : ""}"
+                            class="${data.course.id == link.id ? "selected-fk" : ""}"
                     >
                         ${link.title}
                     </a>
@@ -44,26 +46,27 @@
         <section class="edit-info">
             <div class="content-offset">
                 <p style="visibility: hidden; font-size: 1.5em;">КОСТЫЛЬ</p>
-                <h1 class="fk-title">${course.title}</h1>
+                <h1 class="fk-title">${data.course.title}</h1>
                 <section class="edit-block">
                     <h2 class="fk-section-title">Обновление информации о студенте</h2>
                     <form id="update-student-info" class="form-area" action="/controller" method="post">
-                        <input type="hidden" name="command" value="edit_user">
+                        <input type="hidden" name="command" value="update_user_info">
+                        <input type="hidden" name="course_id" value="${data.course.id}">
                         <div class="field-area">
                             <div class="edit-field">
                                 <label for="update-student-name">Студент</label>
-                                <select id="update-student-name" form="update-student-info" name="name" required>
-                                    <c:forEach var="student" items="${students}">
-                                        <option value="${student.id}">${student.lastName} ${student.firstName}</option>
+                                <select id="update-student-name" form="update-student-info" name="student_id" required>
+                                    <c:forEach var="student" items="${data.course.students}">
+                                        <option value="${student.id}">${student.studentName}</option>
                                     </c:forEach>
                                 </select>
                             </div>
 
                             <div class="edit-field">
                                 <label for="update-student-date">Дата занятия</label>
-                                <select id="update-student-date" form="update-student-info" name="date" required>
-                                    <c:forEach var="date" items="${dates}">
-                                        <option value="${date.id}">date.date</option>
+                                <select id="update-student-date" form="update-student-info" name="date_id" required>
+                                    <c:forEach var="date" items="${data.course.dates}">
+                                        <option value="${date.id}">${date.date.toString()}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -94,13 +97,14 @@
                 <section class="edit-block">
                     <h2 class="fk-section-title">Итоговые оценки</h2>
                     <form id="update-student-final-grade" class="form-area" action="/controller" method="post">
-                        <input type="hidden" name="command" value="edit_grade">
+                        <input type="hidden" name="command" value="update_user_grade">
+                        <input type="hidden" name="course_id" value="${data.course.id}">
                         <div class="field-area">
                             <div class="edit-field">
                                 <label for="update-student-final-name">Студент</label>
                                 <select id="update-student-final-name" form="update-student-final-grade" name="name" required>
-                                    <c:forEach var="student" items="${students}">
-                                        <option value="${student.id}">${student.lastName} ${student.firstName}</option>
+                                    <c:forEach var="student" items="${data.course.students}">
+                                        <option value="${student.id}">${student.studentName}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -130,22 +134,22 @@
                             <tr>
                                 <th class="table-head left-info-head">ФИО</th>
                                 <th class="table-head">Итоговая оценка</th>
-                                <c:forEach var="date" items="${dates}">
-                                    <th class="table-head">date.date</th>
+                                <c:forEach var="date" items="${data.course.dates}">
+                                    <th class="table-head">${date.date.toString()}</th>
                                 </c:forEach>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="student" items="${students}">
+                            <c:forEach var="student" items="${data.course.students}">
                                 <tr>
-                                    <td class="table-cont left-info">${student.lastName} ${student.firstName}</td>
+                                    <td class="table-cont left-info">${student.studentName}</td>
                                     <td class="table-cont">${student.finalGrade}</td>
-                                    <c:forEach var="attendance" items="${student.progresses}">
+                                    <c:forEach var="progress" items="${student.progresses}">
                                         <td class="table-cont
-                                            ${attendance.status == 0 ? "" :
-                                            attendance.status == 1 ? "official" : "skipped"
+                                            ${progress.attendance == 0 ? "" :
+                                            progress.attendance == 1 ? "official" : "skipped"
                                         }">
-                                            ${attendance.grade}
+                                            ${progress.grade == 0 ? "" : progress.grade.toString()}
                                         </td>
                                     </c:forEach>
                                 </tr>
@@ -167,13 +171,13 @@
                 <section class="edit-block">
                     <h2 class="fk-section-title">Отчисление</h2>
                     <form id="delete-student" class="form-area" action="/controller" method="post">
-                        <input type="hidden" name="command" value="remove_student">
+                        <input type="hidden" name="command" value="kick_from_course">
                         <div class="field-area">
                             <div class="edit-field">
                                 <label for="delete-select">Студент</label>
                                 <select id="delete-select" form="delete-student" name="name" required>
-                                    <c:forEach var="student" items="${students}">
-                                        <option value="${student.id}">${student.lastName} ${student.firstName}</option>
+                                    <c:forEach var="student" items="${data.course.students}">
+                                        <option value="${student.id}">${student.studentName}</option>
                                     </c:forEach>
                                 </select>
                             </div>

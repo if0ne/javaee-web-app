@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="data" scope="request" type="ru.rsreu.javaeewebapp.commands.outputs.ShowTeacherPageOutput"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +14,8 @@
     <aside class="aside-edit">
         <h1 class="logo" style="align-self: center;">ELECTIVES</h1>
         <div class="side-profile">
-            <h1 class="user-name" style="color: #FFF; display: block;">${user_last_name} ${user_first_name}</h1>
-            <p class="role-label">${user_role}</p>
+            <h1 class="user-name" style="color: #FFF; display: block;">${sessionScope.userLastName} ${sessionScope.userFirstName}</h1>
+            <p class="role-label">${sessionScope.roleName}</p>
         </div>
         <div class="aside-menu single-form">
             <form class="logout-form" action="/controller" method="get">
@@ -25,7 +27,7 @@
             </form>
         </div>
         <div class="fk-list">
-            <c:forEach var="link" items="${teacher_courses}">
+            <c:forEach var="link" items="${data.courses}">
                 <a href="/controller?command=show_detailed_course&course_id=${link.id}">${link.title}</a>
             </c:forEach>
         </div>
@@ -35,14 +37,14 @@
             <p style="visibility: hidden; font-size: 1.5em;">КОСТЫЛЬ</p>
             <h1 class="fk-title">Мои курсы</h1>
             <section class="fk-container container-teacher">
-                <c:forEach var="course" items="${teacher_courses}">
+                <c:forEach var="course" items="${data.courses}">
                     <section class="fk-item">
                         <div class="fk-item-container">
                             <div class="fk-info">
                                 <h2 class="fk-title">${course.title}</h2>
                                 <div class="fk-short-desc-container">
-                                    <p>Количество студентов: ${course.studentCount}</p>
-                                    <p>Следующее занятие: ${course.nextDate}</p>
+                                    <p>Количество студентов: ${course.studentsNumber}</p>
+                                    <p>Следующее занятие: ${course.nextClassDate.toString()}</p>
                                 </div>
                             </div>
                             <form class="fk-goto" action="/controller" method="get">

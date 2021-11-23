@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +17,8 @@
     <main class="student-main">
         <div class="student-main-container">
             <aside class="student-aside">
-                <h1 class="user-name">${user_last_name} ${user_first_name}</h1>
-                <p class="role-label">${user_role}</p>
+                <h1 class="user-name">${sessionScope.userLastName} ${sessionScope.userFirstName}</h1>
+                <p class="role-label">${sessionScope.roleName}</p>
                 <div class="student-aside-panel">
                     <form class="all-courses-form" action="/controller" method="get">
                         <input type="hidden" name="command" value="show_all_courses">
@@ -32,7 +33,7 @@
                     </form>
                 </div>
                 <div class="student-fk-list">
-                    <c:forEach var="link" items="${student_courses}">
+                    <c:forEach var="link" items="${data.studentCourses}">
                         <a href="/controller?command=show_detailed_course&course_id=${link.id}">${link.title}</a>
                     </c:forEach>
                 </div>

@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="data" scope="request" type="ru.rsreu.javaeewebapp.commands.outputs.ShowStudentDetailedCourseOutput"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +18,8 @@
     <main class="student-main">
         <div class="student-main-container">
             <aside class="student-aside">
-                <h1 class="user-name">${user_last_name} ${user_first_name}</h1>
-                <p class="role-label">${user_role}</p>
+                <h1 class="user-name">${sessionScope.userLastName} ${sessionScope.userFirstName}</h1>
+                <p class="role-label">${sessionScope.roleName}</p>
                 <div class="student-aside-panel">
                     <form class="all-courses-form" action="/controller" method="get">
                         <input type="hidden" name="command" value="show_my_courses">
@@ -35,10 +37,10 @@
             <div class="info-container">
                 <section class="fk-info">
                     <section class="part-info">
-                        <h1 class="fk-title">${course.title}</h1>
-                        <p class="role-label">${course.teacherLastName} ${course.teacherFirstName} ${course.teacherMiddleName}</p>
+                        <h1 class="fk-title">${data.course.title}</h1>
+                        <p class="role-label">${data.course.teacher}</p>
                         <p class="fk-desc">
-                            ${course.description}
+                            ${data.course.description}
                         </p>
                     </section>
                     <hr>
@@ -49,22 +51,22 @@
                             <tr>
                                 <th class="table-head left-info-head">ФИО</th>
                                 <th class="table-head">Итоговая оценка</th>
-                                <c:forEach var="date" items="${dates}">
-                                    <th class="table-head">date.date</th>
+                                <c:forEach var="date" items="${data.course.dates}">
+                                    <th class="table-head">${date.date}</th>
                                 </c:forEach>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="student" items="${students}">
+                            <c:forEach var="student" items="${data.course.students}">
                                 <tr>
-                                    <td class="table-cont left-info">${student.lastName} ${student.firstName}</td>
+                                    <td class="table-cont left-info">${student.studentName}</td>
                                     <td class="table-cont">${student.finalGrade}</td>
-                                    <c:forEach var="attendance" items="${student.progresses}">
+                                    <c:forEach var="progress" items="${student.progresses}">
                                         <td class="table-cont
-                                            ${attendance.status == 0 ? "" :
-                                            attendance.status == 1 ? "official" : "skipped"
+                                            ${progress.attendance == 0 ? "" :
+                                            progress.attendance == 1 ? "official" : "skipped"
                                         }">
-                                                ${attendance.grade}
+                                                ${progress.grade}
                                         </td>
                                     </c:forEach>
                                 </tr>
@@ -86,7 +88,8 @@
                     <section class="part-info">
                         <h2 class="fk-section-title">Отчисление</h2>
                         <form id="delete-student" class="form-area" action="/controller" method="post">
-                            <input type="hidden" name="command" value="killme">
+                            <input type="hidden" name="command" value="leave_from_course">
+                            <input type="hidden" name="course_id" value="${data.course.id}">
                             <button class="btn btn-danger btn-leave">Отчислиться</button>
                         </form>
                     </section>
