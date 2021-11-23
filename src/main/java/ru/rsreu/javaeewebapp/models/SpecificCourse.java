@@ -60,4 +60,12 @@ public class SpecificCourse {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

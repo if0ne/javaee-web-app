@@ -1,5 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.DaoFactory;
+import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.UpdateUserInfoInput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.util.MessageManager;
@@ -25,6 +27,8 @@ public class UpdateUserInfoCommand implements ActionCommand {
     @Override
     public String execute() {
         String page = MessageManager.getProperty("edit.course.id") + input.getCourseId();
+        DaoFactory.getInstance(DbType.ORACLE).getProgressDAO().updateStudentProgress(input.getStudentId(),
+                input.getCourseId(), input.getDateId(), input.getAttendance(), input.getGrade());
         return page;
     }
 

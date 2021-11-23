@@ -31,6 +31,7 @@ public class RoleRedirectFilter implements Filter {
         List<CommandEnum> studentCommands = new ArrayList<>();
         studentCommands.add(CommandEnum.SHOW_LOGIN);
         studentCommands.add(CommandEnum.SHOW_STUDENT_PAGE);
+        studentCommands.add(CommandEnum.SHOW_STUDENT_DETAILED_COURSE);
         studentCommands.add(CommandEnum.LEAVE_FROM_COURSE);
         studentCommands.add(CommandEnum.SHOW_ALL_COURSES);
         studentCommands.add(CommandEnum.SUBSCRIBE);
@@ -39,6 +40,7 @@ public class RoleRedirectFilter implements Filter {
 
         List<CommandEnum> teacherCommands = new ArrayList<>();
         teacherCommands.add(CommandEnum.SHOW_LOGIN);
+        teacherCommands.add(CommandEnum.SHOW_TEACHER_PAGE);
         teacherCommands.add(CommandEnum.CREATE_COURSE);
         teacherCommands.add(CommandEnum.EDIT_COURSE);
         teacherCommands.add(CommandEnum.KICK_FROM_COURSE);
