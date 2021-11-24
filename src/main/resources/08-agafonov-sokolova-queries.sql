@@ -89,6 +89,12 @@ where login = ? and password = ?
     --register for a course
     insert into users_courses (id, id_student, id_course, id_rating) values (?, ?, ?, ?)
     /
+    --add student to course rating table
+    insert into ratings(id_rating, final_grade) values (?, ?)
+    /
+    --add students to course classes
+    insert into classes(id_class, rating, course_date, grade, attendance) values (?, ?, ?, ?, ?)
+    /
     --drop out from the course
     delete from ratings
     where id_rating = (select id_rating
@@ -105,8 +111,6 @@ where login = ? and password = ?
     
     /
     --get all courses list
-    
-            --ADD NUMBER OF STUDENTS TO EACH COURSE AND SORT BY NUMBER
    
         --get a courses list for which you are registered
         select id_course, name, description, last_name, first_name, middle_name

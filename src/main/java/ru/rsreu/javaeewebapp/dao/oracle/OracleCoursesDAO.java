@@ -100,12 +100,12 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Course getCourseFromMap(Map<String, Object> row, boolean registrationStatus) {
-        return new Course(((BigDecimal) row.get("course")).intValueExact(),
+        return new Course(((BigDecimal) row.get("id_course")).intValueExact(),
                             row.get("name").toString(),
                             row.get("description").toString(),
                             new UserName(row.get("last_name").toString(),
                                         row.get("first_name").toString(),
-                                        row.get("middle_name").toString()),
+                                        row.get("middle_name") != null ? row.get("middle_name").toString() : "s"),
                             registrationStatus);
     }
 

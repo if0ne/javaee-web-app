@@ -54,10 +54,10 @@
                                     <c:when test="${course.registration}">
                                         <button class="btn btn-disabled" disabled>Вы записаны</button>
                                     </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-subscribe">Записаться</button>
+                                    </c:otherwise>
                                 </c:choose>
-                                <c:otherwise>
-                                    <button class="btn btn-subscribe">Записаться</button>
-                                </c:otherwise>
                             </form>
                         </div>
                     </section>

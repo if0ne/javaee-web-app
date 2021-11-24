@@ -1,5 +1,7 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.DaoFactory;
+import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.UserCourseInfoInput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.util.MessageManager;
@@ -22,7 +24,8 @@ public class SubscribeCommand implements ActionCommand {
     @Override
     public String execute() {
         String page = MessageManager.getProperty("show.all.courses");
-        //TODO: ДАО
+        DaoFactory.getInstance(DbType.ORACLE).getModifiedCourseDAO().signUpToCourse(input.getUserId(),
+                                                                                    input.getCourseId());
         return page;
     }
 

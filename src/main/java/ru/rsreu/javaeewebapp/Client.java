@@ -49,7 +49,9 @@ public final class Client {
             }
             int rowCount = statement.executeUpdate();
         } catch (SQLException ignored) {
-
+            System.err.println("==============================================================");
+            System.err.println(ignored.getMessage());
+            System.err.println("==============================================================");
         }
     }
 

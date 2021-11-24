@@ -6,10 +6,10 @@ import ru.rsreu.javaeewebapp.dao.oracle.OracleModifiedUserDAO;
 public interface ModifiedUserDAO {
 
     //change database
-    //create user 2
+    //create user
     void createUser(String lastName, String firstName, String middleName, String login, String password, int role);
-    //delete user 4
+    //delete user
     void deleteUser(int userId);
-    //change user status 14
+    //change user status
     void updateUserStatus(int studentId, int newStatus);
 }

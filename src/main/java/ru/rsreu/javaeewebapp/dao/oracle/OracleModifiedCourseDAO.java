@@ -1,7 +1,9 @@
 package ru.rsreu.javaeewebapp.dao.oracle;
 
 import ru.rsreu.javaeewebapp.Client;
+import ru.rsreu.javaeewebapp.DaoFactory;
 import ru.rsreu.javaeewebapp.interfaces.ModifiedCourseDAO;
+import ru.rsreu.javaeewebapp.models.Dates;
 import ru.rsreu.javaeewebapp.util.DateStringConverter;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
@@ -21,6 +23,11 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
     private static final String SQL_NEW_ID_DATA = MessageManager.getProperty("sql.new.id.data");
     private static final String SQL_NEW_ID_RATING = MessageManager.getProperty("sql.new.id.rating");
     private static final String SQL_NEW_ID_USER_COURSE = MessageManager.getProperty("sql.new.id.user.course");
+    private static final String SQL_NEW_ID_CLASS = MessageManager.getProperty("sql.new.id.class");
+    private static final String SQL_ADD_RATING = MessageManager.getProperty("sql.signup.rating");
+    private static final String SQL_ADD_CLASSES = MessageManager.getProperty("sql.signup.classes");
+    private static final String SQL_COURSE_DATES = MessageManager.getProperty("sql.course.dates");
+    private static final String EMPTY = "";
     private static final int FIRST_LIST_ELEMENT = 0;
 
     private Client client;
@@ -31,14 +38,18 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
 
     @Override
     public void createCourse(int teacherId, String title, String description, List<Date> dates) {
-        String courseId = getNewId(SQL_NEW_ID_COURSE);
-        courseId = courseId == "" ? "0" : courseId;
-        this.client.updateData(SQL_CREATE_COURSE, courseId, title,
-                                description, Integer.toString(teacherId));
-        String dateId = getNewId(SQL_NEW_ID_DATA);
-        for (Date date : dates) {
-            this.client.updateData(SQL_ADD_COURSE_DATES, dateId,
-                    DateStringConverter.convertDateToString(date), courseId);
+        try {
+            String courseId = getNewId(SQL_NEW_ID_COURSE);
+            courseId = courseId == "" ? "0" : courseId;
+            this.client.updateData(SQL_CREATE_COURSE, courseId, title,
+                    description, Integer.toString(teacherId));
+            String dateId = getNewId(SQL_NEW_ID_DATA);
+            for (Date date : dates) {
+                this.client.updateData(SQL_ADD_COURSE_DATES, dateId,
+                        DateStringConverter.convertDateToString(date), courseId);
+            }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
     }
 
@@ -48,6 +59,28 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
         String ratingId = getNewId(SQL_NEW_ID_RATING);
         this.client.updateData(SQL_SIGN_UP_COURSE, id, Integer.toString(studentId),
                                 Integer.toString(courseId), ratingId);
+        this.client.updateData(SQL_ADD_RATING, ratingId, EMPTY);
+        List<Dates> dates = getDates(courseId);
+        for (Dates date : dates) {
+            String classId = getNewId(SQL_NEW_ID_CLASS);
+            this.client.updateData(SQL_ADD_CLASSES, classId, ratingId, date.getStringDate(), null, null);
+        }
+    }
+
+    private List<Dates> getDates(int courseId) {
+        List<Dates> result = new ArrayList<Dates>();
+        List<Map<String, Object>> rows = this.client.selectData(SQL_COURSE_DATES,
+                                                        Integer.toString(courseId));
+
+        for (Map<String, Object> row : rows) {
+            result.add(getDateFromMap(row));
+        }
+        return result;
+    }
+
+    private Dates getDateFromMap(Map<String, Object> row) {
+        return new Dates(((BigDecimal) row.get("id_date")).intValueExact(),
+                                            (Date) row.get("course_date"));
     }
 
     @Override
