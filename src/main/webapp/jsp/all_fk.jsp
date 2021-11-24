@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="data" scope="request" type="ru.rsreu.javaeewebapp.commands.outputs.ShowAllCoursesOutput"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +22,7 @@
                 <p class="role-label">${sessionScope.roleName}</p>
                 <div class="student-aside-panel">
                     <form class="all-courses-form" action="/controller" method="get">
-                        <input type="hidden" name="command" value="show_my_courses">
+                        <input type="hidden" name="command" value="show_student_page">
                         <button class="btn btn-default">Мои курсы</button>
                     </form>
                     <form class="logout-form" action="/controller" method="get">
@@ -33,12 +35,12 @@
                 </div>
             </aside>
             <section class="fk-container">
-                <c:forEach var="course" items="${data.courses}">
+                <c:forEach var="course" items="${data.allCourses}">
                     <section class="fk-item">
                         <div class="fk-item-container">
                             <div class="fk-info">
                                 <h2 class="fk-title">${course.title}</h2>
-                                <p class="role-label">${course.teacherLastName} ${course.teacherFirstName} ${course.teacherMiddleName}</p>
+                                <p class="role-label">${course.teacherName}</p>
                                 <div class="fk-short-desc-container">
                                     <p class="fk-short-desc">
                                         ${course.description}
@@ -48,7 +50,14 @@
                             <form class="fk-goto" action="/controller" method="post">
                                 <input type="hidden" name="command" value="subscribe">
                                 <input type="hidden" name="course_id" value="${course.id}">
-                                <button class="btn btn-subscribe">Записаться</button>
+                                <c:choose>
+                                    <c:when test="${course.registration}">
+                                        <button class="btn btn-disabled" disabled>Вы записаны</button>
+                                    </c:when>
+                                </c:choose>
+                                <c:otherwise>
+                                    <button class="btn btn-subscribe">Записаться</button>
+                                </c:otherwise>
                             </form>
                         </div>
                     </section>

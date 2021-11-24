@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="data" scope="request" type="ru.rsreu.javaeewebapp.commands.outputs.ShowStudentPageOutput"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,13 +34,13 @@
                     </form>
                 </div>
                 <div class="student-fk-list">
-                    <c:forEach var="link" items="${data.studentCourses}">
+                    <c:forEach var="link" items="${data.courses}">
                         <a href="/controller?command=show_detailed_course&course_id=${link.id}">${link.title}</a>
                     </c:forEach>
                 </div>
             </aside>
             <section class="fk-container">
-                <c:forEach var="course" items="${student_courses}">
+                <c:forEach var="course" items="${data.courses}">
                     <section class="fk-item">
                         <div class="fk-item-container">
                             <div class="fk-info">
@@ -47,7 +48,7 @@
                                 <p class="role-label">${course.teacherName}</p>
                                 <div class="fk-short-desc-container">
                                     <p class="fk-short-desc">
-                                        ${course.decription}
+                                        ${course.description}
                                     </p>
                                 </div>
                             </div>

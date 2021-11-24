@@ -72,7 +72,7 @@
                                 <input type="password" id="user-password" class="input-field" name="user_password"/>
                             </div>
 
-                            <div class="edit-field helper">
+                            <!--<div class="edit-field helper">
                                 <label for="user-middle-name">Костыль</label>
                                 <input type="password" class="input-field"/>
                             </div>
@@ -80,7 +80,7 @@
                             <div class="edit-field helper">
                                 <label for="user-middle-name">Костыль</label>
                                 <input type="password" class="input-field"/>
-                            </div>
+                            </div>-->
                         </div>
                         <button class="btn btn-default btn-edit">Добавить</button>
                     </form>
