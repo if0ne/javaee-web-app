@@ -26,9 +26,7 @@ public class ShowAllCoursesCommand implements ActionCommand {
     public String execute() {
         String page = MessageManager.getProperty("jsp.all.fk");
         output = new ShowAllCoursesOutput();
-        DaoFactory.getInstance(DbType.ORACLE).getCoursesDAO().getAllStudentCourses(input.getUserId());
-        DaoFactory.getInstance(DbType.ORACLE).getCoursesDAO().getStudentCourses(input.getUserId());
-        //TODO: ДАО
+        output.setAllCourses(DaoFactory.getInstance(DbType.ORACLE).getCoursesDAO().getAllStudentCourses(input.getUserId()));
         return page;
     }
 

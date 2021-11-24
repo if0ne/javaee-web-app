@@ -1,7 +1,10 @@
 package ru.rsreu.javaeewebapp.commands;
 
+import ru.rsreu.javaeewebapp.DaoFactory;
+import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.CreateCourseInput;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.InterimDatesGenerator;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +30,14 @@ public class CreateCourseCommand implements ActionCommand {
     @Override
     public String execute() {
         String page = MessageManager.getProperty("show.teacher.page");
-        //TODO: тут крутая логика
+        DaoFactory.getInstance(DbType.ORACLE).getModifiedCourseDAO().createCourse(
+                input.getTeacherId(),
+                input.getTitle(),
+                input.getDescription(),
+                InterimDatesGenerator.getInterimDatesBetween(input.getBeginDate(),
+                                                                input.getEndDate(),
+                                                                input.getDay())
+        );
         return page;
     }
 
