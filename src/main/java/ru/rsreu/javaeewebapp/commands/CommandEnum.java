@@ -52,6 +52,11 @@ public enum CommandEnum {
             this.command = new ShowTeacherPageCommand();
         }
     },
+    SHOW_CREATE_PAGE {
+        {
+            this.command = new ShowCreatePageCommand();
+        }
+    },
     CREATE_COURSE {
         {
             this.command = new CreateCourseCommand();

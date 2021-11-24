@@ -32,6 +32,7 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
     @Override
     public void createCourse(int teacherId, String title, String description, List<Date> dates) {
         String courseId = getNewId(SQL_NEW_ID_COURSE);
+        courseId = courseId == "" ? "0" : courseId;
         this.client.updateData(SQL_CREATE_COURSE, courseId, title,
                                 description, Integer.toString(teacherId));
         String dateId = getNewId(SQL_NEW_ID_DATA);

@@ -28,9 +28,16 @@
         </div>
         <div class="fk-list">
             <c:forEach var="link" items="${data.courses}">
-                <a href="/controller?command=show_detailed_course&course_id=${link.id}">${link.title}</a>
+                <a href="/controller?command=edit_course&course_id=${link.id}">${link.title}</a>
             </c:forEach>
         </div>
+        <form class="logout-form" action="/controller" method="get">
+            <input type="hidden" name="command" value="show_create_page">
+            <button class="btn btn-default">
+                Создать
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </form>
     </aside>
     <section class="edit-info">
         <div class="content-offset">

@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="data" scope="request" type="ru.rsreu.javaeewebapp.commands.outputs.ShowTeacherPageOutput"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +14,12 @@
         <aside class="aside-edit">
             <h1 class="logo" style="align-self: center;">ELECTIVES</h1>
             <div class="side-profile">
-                <h1 class="user-name" style="color: #FFF; display: block;">${user_last_name} ${user_first_name}</h1>
-                <p class="role-label">${user_role}</p>
+                <h1 class="user-name" style="color: #FFF; display: block;">${sessionScope.userLastName} ${sessionScope.userFirstName}</h1>
+                <p class="role-label">${sessionScope.roleName}</p>
             </div>
             <div class="aside-menu">
                 <form class="all-courses-form" action="/controller" method="get">
-                    <input type="hidden" name="command" value="show_my_courses">
+                    <input type="hidden" name="command" value="show_teacher_page">
                     <button class="btn btn-default">Мои курсы</button>
                 </form>
                 <form class="logout-form tabletop-offset" action="/controller" method="get">
@@ -31,8 +33,8 @@
                 </form>
             </div>
             <div class="fk-list">
-                <c:forEach var="link" items="${teacher_courses}">
-                    <a href="/controller?command=show_detailed_course&course_id=${link.id}">${link.title}</a>
+                <c:forEach var="link" items="${data.courses}">
+                    <a href="/controller?command=edit_course&course_id=${link.id}">${link.title}</a>
                 </c:forEach>
             </div>
         </aside>
