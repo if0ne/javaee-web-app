@@ -21,7 +21,7 @@
 
     <filter>
         <filter-name>Encoding</filter-name>
-        <filter-class>ru.rsreu.javaeewebapp.EncodingFilter</filter-class>
+        <filter-class>ru.rsreu.javaeewebapp.filters.EncodingFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -30,8 +30,18 @@
     </filter-mapping>
 
     <filter>
+        <filter-name>BlockedRedirect</filter-name>
+        <filter-class>ru.rsreu.javaeewebapp.filters.StatusRedirectFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>BlockedRedirect</filter-name>
+        <url-pattern>/controller</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>RoleRedirect</filter-name>
-        <filter-class>ru.rsreu.javaeewebapp.RoleRedirectFilter</filter-class>
+        <filter-class>ru.rsreu.javaeewebapp.filters.RoleRedirectFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -41,7 +51,7 @@
 
     <filter>
         <filter-name>PageSecurity</filter-name>
-        <filter-class>ru.rsreu.javaeewebapp.PageRedirectSecurityFilter</filter-class>
+        <filter-class>ru.rsreu.javaeewebapp.filters.PageRedirectSecurityFilter</filter-class>
     </filter>
 
     <filter-mapping>

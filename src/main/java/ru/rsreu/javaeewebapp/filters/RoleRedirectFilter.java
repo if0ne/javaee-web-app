@@ -1,4 +1,4 @@
-package ru.rsreu.javaeewebapp;
+package ru.rsreu.javaeewebapp.filters;
 
 import ru.rsreu.javaeewebapp.commands.CommandEnum;
 import ru.rsreu.javaeewebapp.models.enums.Role;
@@ -36,6 +36,7 @@ public class RoleRedirectFilter implements Filter {
         studentCommands.add(CommandEnum.SHOW_ALL_COURSES);
         studentCommands.add(CommandEnum.SUBSCRIBE);
         studentCommands.add(CommandEnum.LOGOUT);
+        studentCommands.add(CommandEnum.SHOW_BLOCKED_PAGE);
         roleWithCommand.put(Role.STUDENT, studentCommands);
 
         List<CommandEnum> teacherCommands = new ArrayList<>();
@@ -48,6 +49,7 @@ public class RoleRedirectFilter implements Filter {
         teacherCommands.add(CommandEnum.UPDATE_USER_GRADE);
         teacherCommands.add(CommandEnum.UPDATE_USER_INFO);
         teacherCommands.add(CommandEnum.LOGOUT);
+        teacherCommands.add(CommandEnum.SHOW_BLOCKED_PAGE);
         roleWithCommand.put(Role.TEACHER, teacherCommands);
 
         List<CommandEnum> modCommands = new ArrayList<>();
@@ -55,6 +57,7 @@ public class RoleRedirectFilter implements Filter {
         modCommands.add(CommandEnum.LOGOUT);
         modCommands.add(CommandEnum.SHOW_MOD_PAGE);
         modCommands.add(CommandEnum.CHANGE_USER_STATUS);
+        modCommands.add(CommandEnum.SHOW_BLOCKED_PAGE);
         roleWithCommand.put(Role.MODERATOR, modCommands);
 
         List<CommandEnum> adminCommands = new ArrayList<>();
@@ -63,6 +66,7 @@ public class RoleRedirectFilter implements Filter {
         adminCommands.add(CommandEnum.SHOW_ADMIN_PAGE);
         adminCommands.add(CommandEnum.CREATE_USER);
         adminCommands.add(CommandEnum.DELETE_USER);
+        adminCommands.add(CommandEnum.SHOW_BLOCKED_PAGE);
         roleWithCommand.put(Role.ADMINISTRATOR,adminCommands);
     }
     @Override

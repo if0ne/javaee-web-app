@@ -54,6 +54,7 @@ public class LoginCommand implements ActionCommand {
             output.setRoleName(role.getLocale());
             output.setLastName(user.getLastName());
             output.setFirstName(user.getFirstName());
+            output.setStatus(user.getStatus());
             output.setWrongLoginPasswordMessage(null);
         }
 
@@ -70,6 +71,7 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute("roleName", output.getRoleName());
             session.setAttribute("userLastName", output.getLastName());
             session.setAttribute("userFirstName", output.getFirstName());
+            session.setAttribute("status", output.getStatus());
         }
     }
 
