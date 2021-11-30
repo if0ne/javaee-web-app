@@ -9,6 +9,7 @@ public class LoginOutput {
 
     private String firstName;
     private String lastName;
+    private boolean status;
 
     private String wrongLoginPasswordMessage;
 
@@ -70,5 +71,13 @@ public class LoginOutput {
 
     public void setWrongLoginPasswordMessage(String wrongLoginPasswordMessage) {
         this.wrongLoginPasswordMessage = wrongLoginPasswordMessage;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

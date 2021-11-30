@@ -12,18 +12,45 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * All requests handler
+ * Build response depends on request parameters
+ * Main parameter - command
+ */
 public class FrontController extends HttpServlet {
 
+    /**
+     * Handle GET-requests
+     * @param request - request object
+     * @param response - response object
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * Handle POST-requests
+     * @param request - request object
+     * @param response - response object
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * Recognize what command was called
+     * Depends on command executes command logic, defines page for redirect and type of redirect (forward or sendRedirect)
+     * @param request - request object
+     * @param response - response object
+     * @throws ServletException
+     * @throws IOException
+     */
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
                                 throws ServletException, IOException {
@@ -56,5 +83,4 @@ public class FrontController extends HttpServlet {
                 break;
         }
     }
-
 }

@@ -106,6 +106,11 @@ public enum CommandEnum {
         {
             this.command = new ShowGuestPageCommand();
         }
+    },
+    SHOW_BLOCKED_PAGE {
+        {
+            this.command = new ShowBlockedPageCommand();
+        }
     };
     ActionCommand command;
     public ActionCommand getCurrentCommand() {

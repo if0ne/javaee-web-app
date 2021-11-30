@@ -1,6 +1,8 @@
-package ru.rsreu.javaeewebapp;
+package ru.rsreu.javaeewebapp.filters;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class EncodingFilter implements Filter {
@@ -11,6 +13,7 @@ public class EncodingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        ((HttpServletResponse) response).setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         chain.doFilter(request, response);

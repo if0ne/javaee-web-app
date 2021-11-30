@@ -1,4 +1,4 @@
-package ru.rsreu.javaeewebapp;
+package ru.rsreu.javaeewebapp.filters;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
