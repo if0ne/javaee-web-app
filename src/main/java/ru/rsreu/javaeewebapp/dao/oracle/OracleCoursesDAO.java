@@ -29,6 +29,8 @@ public class OracleCoursesDAO implements CoursesDAO {
     private static final int FIRST_LIST_ELEMENT = 0;
     private static final boolean REGISTERED = true;
     private static final boolean UNREGISTERED = false;
+    private static final boolean FINISHED_COURSE = false;
+    private static final boolean ACTIVE_COURSE = true;
 
     private Client client;
 
@@ -129,13 +131,25 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Course getCourseFromMap(Map<String, Object> row, boolean registrationStatus) {
-        return new Course(((BigDecimal) row.get("id_course")).intValueExact(),
+        int courseId = ((BigDecimal) row.get("id_course")).intValueExact();
+        return new Course(courseId,
                             row.get("name").toString(),
                             row.get("description").toString(),
                             new UserName(row.get("last_name").toString(),
                                         row.get("first_name").toString(),
                                         row.get("middle_name") != null ? row.get("middle_name").toString() : "s"),
-                            registrationStatus);
+                            registrationStatus, isActiveCourse(courseId));
+    }
+
+    private boolean isActiveCourse(int courseId) {
+        List<Date> dates = getAllCourseDate(courseId);
+        java.sql.Date currentDate = new java.sql.Date(new java.util.Date().getTime());
+        for (Date date : dates) {
+            if (date.after(currentDate) || date.equals(currentDate)) {
+                return ACTIVE_COURSE;
+            }
+        }
+        return FINISHED_COURSE;
     }
 
     @Override
@@ -182,26 +196,29 @@ public class OracleCoursesDAO implements CoursesDAO {
 
     private List<Student> getCourseStudents(int courseId) {
         List<Student> result = new ArrayList<Student>();
-        List<Map<String, Object>> rows = this.client.selectData(SQL_GET_STUDENTS);
+        List<Map<String, Object>> rows = this.client.selectData(SQL_GET_STUDENTS, Integer.toString(courseId));
 
         for (Map<String, Object> row : rows) {
-            result.add(getStudentsFromMap(row));
+            result.add(getStudentsFromMap(row, courseId));
         }
         return result;
     }
 
-    private Student getStudentsFromMap(Map<String, Object> row) {
-        return new Student(((BigDecimal) row.get("id_user")).intValueExact(),
+    private Student getStudentsFromMap(Map<String, Object> row, int courseId) {
+        int userId = ((BigDecimal) row.get("id_user")).intValueExact();
+        return new Student(userId,
                 new UserName(row.get("last_name").toString(),
                             row.get("first_name").toString(),
                             row.get("middle_name").toString()),
-                FinalGrade.getGradeFromInt(row.get("final_grade").toString()),
-                getProgressList(((BigDecimal) row.get("id_user")).intValueExact()));
+                FinalGrade.getGradeFromString((row.get("final_grade") == null) ? "" : row.get("final_grade").toString()),
+                getProgressList(userId, courseId));
     }
 
-    private List<Progress> getProgressList(int id_user) {
+    private List<Progress> getProgressList(int userId, int courseId) {
         List<Progress> result = new ArrayList<Progress>();
-        List<Map<String, Object>> rows = this.client.selectData(SQL_GET_PROGRESS);
+        List<Map<String, Object>> rows = this.client.selectData(SQL_GET_PROGRESS,
+                                                                Integer.toString(courseId),
+                                                                Integer.toString(userId));
 
         for (Map<String, Object> row : rows) {
             result.add(getProgressFromMap(row));
@@ -210,8 +227,10 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Progress getProgressFromMap(Map<String, Object> row) {
-        return new Progress(Attendance.getAttendanceFromInt(((BigDecimal) row.get("attendance")).intValueExact()),
-                            Grade.getGradeFromInt(((BigDecimal) row.get("grade")).intValueExact()));
+        Integer attendance = ((BigDecimal) row.get("attendance")).intValueExact();
+        Integer grade = ((BigDecimal) row.get("grade")).intValueExact();
+        return new Progress(Attendance.getAttendanceFromInt(attendance == null ? 0 : attendance),
+                            Grade.getGradeFromInt(grade == null ? 0 : grade));
     }
 
 }

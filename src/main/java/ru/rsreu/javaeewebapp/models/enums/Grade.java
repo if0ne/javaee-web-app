@@ -1,15 +1,15 @@
 package ru.rsreu.javaeewebapp.models.enums;
 
 public enum Grade {
-    FIVE(5), FOUR(4), THREE(3), TWO(2);
+    FIVE(5), FOUR(4), THREE(3), TWO(2), ZERO(0);
 
-    private int grade;
+    private Integer grade;
 
-    Grade(int grade) {
+    Grade(Integer grade) {
         this.grade = grade;
     }
 
-    public static Grade getGradeFromInt(int gradeId) {
+    public static Grade getGradeFromInt(Integer gradeId) {
         switch (gradeId) {
             case 2:
                 return TWO;
@@ -20,11 +20,11 @@ public enum Grade {
             case 5:
                 return FIVE;
             default:
-                return null;
+                return ZERO;
         }
     }
 
-    public int getGrade() {
+    public Integer getGrade() {
         return this.grade;
     }
 }

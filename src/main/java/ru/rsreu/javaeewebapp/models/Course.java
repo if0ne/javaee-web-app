@@ -8,13 +8,16 @@ public class Course {
     private UserName teacherName;
     //determines whether a student is registered for the course or not
     private boolean registration;
+    private boolean finished;
 
-    public Course(int id, String title, String description, UserName teacherName, boolean registration) {
+    public Course(int id, String title, String description, UserName teacherName,
+                    boolean registration, boolean finished) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.teacherName = teacherName;
         this.registration = registration;
+        this.finished = finished;
     }
 
     public int getId() {
@@ -56,4 +59,11 @@ public class Course {
     public void setRegistration(boolean registration) {
         this.registration = registration;
     }
+    public boolean isFinished() {
+        return this.finished;
+    }
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
 }

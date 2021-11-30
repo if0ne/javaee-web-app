@@ -2,7 +2,8 @@ package ru.rsreu.javaeewebapp.models.enums;
 
 public enum FinalGrade {
     CREDITED("Зачтено"),
-    FAILED("Незачтено");
+    FAILED("Незачтено"),
+    UNEXPOSED("");
 
     private String finalGrade;
 
@@ -10,14 +11,14 @@ public enum FinalGrade {
         this.finalGrade = finalGrade;
     }
 
-    public static FinalGrade getGradeFromInt(String finalGrade) {
+    public static FinalGrade getGradeFromString(String finalGrade) {
         switch (finalGrade) {
             case "Зачтено":
                 return CREDITED;
             case "Незачтено":
                 return FAILED;
             default:
-                return null;
+                return UNEXPOSED;
         }
     }
 
