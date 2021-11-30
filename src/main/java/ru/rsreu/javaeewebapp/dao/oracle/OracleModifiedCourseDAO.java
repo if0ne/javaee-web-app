@@ -28,6 +28,7 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
     private static final String SQL_ADD_RATING = MessageManager.getProperty("sql.signup.rating");
     private static final String SQL_ADD_CLASSES = MessageManager.getProperty("sql.signup.classes");
     private static final String SQL_COURSE_DATES = MessageManager.getProperty("sql.course.dates");
+    private static final String SQL_COURSE_ID_DATES = MessageManager.getProperty("sql.course.id.dates");
     private static final String EMPTY = "";
     private static final int FIRST_LIST_ELEMENT = 0;
 
@@ -59,19 +60,19 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
     public void signUpToCourse(int studentId, int courseId) {
         String id = getNewId(SQL_NEW_ID_USER_COURSE);
         String ratingId = getNewId(SQL_NEW_ID_RATING);
+        this.client.updateData(SQL_ADD_RATING, ratingId, EMPTY);
         this.client.updateData(SQL_SIGN_UP_COURSE, id, Integer.toString(studentId),
                                 Integer.toString(courseId), ratingId);
-        this.client.updateData(SQL_ADD_RATING, ratingId, EMPTY);
-        List<Dates> dates = getDates(courseId);
-        for (Dates date : dates) {
+        List<Integer> dates = getDates(courseId);
+        for (Integer date : dates) {
             String classId = getNewId(SQL_NEW_ID_CLASS);
-            this.client.updateData(SQL_ADD_CLASSES, classId, ratingId, date.getStringDate(), null, null);
+            this.client.updateData(SQL_ADD_CLASSES, classId, ratingId, Integer.toString(date), null, null);
         }
     }
 
-    private List<Dates> getDates(int courseId) {
-        List<Dates> result = new ArrayList<Dates>();
-        List<Map<String, Object>> rows = this.client.selectData(SQL_COURSE_DATES,
+    private List<Integer> getDates(int courseId) {
+        List<Integer> result = new ArrayList<>();
+        List<Map<String, Object>> rows = this.client.selectData(SQL_COURSE_ID_DATES,
                                                         Integer.toString(courseId));
 
         for (Map<String, Object> row : rows) {
@@ -80,9 +81,8 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
         return result;
     }
 
-    private Dates getDateFromMap(Map<String, Object> row) {
-        return new Dates(((BigDecimal) row.get("id_date")).intValueExact(),
-                new Date(((Timestamp) row.get("course_date")).getTime()));
+    private Integer getDateFromMap(Map<String, Object> row) {
+        return ((BigDecimal) row.get("id_date")).intValueExact();
     }
 
     @Override

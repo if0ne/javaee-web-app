@@ -35,7 +35,7 @@
                 </div>
                 <div class="student-fk-list">
                     <c:forEach var="link" items="${data.courses}">
-                        <a href="/controller?command=show_detailed_course&course_id=${link.id}">${link.title}</a>
+                        <a href="/controller?command=show_student_detailed_course&course_id=${link.id}">${link.title}</a>
                     </c:forEach>
                 </div>
             </aside>
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <form class="fk-goto" action="/controller" method="get">
-                                <input type="hidden" name="command" value="show_detailed_course">
+                                <input type="hidden" name="command" value="show_student_detailed_course">
                                 <input type="hidden" name="course_id" value="${course.id}">
                                 <button class="btn btn-default">Подробнее</button>
                             </form>
