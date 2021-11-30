@@ -19,7 +19,7 @@ public class CreateCourseCommand implements ActionCommand {
     public void readRequestAttributes(HttpServletRequest request) throws Exception {
         input = new CreateCourseInput();
         HttpSession session = request.getSession(true);
-        input.setTeacherId(Integer.parseInt(session.getAttribute("user_id").toString()));
+        input.setTeacherId(Integer.parseInt(session.getAttribute("userId").toString()));
         input.setDay(Integer.parseInt(request.getParameter("day")));
         input.setTitle(request.getParameter("title"));
         input.setDescription(request.getParameter("description"));

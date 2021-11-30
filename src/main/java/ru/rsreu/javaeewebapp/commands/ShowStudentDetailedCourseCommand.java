@@ -24,7 +24,7 @@ public class ShowStudentDetailedCourseCommand implements ActionCommand {
     public void readRequestAttributes(HttpServletRequest request) throws Exception {
         input = new UserCourseInfoInput();
         HttpSession session = request.getSession(true);
-        input.setUserIdFromRequest(session.getAttribute("user_id"));
+        input.setUserIdFromRequest(session.getAttribute("userId"));
         input.setCourseIdFromRequest(request.getParameter("course_id"));
     }
 

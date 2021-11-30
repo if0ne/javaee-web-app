@@ -76,12 +76,21 @@ where login = ? and password = ?
     order by id_date asc
     /
     --get the teacher courses list
-        --ADD NEXT DATE OF THE CLASS
-         --, course_date as "next_date" = select course
-    select id_course, name, count(id_student) as count
-    from user_courses inner join courses on user_courses.id_course = courses.id_course
+    
+    select courses.id_course, name
+    from courses
     where teacher = ?
-    group by id_course, name
+    /
+    
+    --get students number on course
+    select count(id_student) as students_amount
+    from user_courses
+    where id_course = ?
+    group by id_course
+    /
+    
+    --get all class dates of course
+    select course_date from dates where id_course = ?
     /
 
 --Student

@@ -47,7 +47,7 @@
                         <input type="hidden" name="command" value="create_course">
                         <div class="new-field">
                             <label for="name">Наименование факультета:</label>
-                            <input id="name" class="input-field" name="name"/>
+                            <input id="name" class="input-field" name="title"/>
                         </div>
 
                         <div class="new-field">

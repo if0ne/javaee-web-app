@@ -21,7 +21,7 @@ public class ShowModPageCommand implements ActionCommand {
     public void readRequestAttributes(HttpServletRequest request) throws Exception {
         input = new UserInfoInput();
         HttpSession session = request.getSession(true);
-        input.setUserIdFromRequest(session.getAttribute("user_id"));
+        input.setUserIdFromRequest(session.getAttribute("userId"));
     }
 
     @Override

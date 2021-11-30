@@ -18,7 +18,7 @@ public class MainRedirectCommand implements ActionCommand {
         input = new MainRedirectInput();
 
         Object role = session.getAttribute("role");
-        Object userId = session.getAttribute("user_id");
+        Object userId = session.getAttribute("userId");
 
         input.setRole(role == null ? "" : role.toString());
         input.setUserId(userId == null ? -1 : Integer.parseInt(userId.toString()));

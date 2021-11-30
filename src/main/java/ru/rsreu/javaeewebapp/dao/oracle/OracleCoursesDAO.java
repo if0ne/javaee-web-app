@@ -10,6 +10,7 @@ import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class OracleCoursesDAO implements CoursesDAO {
 
     private static final String SQL_GET_TEACHER_COURSES = MessageManager.getProperty("sql.course.teacher");
+    private static final String SQL_GET_STUDENTS_AMOUNT = MessageManager.getProperty("sql.course.students.number");
     private static final String SQL_NEXT_DATE = MessageManager.getProperty("sql.next.date");
     private static final String SQL_GET_STUDENT_COURSES = MessageManager.getProperty("sql.course.student");
     private static final String SQL_GET_UNUSED_STUDENT_COURSES = MessageManager.getProperty("sql.course.unused");
@@ -47,27 +49,54 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private TeacherCourse getTeacherCoursesFromMap(Map<String, Object> row) {
-        return new TeacherCourse(
-                ((BigDecimal) row.get("id_course")).intValueExact(),
-                row.get("name").toString(),
-                ((BigDecimal) row.get("count")).intValueExact(),
-                getNextDate(((BigDecimal) row.get("id_course")).intValueExact())
+        Integer courseId = ((BigDecimal) row.get("id_course")).intValueExact();
+        return new TeacherCourse(courseId, row.get("name").toString(),
+                getStudentsNumber(courseId),
+                getNextDate(courseId)
         );
     }
 
-    private Date getNextDate(int id_course) {
-        List<Date> result = new ArrayList<Date>();
-        List<Map<String, Object>> rows = this.client.selectData(SQL_NEXT_DATE,
-                                                    Integer.toString(id_course));
+    private int getStudentsNumber(int courseId) {
+        List<Integer> result = new ArrayList<Integer>();
+        List<Map<String, Object>> rows = this.client.selectData(SQL_GET_STUDENTS_AMOUNT,
+                                                            Integer.toString(courseId));
+        for (Map<String, Object> row : rows) {
+            result.add(getCourseStudentsAmount(row));
+        }
+        if (result.size() == 0) {
+            return FIRST_LIST_ELEMENT;
+        } else {
+            return result.get(FIRST_LIST_ELEMENT);
+        }
+    }
 
+    private Integer getCourseStudentsAmount(Map<String, Object> row) {
+        return (Integer) row.get("students_amount");
+    }
+
+    private Date getNextDate(int courseId) {
+        List<Date> dates = getAllCourseDate(courseId);
+        java.sql.Date currentDate = new java.sql.Date(new java.util.Date().getTime());
+        for (Date date : dates) {
+            if (date.after(currentDate) || date.equals(currentDate)) {
+                return date;
+            }
+        }
+        return new Date(new java.util.Date().getTime());
+    }
+
+    private List<Date> getAllCourseDate(int courseId) {
+        List<Date> result = new ArrayList<>();
+        List<Map<String, Object>> rows = this.client.selectData(SQL_NEXT_DATE,
+                                                Integer.toString(courseId));
         for (Map<String, Object> row : rows) {
             result.add(getNextDateFromMap(row));
         }
-        return result.get(FIRST_LIST_ELEMENT);
+        return result;
     }
 
     private Date getNextDateFromMap(Map<String, Object> row) {
-        return (Date) row.get("next_date");
+        return new Date(((Timestamp) row.get("course_date")).getTime());
     }
 
     @Override
@@ -148,7 +177,7 @@ public class OracleCoursesDAO implements CoursesDAO {
 
     private Dates getDatesFromMap(Map<String, Object> row) {
         return new Dates(((BigDecimal) row.get("id_date")).intValueExact(),
-                    (Date) row.get("course_date"));
+                new Date(((Timestamp) row.get("course_date")).getTime()));
     }
 
     private List<Student> getCourseStudents(int courseId) {

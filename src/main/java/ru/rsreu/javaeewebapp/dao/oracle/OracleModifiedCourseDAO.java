@@ -9,6 +9,7 @@ import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +44,11 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
             courseId = courseId == "" ? "0" : courseId;
             this.client.updateData(SQL_CREATE_COURSE, courseId, title,
                     description, Integer.toString(teacherId));
-            String dateId = getNewId(SQL_NEW_ID_DATA);
+            Integer dateId = Integer.parseInt(getNewId(SQL_NEW_ID_DATA));
             for (Date date : dates) {
-                this.client.updateData(SQL_ADD_COURSE_DATES, dateId,
+                this.client.updateData(SQL_ADD_COURSE_DATES, dateId.toString(),
                         DateStringConverter.convertDateToString(date), courseId);
+                dateId++;
             }
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
@@ -80,7 +82,7 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
 
     private Dates getDateFromMap(Map<String, Object> row) {
         return new Dates(((BigDecimal) row.get("id_date")).intValueExact(),
-                                            (Date) row.get("course_date"));
+                new Date(((Timestamp) row.get("course_date")).getTime()));
     }
 
     @Override
@@ -90,10 +92,6 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
     }
 
     private String getNewId(String sql) {
-        return Integer.toString(getCurrentId(sql) + 1);
-    }
-
-    private Integer getCurrentId(String sql) {
         List<Integer> id = new ArrayList<Integer>();
         List<Map<String, Object>> rows = this.client.selectData(sql);
 
@@ -101,9 +99,10 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
             id.add(getIdFromMap(row));
         }
         if (id.size() == 0) {
-            return FIRST_LIST_ELEMENT;
+            return Integer.toString(FIRST_LIST_ELEMENT);
         } else {
-            return id.get(FIRST_LIST_ELEMENT);
+
+            return Integer.toString(id.get(FIRST_LIST_ELEMENT) + 1);
         }
     }
 
