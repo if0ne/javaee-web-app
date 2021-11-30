@@ -75,8 +75,8 @@
 
                         <div class="new-field">
                             <label for="desc" class="no-align">Описание:</label>
-                            <textarea id="desc" name="description" form="create-form">
-                            </textarea>
+<textarea id="desc" name="description" form="create-form">
+</textarea>
                         </div>
 
                         <div class="new-field">

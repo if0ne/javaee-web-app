@@ -26,34 +26,31 @@ public class StatusRedirectFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession(true);
-
         if (session.getAttribute("status") == null) {
             chain.doFilter(request, response);
-            return;
-        }
-
-        boolean status = (Boolean) session.getAttribute("status");
-
-        String action = req.getParameter("command");
-        CommandEnum commandEnum = CommandEnum.SHOW_BLOCKED_PAGE;
-        if (!(action == null || action.isEmpty())) {
-            try {
-                commandEnum = CommandEnum.valueOf(action.toUpperCase());
-            } catch (IllegalArgumentException exception) {
-                System.err.println(exception.getMessage());
-            }
-        }
-
-        if (status) {
-            chain.doFilter(request, response);
         } else {
-            if (!accessibleCommands.contains(commandEnum)) {
-                ((HttpServletResponse) response).sendRedirect("/controller?command=show_blocked_page");
-            } else {
+            boolean status = (Boolean) session.getAttribute("status");
+
+            String action = req.getParameter("command");
+            CommandEnum commandEnum = CommandEnum.SHOW_BLOCKED_PAGE;
+            if (!(action == null || action.isEmpty())) {
+                try {
+                    commandEnum = CommandEnum.valueOf(action.toUpperCase());
+                } catch (IllegalArgumentException exception) {
+                    System.err.println(exception.getMessage());
+                }
+            }
+
+            if (status) {
                 chain.doFilter(request, response);
+            } else {
+                if (!accessibleCommands.contains(commandEnum)) {
+                    ((HttpServletResponse) response).sendRedirect("/controller?command=show_blocked_page");
+                } else {
+                    chain.doFilter(request, response);
+                }
             }
         }
-
     }
 
     @Override

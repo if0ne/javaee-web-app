@@ -71,7 +71,7 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Integer getCourseStudentsAmount(Map<String, Object> row) {
-        return (Integer) row.get("students_amount");
+        return ((BigDecimal) row.get("students_amount")).intValueExact();
     }
 
     private Date getNextDate(int courseId) {

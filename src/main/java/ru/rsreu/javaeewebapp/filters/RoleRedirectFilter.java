@@ -73,7 +73,6 @@ public class RoleRedirectFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession(true);
-
         if (session.getAttribute("role") == null) {
             session.setAttribute("user_id", -1);
             session.setAttribute("role", Role.GUEST.toString());
