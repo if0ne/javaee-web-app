@@ -10,6 +10,9 @@ public enum Grade {
     }
 
     public static Grade getGradeFromInt(Integer gradeId) {
+        if (gradeId == null) {
+            return ZERO;
+        }
         switch (gradeId) {
             case 2:
                 return TWO;

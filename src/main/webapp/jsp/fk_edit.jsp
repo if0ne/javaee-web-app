@@ -83,10 +83,11 @@
                             <div class="edit-field">
                                 <label for="update-student-grade">Оценка</label>
                                 <select id="update-student-grade" form="update-student-info" name="grade" required>
-                                    <option value="0">2</option>
-                                    <option value="1">3</option>
-                                    <option value="2">4</option>
-                                    <option value="3">5</option>
+                                    <option value="0">-</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                         </div>
@@ -102,7 +103,7 @@
                         <div class="field-area">
                             <div class="edit-field">
                                 <label for="update-student-final-name">Студент</label>
-                                <select id="update-student-final-name" form="update-student-final-grade" name="name" required>
+                                <select id="update-student-final-name" form="update-student-final-grade" name="student_id" required>
                                     <c:forEach var="student" items="${data.course.students}">
                                         <option value="${student.id}">${student.studentName}</option>
                                     </c:forEach>
@@ -111,7 +112,7 @@
 
                             <div class="edit-field">
                                 <label for="update-student-final-date">Оценка</label>
-                                <select id="update-student-final-date" form="update-student-info" name="grade" required>
+                                <select id="update-student-final-date" form="update-student-final-grade" name="grade" required>
                                     <option value="0">Незачтено</option>
                                     <option value="1">Зачтено</option>
                                 </select>

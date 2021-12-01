@@ -66,7 +66,7 @@
                                             ${progress.attendance == 0 ? "" :
                                             progress.attendance == 1 ? "official" : "skipped"
                                         }">
-                                                ${progress.grade}
+                                                ${progress.grade == 0 ? "" : progress.grade.toString()}
                                         </td>
                                     </c:forEach>
                                 </tr>

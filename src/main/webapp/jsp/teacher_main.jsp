@@ -22,7 +22,6 @@
                 <input type="hidden" name="command" value="show_create_page">
                 <button class="btn btn-default">
                     Создать
-                    <i class="fas fa-sign-out-alt"></i>
                 </button>
             </form>
             <form class="logout-form" action="/controller" method="get">

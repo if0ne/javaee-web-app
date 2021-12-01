@@ -36,7 +36,7 @@ public class ShowStudentDetailedCourseCommand implements ActionCommand {
         makeUserFirstInList(course.getStudents());
         output.setCourse(course);
         output.setStudentCourses(DaoFactory.getInstance(DbType.ORACLE).getCoursesDAO().getAllStudentCourses(input.getUserId()));
-        return null;
+        return page;
     }
 
     @Override

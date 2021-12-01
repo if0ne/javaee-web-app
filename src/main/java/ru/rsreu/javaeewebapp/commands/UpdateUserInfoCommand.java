@@ -16,12 +16,12 @@ public class UpdateUserInfoCommand implements ActionCommand {
     @Override
     public void readRequestAttributes(HttpServletRequest request) throws Exception {
         input = new UpdateUserInfoInput();
-        HttpSession session = request.getSession(true);
-        input.setCourseId(Integer.parseInt(request.getAttribute("course_id").toString()));
-        input.setStudentId(Integer.parseInt(request.getAttribute("student_id").toString()));
-        input.setDateId(Integer.parseInt(request.getAttribute("date_id").toString()));
-        input.setAttendance(Integer.parseInt(request.getAttribute("attendance").toString()));
-        input.setGrade(Integer.parseInt(request.getAttribute("grade").toString()));
+
+        input.setCourseId(Integer.parseInt(request.getParameter("course_id").toString()));
+        input.setStudentId(Integer.parseInt(request.getParameter("student_id").toString()));
+        input.setDateId(Integer.parseInt(request.getParameter("date_id").toString()));
+        input.setAttendance(Integer.parseInt(request.getParameter("attendance").toString()));
+        input.setGrade(Integer.parseInt(request.getParameter("grade").toString()));
     }
 
     @Override

@@ -48,6 +48,7 @@ public final class Client {
                 statement.setString(index + 1, params[index]);
             }
             int rowCount = statement.executeUpdate();
+            System.out.println("Обработано строк: " + rowCount);
         } catch (SQLException ignored) {
             System.err.println("==============================================================");
             System.err.println(ignored.getMessage());

@@ -15,9 +15,9 @@ public class UpdateUserGradeCommand implements ActionCommand {
     @Override
     public void readRequestAttributes(HttpServletRequest request) throws Exception {
         input = new UpdateUserGradeInput();
-        input.setCourseId(Integer.parseInt(request.getAttribute("course_id").toString()));
-        input.setStudentId(Integer.parseInt(request.getAttribute("student_id").toString()));
-        input.setFinalGrade(Integer.parseInt(request.getAttribute("grade").toString()));
+        input.setCourseId(Integer.parseInt(request.getParameter("course_id").toString()));
+        input.setStudentId(Integer.parseInt(request.getParameter("student_id").toString()));
+        input.setFinalGrade(Integer.parseInt(request.getParameter("grade") != null ? request.getParameter("grade") : ""));
     }
 
     @Override

@@ -9,7 +9,10 @@ public enum Attendance {
         this.attendance = attendance;
     }
 
-    public static Attendance getAttendanceFromInt(int attendanceId) {
+    public static Attendance getAttendanceFromInt(Integer attendanceId) {
+        if (attendanceId == null) {
+            return PRESENCE;
+        }
         switch (attendanceId) {
             case 1:
                 return REASON;

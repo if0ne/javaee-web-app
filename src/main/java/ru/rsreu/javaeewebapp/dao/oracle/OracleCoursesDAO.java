@@ -210,7 +210,7 @@ public class OracleCoursesDAO implements CoursesDAO {
                 new UserName(row.get("last_name").toString(),
                             row.get("first_name").toString(),
                             row.get("middle_name").toString()),
-                FinalGrade.getGradeFromString((row.get("final_grade") == null) ? "" : row.get("final_grade").toString()),
+                FinalGrade.getGradeFromString((String) row.get("final_grade")),
                 getProgressList(userId, courseId));
     }
 
@@ -227,10 +227,10 @@ public class OracleCoursesDAO implements CoursesDAO {
     }
 
     private Progress getProgressFromMap(Map<String, Object> row) {
-        Integer attendance = ((BigDecimal) row.get("attendance")).intValueExact();
-        Integer grade = ((BigDecimal) row.get("grade")).intValueExact();
-        return new Progress(Attendance.getAttendanceFromInt(attendance == null ? 0 : attendance),
-                            Grade.getGradeFromInt(grade == null ? 0 : grade));
+        Integer attendance = row.get("attendance") != null ? ((BigDecimal) row.get("attendance")).intValueExact() : null;
+        Integer grade = row.get("grade") != null ? ((BigDecimal) row.get("grade")).intValueExact() : null;
+        return new Progress(Attendance.getAttendanceFromInt(attendance),
+                            Grade.getGradeFromInt(grade));
     }
 
 }
