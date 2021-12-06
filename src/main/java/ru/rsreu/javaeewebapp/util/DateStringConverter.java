@@ -5,14 +5,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class DateStringConverter {
-    private static final SimpleDateFormat DATE_FORMAT =
-            new SimpleDateFormat(MessageManager.getProperty("format.date"));
+    private static final SimpleDateFormat STUDENT_DATE_FORMAT =
+            new SimpleDateFormat(MessageManager.getProperty("format.date.student"));
 
-    public static String convertDateToString(Date date) {
-        return DATE_FORMAT.format(date);
+    private static final SimpleDateFormat TEACHER_DATE_FORMAT =
+            new SimpleDateFormat(MessageManager.getProperty("format.date.teacher"));
+
+    public static String convertDateToStudentString(Date date) {
+        return STUDENT_DATE_FORMAT.format(date);
     }
 
-    public static Date convertStringToDate(String date) throws ParseException {
-        return new java.sql.Date(DATE_FORMAT.parse(date).getTime());
+    public static String convertDateToTeacherString(Date date) {
+        return TEACHER_DATE_FORMAT.format(date);
     }
 }

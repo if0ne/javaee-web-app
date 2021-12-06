@@ -40,26 +40,33 @@
                 </div>
             </aside>
             <section class="fk-container">
-                <c:forEach var="course" items="${data.courses}">
-                    <section class="fk-item">
-                        <div class="fk-item-container">
-                            <div class="fk-info">
-                                <h2 class="fk-title">${course.title}</h2>
-                                <p class="role-label">${course.teacherName}</p>
-                                <div class="fk-short-desc-container">
-                                    <p class="fk-short-desc">
-                                        ${course.description}
-                                    </p>
+                <c:choose>
+                    <c:when test="${data.courses.size() > 0}">
+                        <c:forEach var="course" items="${data.courses}">
+                            <section class="fk-item">
+                                <div class="fk-item-container">
+                                    <div class="fk-info">
+                                        <h2 class="fk-title">${course.title}</h2>
+                                        <p class="role-label">${course.teacherName}</p>
+                                        <div class="fk-short-desc-container">
+                                            <p class="fk-short-desc">
+                                                    ${course.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <form class="fk-goto" action="/controller" method="get">
+                                        <input type="hidden" name="command" value="show_student_detailed_course">
+                                        <input type="hidden" name="course_id" value="${course.id}">
+                                        <button class="btn btn-default">Подробнее</button>
+                                    </form>
                                 </div>
-                            </div>
-                            <form class="fk-goto" action="/controller" method="get">
-                                <input type="hidden" name="command" value="show_student_detailed_course">
-                                <input type="hidden" name="course_id" value="${course.id}">
-                                <button class="btn btn-default">Подробнее</button>
-                            </form>
-                        </div>
-                    </section>
-                </c:forEach>
+                            </section>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Вы еще никуда не записаны</p>
+                    </c:otherwise>
+                </c:choose>
             </section>
         </div>
     </main>

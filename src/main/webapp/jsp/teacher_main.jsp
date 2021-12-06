@@ -43,24 +43,31 @@
             <p style="visibility: hidden; font-size: 1.5em;">КОСТЫЛЬ</p>
             <h1 class="fk-title">Мои курсы</h1>
             <section class="fk-container container-teacher">
-                <c:forEach var="course" items="${data.courses}">
-                    <section class="fk-item">
-                        <div class="fk-item-container">
-                            <div class="fk-info">
-                                <h2 class="fk-title">${course.title}</h2>
-                                <div class="fk-short-desc-container">
-                                    <p>Количество студентов: ${course.studentsNumber}</p>
-                                    <p>Следующее занятие: ${course.nextClassDate.toString()}</p>
+                <c:choose>
+                    <c:when test="${data.courses.size() > 0}">
+                        <c:forEach var="course" items="${data.courses}">
+                            <section class="fk-item">
+                                <div class="fk-item-container">
+                                    <div class="fk-info">
+                                        <h2 class="fk-title">${course.title}</h2>
+                                        <div class="fk-short-desc-container">
+                                            <p>Количество студентов: ${course.studentsNumber}</p>
+                                            <p>Следующее занятие: ${course.nextClassDate.toString()}</p>
+                                        </div>
+                                    </div>
+                                    <form class="fk-goto" action="/controller" method="get">
+                                        <input type="hidden" name="command" value="edit_course">
+                                        <input type="hidden" name="course_id" value="${course.id}">
+                                        <button class="btn btn-default">Редактировать</button>
+                                    </form>
                                 </div>
-                            </div>
-                            <form class="fk-goto" action="/controller" method="get">
-                                <input type="hidden" name="command" value="edit_course">
-                                <input type="hidden" name="course_id" value="${course.id}">
-                                <button class="btn btn-default">Редактировать</button>
-                            </form>
-                        </div>
-                    </section>
-                </c:forEach>
+                            </section>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Вы еще не создали ни одного курса</p>
+                    </c:otherwise>
+                </c:choose>
             </section>
         </div>
         <div class="edit-yulya"></div>

@@ -3,6 +3,8 @@ package ru.rsreu.javaeewebapp.commands;
 import ru.rsreu.javaeewebapp.DaoFactory;
 import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.CreateCourseInput;
+import ru.rsreu.javaeewebapp.exceptions.CommandException;
+import ru.rsreu.javaeewebapp.exceptions.WrongCourseDataException;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.util.InterimDatesGenerator;
 import ru.rsreu.javaeewebapp.util.MessageManager;
@@ -28,16 +30,31 @@ public class CreateCourseCommand implements ActionCommand {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws CommandException {
         String page = MessageManager.getProperty("show.teacher.page");
-        DaoFactory.getInstance(DbType.ORACLE).getModifiedCourseDAO().createCourse(
-                input.getTeacherId(),
-                input.getTitle(),
-                input.getDescription(),
-                InterimDatesGenerator.getInterimDatesBetween(input.getBeginDate(),
-                                                                input.getEndDate(),
-                                                                input.getDay())
-        );
+
+        boolean isWrongDate = input.getBeginDate().after(input.getEndDate());
+
+        if (input.getTitle().trim().isEmpty() || isWrongDate) {
+            WrongCourseDataException courseException = new WrongCourseDataException();
+            if (isWrongDate) {
+                courseException.addError("wrongDates", "Дата начала должна быть раньше, чем дата конца");
+            }
+            if (input.getTitle().trim().isEmpty()) {
+                courseException.addError("wrongTitle", "Неверное название");
+            }
+            throw courseException;
+        } else {
+            DaoFactory.getInstance(DbType.ORACLE).getModifiedCourseDAO().createCourse(
+                    input.getTeacherId(),
+                    input.getTitle(),
+                    input.getDescription(),
+                    InterimDatesGenerator.getInterimDatesBetween(input.getBeginDate(),
+                            input.getEndDate(),
+                            input.getDay())
+            );
+        }
+
         return page;
     }
 

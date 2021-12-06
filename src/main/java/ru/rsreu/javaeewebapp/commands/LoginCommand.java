@@ -2,13 +2,13 @@ package ru.rsreu.javaeewebapp.commands;
 
 import ru.rsreu.javaeewebapp.DaoFactory;
 import ru.rsreu.javaeewebapp.DbType;
+import ru.rsreu.javaeewebapp.exceptions.WrongLoginPasswordException;
 import ru.rsreu.javaeewebapp.commands.inputs.LoginInput;
 import ru.rsreu.javaeewebapp.commands.outputs.LoginOutput;
 
 import ru.rsreu.javaeewebapp.models.User;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.models.enums.Role;
-import ru.rsreu.javaeewebapp.util.ConfigurationManager;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 import ru.rsreu.javaeewebapp.util.ParameterChecker;
 
@@ -34,7 +34,7 @@ public class LoginCommand implements ActionCommand {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws Exception {
         String page = MessageManager.getProperty("show.login");
 
         String login = this.input.getLogin();
@@ -45,7 +45,7 @@ public class LoginCommand implements ActionCommand {
         User user = DaoFactory.getInstance(DbType.ORACLE).getUsersDAO().getLoggedUser(login, password);
         if (user == null) {
             output.setSuccessLogin(false);
-            output.setWrongLoginPasswordMessage("Неправильный логин или пароль");
+            throw new WrongLoginPasswordException("wrongLoginPassword", "Неверный логин или пароль");
         } else {
             Role role = Role.getRoleFromInt(user.getRole());
             output.setSuccessLogin(true);
@@ -64,7 +64,6 @@ public class LoginCommand implements ActionCommand {
     @Override
     public void setAttributes(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
-        request.setAttribute("wrongLoginPassword", output.getWrongLoginPasswordMessage());
         if (output.isSuccessLogin()) {
             session.setAttribute("userId", output.getUserId());
             session.setAttribute("role", output.getRole());

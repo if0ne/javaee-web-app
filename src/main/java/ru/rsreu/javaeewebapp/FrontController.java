@@ -1,15 +1,16 @@
 package ru.rsreu.javaeewebapp;
 
 import ru.rsreu.javaeewebapp.commands.ActionCommand;
-import ru.rsreu.javaeewebapp.commands.EmptyCommand;
+import ru.rsreu.javaeewebapp.exceptions.CommandException;
+import ru.rsreu.javaeewebapp.exceptions.WrongLoginPasswordException;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
+import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -58,20 +59,21 @@ public class FrontController extends HttpServlet {
 
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
+        RedirectType redirectType = command.getRedirectType();
+
         try {
             command.readRequestAttributes(request);
             page = command.execute();
             command.setAttributes(request);
+        } catch (CommandException exception){
+            exception.setErrorMessages(request);
+            redirectType = RedirectType.FORWARD;
+            page = exception.getPage();
         } catch (Exception exception) {
             System.err.println(exception.getMessage());
-            for (StackTraceElement el : exception.getStackTrace()) {
-                System.err.println(el.getClassName() + " " + el.getMethodName() + " " + el.getLineNumber());
-            }
-            command = new EmptyCommand();
-            page = command.execute();
+            redirectType = RedirectType.REDIRECT;
+            page = MessageManager.getProperty("show.login");
         }
-
-        RedirectType redirectType = command.getRedirectType();
 
         switch (redirectType) {
             case REDIRECT:

@@ -1,8 +1,8 @@
 package ru.rsreu.javaeewebapp.models;
 
-import ru.rsreu.javaeewebapp.util.DateStringConverter;
-
 import java.sql.Date;
+
+import static ru.rsreu.javaeewebapp.util.DateStringConverter.convertDateToStudentString;
 
 public class Dates {
 
@@ -13,15 +13,15 @@ public class Dates {
     public Dates(int id, Date date) {
         this.id = id;
         this.date = date;
-        this.stringDate = DateStringConverter.convertDateToString(date);
+        this.stringDate = convertDateToStudentString(date);
     }
 
     public int getId() {
         return this.id;
     }
 
-    public Date getDate() {
-        return this.date;
+    public String getDate() {
+        return convertDateToStudentString(this.date);
     }
 
     public void setId(int id) {

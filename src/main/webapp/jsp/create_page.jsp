@@ -84,6 +84,12 @@
                             <button class="btn btn-default btn-edit">Создать</button>
                         </div>
                     </form>
+                    <p class="error-message">
+                        ${wrongTitle}
+                    </p>
+                    <p class="error-message">
+                        ${wrongDates}
+                    </p>
                 </section>
             </div>
             <div class="edit-yulya"></div>
