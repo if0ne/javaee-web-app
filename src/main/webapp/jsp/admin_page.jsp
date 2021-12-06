@@ -84,6 +84,9 @@
                         </div>
                         <button class="btn btn-default btn-edit">Добавить</button>
                     </form>
+                    <p class="error-message">
+                        ${wrongInputData}
+                    </p>
                 </section>
                 <hr>
                 <section class="edit-block">

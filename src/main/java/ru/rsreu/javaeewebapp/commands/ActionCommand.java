@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface ActionCommand {
     void readRequestAttributes(HttpServletRequest request) throws Exception;
-    String execute();
+    String execute() throws Exception;
     void setAttributes(HttpServletRequest request);
     RedirectType getRedirectType();
 }

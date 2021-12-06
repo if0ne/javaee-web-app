@@ -2,6 +2,8 @@ package ru.rsreu.javaeewebapp.models;
 
 import java.sql.Date;
 
+import static ru.rsreu.javaeewebapp.util.DateStringConverter.convertDateToTeacherString;
+
 public class TeacherCourse {
 
     private int id;
@@ -28,8 +30,8 @@ public class TeacherCourse {
         return this.studentsNumber;
     }
 
-    public Date getNextClassDate() {
-        return this.nextClassDate;
+    public String getNextClassDate() {
+        return convertDateToTeacherString(this.nextClassDate);
     }
 
     public void setId(int id) {

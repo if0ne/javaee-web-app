@@ -1,15 +1,12 @@
 package ru.rsreu.javaeewebapp.dao.oracle;
 
 import ru.rsreu.javaeewebapp.Client;
-import ru.rsreu.javaeewebapp.DaoFactory;
 import ru.rsreu.javaeewebapp.interfaces.ModifiedCourseDAO;
-import ru.rsreu.javaeewebapp.models.Dates;
 import ru.rsreu.javaeewebapp.util.DateStringConverter;
 import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +45,7 @@ public class OracleModifiedCourseDAO implements ModifiedCourseDAO {
             Integer dateId = Integer.parseInt(getNewId(SQL_NEW_ID_DATA));
             for (Date date : dates) {
                 this.client.updateData(SQL_ADD_COURSE_DATES, dateId.toString(),
-                        DateStringConverter.convertDateToString(date), courseId);
+                        DateStringConverter.convertDateToStudentString(date), courseId);
                 dateId++;
             }
         } catch (Exception ex) {

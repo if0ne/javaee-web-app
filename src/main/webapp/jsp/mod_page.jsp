@@ -33,37 +33,45 @@
             <div class="content-offset">
                 <p style="visibility: hidden; font-size: 1.5em;">КОСТЫЛЬ</p>
                 <h1 class="fk-title">Список студентов</h1>
-                <section class="edit-block">
-                    <table class="student-grades mod-table">
-                        <thead>
-                            <tr>
-                                <th class="table-head left-info-head">ФИО</th>
-                                <th class="table-head">Статус</th>
-                                <th class="table-head"></th>
-                            </tr>
-                        </thead>
-                        <tbody
-                            <c:forEach var="student" items="${data.students}">
+                <c:choose>
+                    <c:when test="${data.students.size() > 0}">
+                        <section class="edit-block">
+                            <table class="student-grades mod-table">
+                                <thead>
                                 <tr>
-                                    <td class="table-cont left-info">${student.name}</td>
-                                    <td class="table-cont">
-                                            ${student.status ? "Заблокирован" : "Незаблокирован"}
-                                    </td>
-                                    <td class="table-cont">
-                                        <form action="/controller" method="post">
-                                            <input type="hidden" name="command" value="change_user_status">
-                                            <input type="hidden" name="user_id" value="${student.id}">
-                                            <input type="hidden" name="user_status" value="${student.status ? 1 : 0}">
-                                            <button class="btn btn-danger">
-                                                ${student.status ? "Разблокировать" : "Заблокировать" }
-                                            </button>
-                                        </form>
-                                    </td>
+                                    <th class="table-head left-info-head">ФИО</th>
+                                    <th class="table-head">Статус</th>
+                                    <th class="table-head"></th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </section>
+                                </thead>
+                                <tbody
+                                <c:forEach var="student" items="${data.students}">
+                                    <tr>
+                                        <td class="table-cont left-info">${student.name}</td>
+                                        <td class="table-cont">
+                                                ${student.status ? "Заблокирован" : "Незаблокирован"}
+                                        </td>
+                                        <td class="table-cont">
+                                            <form action="/controller" method="post">
+                                                <input type="hidden" name="command" value="change_user_status">
+                                                <input type="hidden" name="user_id" value="${student.id}">
+                                                <input type="hidden" name="user_status" value="${student.status ? 1 : 0}">
+                                                <button class="btn btn-danger">
+                                                        ${student.status ? "Разблокировать" : "Заблокировать" }
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </section>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Список студентов пуст</p>
+                    </c:otherwise>
+                </c:choose>
+
             </div>
             <div class="edit-yulya"></div>
         </section>

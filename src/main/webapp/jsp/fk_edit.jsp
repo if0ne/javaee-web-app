@@ -35,7 +35,7 @@
             <div class="fk-list">
                 <c:forEach var="link" items="${data.allCourses}">
                     <a
-                            href="/controller?command=show_detailed_course&course_id=${link.id}"
+                            href="/controller?command=edit_course&course_id=${link.id}"
                             class="${data.course.id == link.id ? "selected-fk" : ""}"
                     >
                         ${link.title}
@@ -130,33 +130,40 @@
                 <hr>
                 <section class="edit-block">
                     <h2 class="fk-section-title">Студенты</h2>
-                    <table class="student-grades">
-                        <thead>
-                            <tr>
-                                <th class="table-head left-info-head">ФИО</th>
-                                <th class="table-head">Итоговая оценка</th>
-                                <c:forEach var="date" items="${data.course.dates}">
-                                    <th class="table-head">${date.date.toString()}</th>
-                                </c:forEach>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="student" items="${data.course.students}">
+                    <c:choose>
+                        <c:when test="${data.course.students.size() > 0}">
+                            <table class="student-grades">
+                                <thead>
                                 <tr>
-                                    <td class="table-cont left-info">${student.studentName}</td>
-                                    <td class="table-cont">${student.finalGrade}</td>
-                                    <c:forEach var="progress" items="${student.progresses}">
-                                        <td class="table-cont
+                                    <th class="table-head left-info-head">ФИО</th>
+                                    <th class="table-head">Итоговая оценка</th>
+                                    <c:forEach var="date" items="${data.course.dates}">
+                                        <th class="table-head">${date.date.toString()}</th>
+                                    </c:forEach>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="student" items="${data.course.students}">
+                                    <tr>
+                                        <td class="table-cont left-info">${student.studentName}</td>
+                                        <td class="table-cont">${student.finalGrade}</td>
+                                        <c:forEach var="progress" items="${student.progresses}">
+                                            <td class="table-cont
                                             ${progress.attendance == 0 ? "" :
                                             progress.attendance == 1 ? "official" : "skipped"
                                         }">
-                                            ${progress.grade == 0 ? "" : progress.grade.toString()}
-                                        </td>
-                                    </c:forEach>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                                                    ${progress.grade == 0 ? "" : progress.grade.toString()}
+                                            </td>
+                                        </c:forEach>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:when>
+                        <c:otherwise>
+                            <p>Еще ни один студент не записан</p>
+                        </c:otherwise>
+                    </c:choose>
                     <div class="hints">
                         <div class="hint">
                             <span class="skipped" style="display: inline-block; width: 30px; height: 30px"></span>
@@ -190,5 +197,21 @@
             <div class="edit-yulya"></div>
         </section>
     </main>
+<script>
+    let reason = document.querySelectorAll("#update-student-attendance")[0];
+    let grades = document.querySelectorAll("#update-student-grade")[0];
+    let prevValue = grades.value;
+
+    reason.addEventListener("change", () => {
+        if (reason.value !== "0") {
+            grades.parentElement.style.visibility = "hidden";
+            prevValue = grades.value;
+            grades.value = "0";
+        } else {
+            grades.parentElement.style.visibility = "visible";
+            grades.value = prevValue;
+        }
+    });
+</script>
 </body>
 </html>

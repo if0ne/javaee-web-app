@@ -3,6 +3,8 @@ package ru.rsreu.javaeewebapp.commands;
 import ru.rsreu.javaeewebapp.DaoFactory;
 import ru.rsreu.javaeewebapp.DbType;
 import ru.rsreu.javaeewebapp.commands.inputs.CreateUserInput;
+import ru.rsreu.javaeewebapp.commands.outputs.CreateUserOutput;
+import ru.rsreu.javaeewebapp.exceptions.WrongUserDataException;
 import ru.rsreu.javaeewebapp.models.enums.RedirectType;
 import ru.rsreu.javaeewebapp.models.enums.Role;
 import ru.rsreu.javaeewebapp.util.MessageManager;
@@ -28,27 +30,37 @@ public class CreateUserCommand implements ActionCommand {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws Exception {
         String page = MessageManager.getProperty("show.admin.page");
-        DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().createUser(
-                input.getLastName(),
-                input.getFirstName(),
-                input.getMiddleName(),
-                input.getLogin(),
-                input.getPassword(),
-                input.getRole().getRoleId()
-        );
+        if (!validateInputData(input)) {
+            throw new WrongUserDataException("wrongInputData", "Неверные значения вводимых полей");
+        } else {
+            DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().createUser(
+                    input.getLastName(),
+                    input.getFirstName(),
+                    input.getMiddleName(),
+                    input.getLogin(),
+                    input.getPassword(),
+                    input.getRole().getRoleId()
+            );
+        }
         return page;
     }
 
     @Override
     public void setAttributes(HttpServletRequest request) {
-
     }
 
     @Override
     public RedirectType getRedirectType() {
         return RedirectType.REDIRECT;
+    }
+
+    private boolean validateInputData(CreateUserInput input) {
+        return !(input.getFirstName().trim().isEmpty()
+                || input.getLastName().trim().isEmpty()
+                || input.getLogin().trim().isEmpty()
+                || input.getPassword().trim().isEmpty());
     }
 
 }
