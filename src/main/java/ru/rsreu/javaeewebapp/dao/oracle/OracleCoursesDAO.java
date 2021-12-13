@@ -84,7 +84,7 @@ public class OracleCoursesDAO implements CoursesDAO {
                 return date;
             }
         }
-        return new Date(new java.util.Date().getTime());
+        return null;
     }
 
     private List<Date> getAllCourseDate(int courseId) {

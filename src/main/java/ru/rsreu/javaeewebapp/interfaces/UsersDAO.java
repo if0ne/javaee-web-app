@@ -15,4 +15,6 @@ public interface UsersDAO {
     List<UserRole> getAllUsersRoles();
     //user who logged in system
     User getLoggedUser(String login, String password);
+    // check existed login
+    boolean isExistedUser(String login);
 }

@@ -19,6 +19,7 @@ public class OracleUsersDAO implements UsersDAO {
     private static final String SQL_GET_STUDENTS_STATUSES = MessageManager.getProperty("sql.user.status");
     private static final String SQL_GET_USERS_ROLES = MessageManager.getProperty("sql.user.role");
     private static final String SQL_GET_LOGGED_USER = MessageManager.getProperty("sql.user.logged");
+    private static final String SQL_EXISTED_LOGIN = MessageManager.getProperty("sql.existed.login");
     private static final String ADMINISTRATOR = "Администратор";
     private static final String STUDENT = "Студент";
     private static int FIRST_LIST_ELEMENT = 0;
@@ -91,8 +92,20 @@ public class OracleUsersDAO implements UsersDAO {
                 row.get("login").toString(),
                 Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()) ,
                 new UserName(row.get("last_name").toString(),
-                            row.get("first_name").toString(),
-                            row.get("middle_name") != null ? row.get("middle_name").toString() : ""),
+                        row.get("first_name").toString(),
+                        row.get("middle_name") != null ? row.get("middle_name").toString() : ""),
                 ((BigDecimal) row.get("blocked")).intValueExact() == 0);
+    }
+
+    @Override
+    public boolean isExistedUser(String login) {
+        List<Map<String, Object>> rows = this.client.selectData(SQL_EXISTED_LOGIN,
+                                                                    login);
+
+        if (rows.size() == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
