@@ -4,6 +4,10 @@ import java.sql.Date;
 
 import static ru.rsreu.javaeewebapp.util.DateStringConverter.convertDateToStudentString;
 
+/**
+ * Dates class designed to represent one date on which a course is held
+ * It contains date id, date object and date as string
+ */
 public class Dates {
 
     private int id;

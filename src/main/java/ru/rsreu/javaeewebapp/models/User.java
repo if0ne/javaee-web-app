@@ -2,6 +2,9 @@ package ru.rsreu.javaeewebapp.models;
 
 import ru.rsreu.javaeewebapp.models.enums.Role;
 
+/**
+ * class containing user information
+ */
 public class User {
 
     private int id;

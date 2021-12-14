@@ -2,6 +2,11 @@ package ru.rsreu.javaeewebapp.models;
 
 import java.util.List;
 
+/**
+ * it is a detailed description of the course for registered students
+ * it contains title, description  and teacher name and also table of
+ * students with their attendances and grades on course
+ */
 public class SpecificCourse {
 
     private int id;
