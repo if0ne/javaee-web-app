@@ -32,18 +32,21 @@ public class CreateUserCommand implements ActionCommand {
     @Override
     public String execute() throws Exception {
         String page = MessageManager.getProperty("show.admin.page");
+        boolean isExistedUser = DaoFactory.getInstance(DbType.ORACLE).getUsersDAO().isExistedUser(input.getLogin().trim());
         if (!validateInputData(input)) {
             throw new WrongUserDataException("wrongInputData", "Неверные значения вводимых полей");
-        } else {
-            DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().createUser(
-                    input.getLastName(),
-                    input.getFirstName(),
-                    input.getMiddleName(),
-                    input.getLogin(),
-                    input.getPassword(),
-                    input.getRole().getRoleId()
-            );
         }
+        if (isExistedUser) {
+            throw new WrongUserDataException("wrongInputData", "Пользователь с таким логином уже существует");
+        }
+        DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().createUser(
+                input.getLastName().trim(),
+                input.getFirstName().trim(),
+                input.getMiddleName().trim(),
+                input.getLogin().trim(),
+                input.getPassword().trim(),
+                input.getRole().getRoleId()
+        );
         return page;
     }
 
