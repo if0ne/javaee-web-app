@@ -52,7 +52,7 @@
                                         <h2 class="fk-title">${course.title}</h2>
                                         <div class="fk-short-desc-container">
                                             <p>Количество студентов: ${course.studentsNumber}</p>
-                                            <%--<p>Следующее занятие: ${course.nextClassDate.toString()}</p>--%>
+                                            <p>Следующее занятие: ${course.nextClassDate == "" ? "Занятий нет" : course.nextClassDate}</p>
                                         </div>
                                     </div>
                                     <form class="fk-goto" action="/controller" method="get">

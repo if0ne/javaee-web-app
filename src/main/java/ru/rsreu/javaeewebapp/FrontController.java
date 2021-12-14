@@ -71,6 +71,7 @@ public class FrontController extends HttpServlet {
             page = exception.getPage();
         } catch (Exception exception) {
             System.err.println(exception.getMessage());
+            exception.printStackTrace();
             redirectType = RedirectType.REDIRECT;
             page = MessageManager.getProperty("show.login");
         }

@@ -16,6 +16,9 @@ public class DateStringConverter {
     }
 
     public static String convertDateToTeacherString(Date date) {
+        if (date == null) {
+            return "";
+        }
         return TEACHER_DATE_FORMAT.format(date);
     }
 }
