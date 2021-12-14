@@ -4,6 +4,10 @@ import java.sql.Date;
 
 import static ru.rsreu.javaeewebapp.util.DateStringConverter.convertDateToTeacherString;
 
+/**
+ * the teacher can see in the list of his courses only his name,
+ * the number of registered students and the date of the next lesson
+ */
 public class TeacherCourse {
 
     private int id;

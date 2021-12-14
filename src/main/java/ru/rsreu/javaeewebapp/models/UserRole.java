@@ -4,6 +4,9 @@ import ru.rsreu.javaeewebapp.models.enums.Role;
 
 import java.io.Serializable;
 
+/**
+ * class containing user information for administrator
+ */
 public class UserRole implements Serializable {
 
     private int id;

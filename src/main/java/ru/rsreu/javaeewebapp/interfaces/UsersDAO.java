@@ -8,12 +8,26 @@ import java.util.List;
 
 public interface UsersDAO {
 
-    //get information from database
-    //students list and their statuses
+
+    /**
+     *
+     * @return list of all existed students with their statuses (blocked / unblocked) for moderator
+     */
     List<StudentStatus> getStudentsStatuses();
     //all users list without administrator and their roles
+
+    /**
+     *
+     * @return list of all existed users with their roles (without administrator) for administrator
+     */
     List<UserRole> getAllUsersRoles();
-    //user who logged in system
+
+    /**
+     *
+     * @param login
+     * @param password
+     * @return
+     */
     User getLoggedUser(String login, String password);
     // check existed login
     boolean isExistedUser(String login);

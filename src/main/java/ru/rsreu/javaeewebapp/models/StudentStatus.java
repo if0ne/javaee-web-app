@@ -1,5 +1,8 @@
 package ru.rsreu.javaeewebapp.models;
 
+/**
+ * class containing user information for moderator
+ */
 public class StudentStatus {
 
     private int id;

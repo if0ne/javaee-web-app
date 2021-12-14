@@ -4,6 +4,9 @@ import ru.rsreu.javaeewebapp.util.MessageManager;
 
 import java.io.Serializable;
 
+/**
+ * data class for storing the last name, first name and patronymic
+ */
 public class UserName implements Serializable {
 
     private String lastName;

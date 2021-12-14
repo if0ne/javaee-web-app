@@ -4,6 +4,9 @@ import ru.rsreu.javaeewebapp.models.enums.FinalGrade;
 
 import java.util.List;
 
+/**
+ * each student on the course has his own final grade, as well as a list of attendance of classes and grades
+ */
 public class Student {
 
     private int id;

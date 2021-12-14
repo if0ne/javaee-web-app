@@ -3,6 +3,9 @@ package ru.rsreu.javaeewebapp.models;
 import ru.rsreu.javaeewebapp.models.enums.Attendance;
 import ru.rsreu.javaeewebapp.models.enums.Grade;
 
+/**
+ * contains performance data (attendance and grade)
+ */
 public class Progress {
 
     private Attendance attendance;

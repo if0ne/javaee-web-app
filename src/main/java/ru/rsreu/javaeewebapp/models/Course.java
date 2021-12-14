@@ -1,12 +1,17 @@
 package ru.rsreu.javaeewebapp.models;
 
+
+/**
+ * Course class contains all data about the course: ID, title, description, name, surname and patronymic of the teacher,
+ * as well as the status of the course (finished or active)
+ * Registration status stores information for the student (whether he is registered for the course or not)
+ */
 public class Course {
 
     private int id;
     private String title;
     private String description;
     private UserName teacherName;
-    //determines whether a student is registered for the course or not
     private boolean registration;
     private boolean finished;
 
