@@ -63,4 +63,8 @@
         <session-timeout>30</session-timeout>
     </session-config>
 
+    <error-page>
+        <location>/controller?command=show_login</location>
+    </error-page>
+
 </web-app>
