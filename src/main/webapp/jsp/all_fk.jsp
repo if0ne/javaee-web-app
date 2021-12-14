@@ -38,31 +38,55 @@
                 <c:choose>
                     <c:when test="${data.allCourses.size() > 0}">
                         <c:forEach var="course" items="${data.allCourses}">
-                            <section class="fk-item">
-                                <div class="fk-item-container">
-                                    <div class="fk-info">
-                                        <h2 class="fk-title">${course.title}</h2>
-                                        <p class="role-label">${course.teacherName}</p>
-                                        <div class="fk-short-desc-container">
-                                            <p class="fk-short-desc">
-                                                    ${course.description}
-                                            </p>
+                            <c:choose>
+                                <c:when test="${!course.finished}">
+                                    <section class="fk-item">
+                                        <div class="fk-item-container">
+                                            <div class="fk-info">
+                                                <h2 class="fk-title">${course.title}</h2>
+                                                <p class="role-label">${course.teacherName}</p>
+                                                <div class="fk-short-desc-container">
+                                                    <p class="fk-short-desc">
+                                                            ${course.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <form class="fk-goto" action="/controller" method="post">
+                                                <input type="hidden" name="command" value="subscribe">
+                                                <input type="hidden" name="course_id" value="${course.id}">
+                                                <c:choose>
+                                                    <c:when test="${course.registration}">
+                                                        <button class="btn btn-disabled" disabled>Вы записаны</button>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <button class="btn btn-subscribe">Записаться</button>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </form>
                                         </div>
-                                    </div>
-                                    <form class="fk-goto" action="/controller" method="post">
-                                        <input type="hidden" name="command" value="subscribe">
-                                        <input type="hidden" name="course_id" value="${course.id}">
-                                        <c:choose>
-                                            <c:when test="${course.registration}">
-                                                <button class="btn btn-disabled" disabled>Вы записаны</button>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <button class="btn btn-subscribe">Записаться</button>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </form>
-                                </div>
-                            </section>
+                                    </section>
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+                        <hr style="width: 90%; margin-bottom: 32px;">
+                        <c:forEach var="course" items="${data.allCourses}">
+                            <c:choose>
+                                <c:when test="${course.finished}">
+                                    <section class="fk-item">
+                                        <div class="fk-item-container">
+                                            <div class="fk-info">
+                                                <h2 class="fk-title">${course.title}</h2>
+                                                <p class="role-label">${course.teacherName}</p>
+                                                <div class="fk-short-desc-container">
+                                                    <p class="fk-short-desc">
+                                                            ${course.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </c:when>
+                            </c:choose>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>

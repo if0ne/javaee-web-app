@@ -29,8 +29,8 @@ public class OracleCoursesDAO implements CoursesDAO {
     private static final int FIRST_LIST_ELEMENT = 0;
     private static final boolean REGISTERED = true;
     private static final boolean UNREGISTERED = false;
-    private static final boolean FINISHED_COURSE = false;
-    private static final boolean ACTIVE_COURSE = true;
+    private static final boolean FINISHED_COURSE = true;
+    private static final boolean ACTIVE_COURSE = false;
 
     private Client client;
 
@@ -134,14 +134,14 @@ public class OracleCoursesDAO implements CoursesDAO {
         int courseId = ((BigDecimal) row.get("id_course")).intValueExact();
         return new Course(courseId,
                             row.get("name").toString(),
-                            row.get("description").toString(),
+                            (String) row.get("description"),
                             new UserName(row.get("last_name").toString(),
                                         row.get("first_name").toString(),
                                         row.get("middle_name") != null ? row.get("middle_name").toString() : "s"),
-                            registrationStatus, isActiveCourse(courseId));
+                            registrationStatus, isFinishedCourse(courseId));
     }
 
-    private boolean isActiveCourse(int courseId) {
+    private boolean isFinishedCourse(int courseId) {
         List<Date> dates = getAllCourseDate(courseId);
         java.sql.Date currentDate = new java.sql.Date(new java.util.Date().getTime());
         for (Date date : dates) {
@@ -173,7 +173,7 @@ public class OracleCoursesDAO implements CoursesDAO {
                                     new UserName(row.get("last_name").toString(),
                                                 row.get("first_name").toString(),
                                                 row.get("middle_name").toString()),
-                                    row.get("description").toString(),
+                                    (String) row.get("description"),
                                     dates, students);
 
     }
