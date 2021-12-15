@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class SessionLifetimeFilter implements Filter {
 
-    private static final long TIMEOUT = 60;
+    private static final long TIMEOUT = 30*60*1000;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
