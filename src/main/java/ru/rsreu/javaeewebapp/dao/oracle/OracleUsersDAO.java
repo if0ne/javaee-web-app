@@ -67,8 +67,9 @@ public class OracleUsersDAO implements UsersDAO {
                 new UserName(
                         row.get("last_name").toString(),
                         row.get("first_name").toString(),
-                        row.get("middle_name").toString()),
-                Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()));
+                        (String) row.get("middle_name")),
+                Role.getRoleFromInt(((BigDecimal) row.get("id_role")).intValueExact()),
+                ((BigDecimal) row.get("logged")).intValueExact() != 0);
     }
 
     @Override

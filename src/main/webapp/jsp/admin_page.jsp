@@ -99,6 +99,7 @@
                                     <th class="table-head left-info-head">ФИО</th>
                                     <th class="table-head">Логин</th>
                                     <th class="table-head">Роль</th>
+                                    <th class="table-head">Статус</th>
                                     <th class="table-head"></th>
                                 </tr>
                                 </thead>
@@ -108,6 +109,7 @@
                                         <td class="table-cont left-info">${user.fullName}</td>
                                         <td class="table-cont">${user.login}</td>
                                         <td class="table-cont">${user.role}</td>
+                                        <td class="table-cont">${user.logged ? "Онлайн" : "Оффлайн" }</td>
                                         <td class="table-cont">
                                             <form action="/controller" method="post">
                                                 <input type="hidden" name="command" value="delete_user">

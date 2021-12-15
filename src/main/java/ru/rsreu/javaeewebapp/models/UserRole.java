@@ -14,13 +14,15 @@ public class UserRole implements Serializable {
     private UserName fullName;
     private UserName name;
     private Role role;
+    private boolean logged;
 
-    public UserRole(int id, String login, UserName name, Role role) {
+    public UserRole(int id, String login, UserName name, Role role, boolean logged) {
         this.id = id;
         this.login = login;
         this.name = name;
         this.fullName = name;
         this.role = role;
+        this.logged = logged;
     }
 
     public int getId() {
@@ -57,5 +59,9 @@ public class UserRole implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isLogged() {
+        return logged;
     }
 }

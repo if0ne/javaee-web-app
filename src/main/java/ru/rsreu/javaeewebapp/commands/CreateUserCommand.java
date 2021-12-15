@@ -42,7 +42,7 @@ public class CreateUserCommand implements ActionCommand {
         DaoFactory.getInstance(DbType.ORACLE).getModifiedUserDAO().createUser(
                 input.getLastName().trim(),
                 input.getFirstName().trim(),
-                input.getMiddleName().trim(),
+                input.getMiddleName() != null ? input.getMiddleName().trim() : null,
                 input.getLogin().trim(),
                 input.getPassword().trim(),
                 input.getRole().getRoleId()

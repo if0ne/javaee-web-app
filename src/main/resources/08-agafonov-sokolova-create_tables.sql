@@ -20,6 +20,7 @@ create table users (
     middle_name varchar(50),
     role number not null,
     blocked number(1, 0) default 0,
+    logged number(1, 0) default 0,
     constraint pk_user primary key (id_user),
     constraint fk_role foreign key (role) references roles (id_role),
     constraint unique_login unique (login)

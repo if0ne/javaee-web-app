@@ -50,6 +50,16 @@
     </filter-mapping>
 
     <filter>
+        <filter-name>SessionFilter</filter-name>
+        <filter-class>ru.rsreu.javaeewebapp.filters.SessionLifetimeFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SessionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>PageSecurity</filter-name>
         <filter-class>ru.rsreu.javaeewebapp.filters.PageRedirectSecurityFilter</filter-class>
     </filter>
@@ -59,9 +69,9 @@
         <url-pattern>/jsp/*</url-pattern>
     </filter-mapping>
 
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
+    <listener>
+        <listener-class>ru.rsreu.javaeewebapp.SessionListener</listener-class>
+    </listener>
 
     <error-page>
         <location>/controller?command=show_login</location>

@@ -28,4 +28,11 @@ public interface ModifiedUserDAO {
      * @param newStatus - blocked / unblocked status
      */
     void updateUserStatus(int studentId, int newStatus);
+
+    /**
+     * update user logged status
+     * @param loggedStatus - new logged status
+     * @param userId - user id
+     */
+    void updateLoggedUserStatus(int userId, boolean loggedStatus);
 }

@@ -76,6 +76,7 @@ public class RoleRedirectFilter implements Filter {
         if (session.getAttribute("role") == null) {
             session.setAttribute("user_id", -1);
             session.setAttribute("role", Role.GUEST.toString());
+            session.setAttribute("date", new java.util.Date().getTime());
         }
 
         Role role = Role.valueOf(session.getAttribute("role").toString());

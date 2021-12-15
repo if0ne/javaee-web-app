@@ -15,6 +15,7 @@ public class OracleModifiedUserDAO implements ModifiedUserDAO {
     private static final String SQL_DELETE_USER = MessageManager.getProperty("sql.user.delete");
     private static final String SQL_CREATE_USER = MessageManager.getProperty("sql.user.create");
     private static final String SQL_NEW_ID_USER = MessageManager.getProperty("sql.new.id.user");
+    private static final String SQL_UPDATE_LOGGED_STATUS = MessageManager.getProperty("sql.update.logged.status");
     private static final int FIRST_LIST_ELEMENT = 0;
 
     private Client client;
@@ -62,4 +63,12 @@ public class OracleModifiedUserDAO implements ModifiedUserDAO {
         this.client.updateData(SQL_UPDATE_USER_STATUS, Integer.toString(newStatus),
                                 Integer.toString(studentId));
     }
+
+    @Override
+    public void updateLoggedUserStatus(int userId, boolean loggedStatus) {
+        this.client.updateData(SQL_UPDATE_LOGGED_STATUS, Integer.toString(loggedStatus ? 1 : 0),
+                                Integer.toString(userId));
+    }
+
+
 }

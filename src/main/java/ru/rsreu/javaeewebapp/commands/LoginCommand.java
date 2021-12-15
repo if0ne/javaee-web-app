@@ -71,6 +71,7 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute("userLastName", output.getLastName());
             session.setAttribute("userFirstName", output.getFirstName());
             session.setAttribute("status", output.getStatus());
+            session.setAttribute("date", new java.util.Date().getTime());
         }
     }
 
